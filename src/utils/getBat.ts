@@ -25,7 +25,7 @@ export const getBat = (
 			}),
 		}
 
-	const value = device['7'] != null ? device['7'][0] : undefined
+	const value = device['7']?.[0]
 	const time = device['13'] != null ? device['13'] * 1000 : undefined
 
 	const object = {

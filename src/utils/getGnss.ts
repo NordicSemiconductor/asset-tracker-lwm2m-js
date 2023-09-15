@@ -25,12 +25,8 @@ export const getGnss = (
 			}),
 		}
 
-	const lat = location['0']
-	const alt = location['2']
-	const spd = location['6']
-	const lng = location['1']
-	const acc = location['3']
-	const time = location['5'] != null ? location['5'] * 1000 : undefined
+	const { 0: lat, 2: alt, 6: spd, 1: lng, 3: acc, 5: maybeTime } = location
+	const time = maybeTime != null ? maybeTime * 1000 : undefined
 
 	/**
 	 * hdg from GNSS object is not provided.

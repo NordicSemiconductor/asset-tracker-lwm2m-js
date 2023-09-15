@@ -32,14 +32,19 @@ export const getRoam = ({
 			}),
 		}
 
-	const nw = String(connectivityMonitoring[0])
-	const rsrp = connectivityMonitoring[2]
-	const area = connectivityMonitoring[12]
-	const smcc = connectivityMonitoring[10]
-	const smnc = connectivityMonitoring[9]
-	const cell = connectivityMonitoring[8]
-	const ip =
-		connectivityMonitoring[4] != null ? connectivityMonitoring[4][0] : undefined
+	const {
+		0: maybeNw,
+		2: rsrp,
+		4: ipArray,
+		8: cell,
+		9: smnc,
+		10: smcc,
+		12: area,
+	} = connectivityMonitoring
+
+	const nw = String(maybeNw)
+	const ip = ipArray != null ? ipArray[0] : undefined
+	const mccmnc = Number(`${smcc}${smnc}`)
 
 	/**
 	 * Connectivity Monitoring (4) object does not support timestamp
@@ -56,7 +61,7 @@ export const getRoam = ({
 			nw,
 			rsrp,
 			area,
-			mccmnc: Number(`${smcc}${smnc}`), // /4/0/10 & /4/0/9
+			mccmnc,
 			cell,
 			ip,
 			band: 3, // TODO: remove this

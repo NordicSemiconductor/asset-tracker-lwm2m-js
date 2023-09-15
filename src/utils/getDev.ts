@@ -25,10 +25,8 @@ export const getDev = (
 			}),
 		}
 
-	const imei = device['2']
-	const modV = device['3']
-	const brdV = device['0']
-	const time = device['13'] != null ? device['13'] * 1000 : undefined
+	const { 0: brdV, 2: imei, 3: modV, 13: maybeTime } = device
+	const time = maybeTime != null ? maybeTime * 1000 : undefined
 
 	/**
 	 * iccid from Dev object is not provided.
