@@ -10,8 +10,6 @@ import { TypeError, Warning } from '../converter.js'
  * Check the required values and create the GNSS object required in nRF Asset Tracker
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/gnss.md
- * @see {@link ../../documents/gnss.md}
- * // TODO: Take a decision here
  */
 export const getGnss = (
 	location?: Location_6,
@@ -30,7 +28,8 @@ export const getGnss = (
 
 	/**
 	 * hdg from GNSS object is not provided.
-	 * @see {@link adr/009-nrf-asset-tracker-values-not-provided.md}
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md
 	 */
 	const object = {
 		v: {

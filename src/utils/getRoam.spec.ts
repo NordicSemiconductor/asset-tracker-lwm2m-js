@@ -27,7 +27,8 @@ void describe('getRoam', () => {
 			'11': [0],
 			/**
 			 * Timestamp is taken from resource 13.
-			 * @see {@link adr/010-roam-timestamp-not-supported-by-lwm2m.md}
+			 *
+			 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
 			 *
 			 */
 			'13': 1675874731,
@@ -88,8 +89,8 @@ void describe('getRoam', () => {
 			'11': [0],
 			/**
 			 * Timestamp is taken from resource 13.
-			 * @see {@link adr/010-roam-timestamp-not-supported-by-lwm2m.md}
 			 *
+			 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
 			 */
 			'13': 1675874731,
 			'16': 'UQ',

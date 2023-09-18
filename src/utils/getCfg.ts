@@ -10,8 +10,6 @@ import { TypeError, Warning } from '../converter.js'
  * Check required values and build config object, expected by nRF Asset Tracker
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/config.md
- * @see {@link ../../documents/config.md}
- * // TODO: Take a decision here
  */
 export const getCfg = (
 	config?: Config_50009,

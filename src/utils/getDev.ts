@@ -10,8 +10,6 @@ import { TypeError, Warning } from '../converter.js'
  * Check required values and build the dev object, expected by nRF Asset Tracker
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/device.md
- * @see {@link ../../documents/device.md}
- * // TODO: Take a decision here
  */
 export const getDev = (
 	device?: Device_3,
@@ -30,7 +28,8 @@ export const getDev = (
 
 	/**
 	 * iccid from Dev object is not provided.
-	 * @see {@link adr/009-nrf-asset-tracker-values-not-provided.md}
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md
 	 */
 	const object = {
 		v: {

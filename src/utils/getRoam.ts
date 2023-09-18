@@ -13,8 +13,6 @@ import { TypeError, Warning } from '../converter.js'
  * Check the required values and create roam object, which is required in nRF Asset Tracker
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/roam.md
- * @see {@link ../../documents/roam.md}
- * // TODO: Take a decision here
  */
 export const getRoam = ({
 	connectivityMonitoring,
@@ -48,13 +46,15 @@ export const getRoam = ({
 
 	/**
 	 * Connectivity Monitoring (4) object does not support timestamp
-	 * @see {@link adr/010-roam-timestamp-not-supported-by-lwm2m.md}
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
 	 */
 	const time = device?.['13'] != null ? device['13'] * 1000 : undefined
 
 	/**
 	 * band and eest from Dev object are not provided.
-	 * @see {@link adr/009-nrf-asset-tracker-values-not-provided.md}
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md
 	 */
 	const object = {
 		v: {
