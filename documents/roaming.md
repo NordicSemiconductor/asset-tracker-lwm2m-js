@@ -16,9 +16,6 @@
 | eest   | [value not provided](../adr/009-nrf-asset-tracker-values-not-provided.md) |
 | ts     | [/3/0/13](../adr/010-roam-timestamp-not-supported-by-lwm2m.md)            |
 
-// TODO: Update link related to Timestamp Hierarchy. Use NordicSemiconductor
-instead of MLopezJ
-
 ## Details
 
 | Field  | Type                                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Minimum Value | Maximum Value | Examples                                                                                  | Required |

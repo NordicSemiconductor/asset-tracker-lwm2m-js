@@ -12,9 +12,6 @@
 | brdV  | /3/0/0                                                                    |
 | ts    | /3/0/13                                                                   |
 
-// TODO: Update link related to Timestamp Hierarchy. Use NordicSemiconductor
-instead of MLopezJ
-
 ## Details
 
 | Field | Description                                              | Type    | Min Length    | Max Length | Examples                 | Required |

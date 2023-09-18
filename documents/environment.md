@@ -11,9 +11,6 @@
 | atmp  | /3323/0/5700                                 |
 | ts    | /3303/0/5518 or /3304/0/5518 or /3323/0/5518 |
 
-// TODO: Update link related to Timestamp Hierarchy. Use NordicSemiconductor
-instead of MLopezJ
-
 ## Details
 
 | Field | Description                                              | Type    | Minimum       | Maximum | Required |

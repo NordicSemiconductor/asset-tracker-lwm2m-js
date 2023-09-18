@@ -14,9 +14,6 @@
 | hdg               | [value not provided](../adr/009-nrf-asset-tracker-values-not-provided.md) |
 | ts                | /6/0/5                                                                    |
 
-// TODO: Update link related to Timestamp Hierarchy. Use NordicSemiconductor
-instead of MLopezJ
-
 ## Details
 
 | Field | Description                                              | Type    | Minimum       | Maximum | Required |
