@@ -22,7 +22,6 @@ void describe('getGnss', () => {
 				acc: 24.798573,
 				alt: 2,
 				spd: 0.579327,
-				hdg: 51, // TODO: remove this
 			},
 			ts: 1665149633000,
 		}

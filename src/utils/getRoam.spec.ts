@@ -47,8 +47,6 @@ void describe('getRoam', () => {
 				mccmnc: 24220,
 				cell: 34237196,
 				ip: '10.160.120.155',
-				band: 3, // TODO: remove this
-				eest: 5, // TODO: remove this
 			},
 			ts: 1675874731000,
 		}
