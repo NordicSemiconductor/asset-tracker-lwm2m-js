@@ -22,7 +22,6 @@ void describe('getDev', () => {
 				imei: '351358815340515',
 				modV: '22.8.1+0',
 				brdV: 'Nordic Semiconductor ASA',
-				iccid: '1234567890123456789', // TODO: remove this
 			},
 			ts: 1675874731000,
 		}

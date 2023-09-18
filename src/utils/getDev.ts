@@ -36,7 +36,6 @@ export const getDev = (
 			imei,
 			modV,
 			brdV,
-			iccid: '1234567890123456789',
 		},
 		ts: time,
 	}

@@ -38,7 +38,6 @@ export const getGnss = (
 			acc,
 			alt,
 			spd,
-			hdg: 51,
 		},
 		ts: time,
 	}
