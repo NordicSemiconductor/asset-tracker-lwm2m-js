@@ -23,6 +23,11 @@ export const getBat = (
 			}),
 		}
 
+	/**
+	 * First element of resource selected
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
+	 */
 	const value = device['7']?.[0]
 	const time = device['13'] !== undefined ? device['13'] * 1000 : undefined
 

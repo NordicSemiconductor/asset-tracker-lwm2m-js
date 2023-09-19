@@ -43,7 +43,7 @@ export const getRoam = ({
 	const nw = String(maybeNw)
 	const mccmnc = Number(`${smcc}${smnc}`)
 	/**
-	 * First element of array selected
+	 * First element of resource selected
 	 *
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
 	 */
