@@ -41,15 +41,20 @@ export const getRoam = ({
 	} = connectivityMonitoring
 
 	const nw = String(maybeNw)
-	const ip = ipArray != null ? ipArray[0] : undefined
 	const mccmnc = Number(`${smcc}${smnc}`)
+	/**
+	 * First element of array selected
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
+	 */
+	const ip = ipArray[0]
 
 	/**
 	 * Connectivity Monitoring (4) object does not support timestamp
 	 *
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
 	 */
-	const time = device?.['13'] != null ? device['13'] * 1000 : undefined
+	const time = device?.['13'] !== undefined ? device['13'] * 1000 : undefined
 
 	/**
 	 * band and eest from Dev object are not provided.

@@ -23,8 +23,7 @@ export const getGnss = (
 			}),
 		}
 
-	const { 0: lat, 2: alt, 6: spd, 1: lng, 3: acc, 5: maybeTime } = location
-	const time = maybeTime != null ? maybeTime * 1000 : undefined
+	const { 0: lat, 2: alt, 6: spd, 1: lng, 3: acc, 5: time } = location
 
 	/**
 	 * hdg from GNSS object is not provided.
@@ -39,7 +38,7 @@ export const getGnss = (
 			alt,
 			spd,
 		},
-		ts: time,
+		ts: time * 1000,
 	}
 
 	const maybeValidGnss = validateWithType(GNSS)(object)
