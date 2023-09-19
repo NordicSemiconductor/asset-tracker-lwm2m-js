@@ -47,7 +47,7 @@ export const getRoam = ({
 	 *
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
 	 */
-	const ip = ipArray[0]
+	const ip = ipArray !== undefined ? ipArray[0] : undefined
 
 	/**
 	 * Connectivity Monitoring (4) object does not support timestamp
