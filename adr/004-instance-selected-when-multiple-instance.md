@@ -48,5 +48,5 @@ The value to be picked is
 ```
 
 More details in
-"[select first instance when LwM2M object is an array](./src/converter.spec.ts)"
+"[select first instance when LwM2M object is an array](../src/converter.spec.ts)"
 test.

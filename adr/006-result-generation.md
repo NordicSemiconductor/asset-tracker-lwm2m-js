@@ -1,8 +1,10 @@
 # ADR 006: Result generation
 
-One characteristic of this conversion process is that both input and output structure type has all its objects as optional values.
+One characteristic of this conversion process is that both input and output
+structure type has all its objects as optional values.
 
 Input:
+
 ```
 {
 	[Device_3_urn]?: Device_3
@@ -17,6 +19,7 @@ Input:
 ```
 
 Output:
+
 ```
 {
 	cfg: Type.Optional(Config),
@@ -29,10 +32,17 @@ Output:
 
 ```
 
-Is important to notice that the consequence of one object not being present in the input is that the object/s of the output which are dependent of it to be generated will not be returned in the output.
+Is important to notice that the consequence of one object not being present in
+the input is that the object/s of the output which are dependent of it to be
+generated will not be returned in the output.
 
-For example, the LwM2M object 6 - Location is used to create the GNSS object in the output. If object 6 is missing, the GNSS object will not be part of the output.
+For example, the LwM2M object 6 - Location is used to create the GNSS object in
+the output. If object 6 is missing, the GNSS object will not be part of the
+output.
 
-See [data transition](documents/nRFAssetTracker.md) for check the dependencies between LwM2M objects and nRF Asset Tracker objects.
+See [data transition](../documents/nRFAssetTracker.md) for check the
+dependencies between LwM2M objects and nRF Asset Tracker objects.
 
-See [test - "should create output even when some expected objects in the input are missing"](../src/converter.spec.ts) for more examples.
+See
+[test - "should create output even when some expected objects in the input are missing"](../src/converter.spec.ts)
+for more examples.

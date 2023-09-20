@@ -31,5 +31,5 @@ The element to be picked is
 ```
 
 More details in
-"[select first element when LwM2M resource is an array](./src/converter.spec.ts)"
+"[select first element when LwM2M resource is an array](../src/converter.spec.ts)"
 test.
