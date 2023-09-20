@@ -3,6 +3,7 @@
 ```
 TODO:
 * Update link related to test and release badge. Use NordicSemiconductor instead of MLopezJ
+* Solve "Running tests takes too long"
 * release to NPM
 ```
 
