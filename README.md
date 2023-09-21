@@ -4,7 +4,6 @@
 TODO:
 * Update link related to test and release badge. Use NordicSemiconductor instead of MLopezJ
 * Solve "Running tests takes too long"
-* Ensure Unit test files are using the test method from node:test runner
 * release to NPM
 ```
 

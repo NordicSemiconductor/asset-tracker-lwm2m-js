@@ -7,7 +7,7 @@ import { type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { TypeError, Warning } from '../converter.js'
 
 /**
- * Check required values and build the dev object, expected by nRF Asset Tracker
+ * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/device.md
  */

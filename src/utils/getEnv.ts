@@ -12,6 +12,8 @@ import { TypeError, Warning } from '../converter.js'
 
 /**
  * Check and create the 'env' object, expected by nRF Asset Tracker
+ * Takes objects id 3303 (temperature), 3304 (humidity) and 3323 (pressure) from
+ * 'LwM2M Asset Tracker v2' and convert into 'env' object from 'nRF Asset Tracker Reported'
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/environment.md
  */

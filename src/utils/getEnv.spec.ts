@@ -5,7 +5,7 @@ import { getEnv } from './getEnv.js'
 import { TypeError, Warning } from '../converter.js'
 
 void describe('getEnv', () => {
-	void it(`should create the 'env' object expected by nRF Asset Tracker`, () => {
+	void it(`should create the 'env' object expected by 'nRF Asset Tracker Reported'`, () => {
 		const temperature = [
 			{
 				'5601': 27.18,
@@ -48,7 +48,12 @@ void describe('getEnv', () => {
 		assert.deepEqual(env.result, expected)
 	})
 
-	void it(`should return warning if required objects are undefined`, () => {
+	/**
+	 * For transition from 'LwM2M Asset Tracker v2' objects to 'nRF Asset Tracker Reported' objects
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/documents/nRFAssetTracker.md
+	 */
+	void it(`should return a warning if the dependent LwM2M object for creating the 'env' object is undefined`, () => {
 		const temperature = [
 			{
 				'5601': 27.18,
@@ -78,7 +83,7 @@ void describe('getEnv', () => {
 		)
 	})
 
-	void it(`should return error if required resources are missing`, () => {
+	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
 		const temperature = [
 			{
 				'5601': 27.18,

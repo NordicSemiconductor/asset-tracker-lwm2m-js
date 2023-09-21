@@ -5,7 +5,7 @@ import { getRoam } from './getRoam.js'
 import { TypeError, Warning } from '../converter.js'
 
 void describe('getRoam', () => {
-	void it(`should create roam object`, () => {
+	void it(`should create the 'roam' object expected by 'nRF Asset Tracker Reported'`, () => {
 		const connectivityMonitoring = {
 			'0': 6,
 			'1': [7, 6],
@@ -53,7 +53,12 @@ void describe('getRoam', () => {
 		assert.deepEqual(roam.result, expected)
 	})
 
-	void it(`should return warning if Connectivity Monitoring (4) object is missing`, () => {
+	/**
+	 * For transition from 'LwM2M Asset Tracker v2' objects to 'nRF Asset Tracker Reported' objects
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/documents/nRFAssetTracker.md
+	 */
+	void it(`should return a warning if the dependent LwM2M object for creating the 'roam' object is undefined`, () => {
 		const connectivityMonitoring = undefined
 		const device = undefined
 		const result = getRoam({ connectivityMonitoring, device }) as {
@@ -66,7 +71,7 @@ void describe('getRoam', () => {
 		)
 	})
 
-	void it(`should return error if required resource is missing`, () => {
+	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
 		const connectivityMonitoring = {
 			'0': 6,
 			'1': [6, 7],

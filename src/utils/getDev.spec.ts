@@ -4,7 +4,7 @@ import { getDev } from './getDev.js'
 import { TypeError, Warning } from '../converter.js'
 
 void describe('getDev', () => {
-	void it(`should create the 'dev' object expected by the nRF Asset Tracker`, () => {
+	void it(`should create the 'dev' object expected by 'nRF Asset Tracker Reported'`, () => {
 		const device = {
 			'0': 'Nordic Semiconductor ASA',
 			'1': 'Thingy:91',
@@ -28,13 +28,18 @@ void describe('getDev', () => {
 		assert.deepEqual(dev.result, expected)
 	})
 
-	void it(`should return warning if Device object is undefined`, () => {
+	/**
+	 * For transition from 'LwM2M Asset Tracker v2' objects to 'nRF Asset Tracker Reported' objects
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/documents/nRFAssetTracker.md
+	 */
+	void it(`should return a warning if the dependent LwM2M object for creating the 'dev' object is undefined`, () => {
 		const dev = getDev(undefined) as { warning: Warning }
 		assert.equal(dev.warning.message, 'Dev object can not be created')
 		assert.equal(dev.warning.description, 'Device (3) object is undefined')
 	})
 
-	void it(`should return error in case a required resource is missing`, () => {
+	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
 		const device = {
 			'0': 'Nordic Semiconductor ASA',
 			'1': 'Thingy:91',

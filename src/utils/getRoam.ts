@@ -10,7 +10,8 @@ import type {
 import { TypeError, Warning } from '../converter.js'
 
 /**
- * Check the required values and create roam object, which is required in nRF Asset Tracker
+ * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
+ * and convert into 'roam' object from 'nRF Asset Tracker Reported'
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/roam.md
  */

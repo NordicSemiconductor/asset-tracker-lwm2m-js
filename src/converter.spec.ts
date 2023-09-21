@@ -156,6 +156,9 @@ void describe('converter', () => {
 		assert.deepEqual(result.gnss, expected.gnss)
 	})
 
+	/**
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/006-result-generation.md for more details
+	 */
 	void it(`should create output even when some expected objects in the input are missing`, (context) => {
 		const input = {
 			[Device_3_urn]: {
@@ -190,16 +193,23 @@ void describe('converter', () => {
 		const result = converter(input, warningCallback)
 		assert.deepEqual(result, expected)
 		/**
-		 * 4 objects (env, gnss, cfg, roam) from nRF Asset Tracker were not generated because dependent objects were not present in input,
-		 * thats why it is expecting the warning callback to be called 4 times
+		 * 4 objects (env, gnss, cfg, roam) from nRF Asset Tracker were not generated
+		 * because dependent objects were not present in input, thats why it is expecting
+		 * the warning callback to be called 4 times
 		 */
 		assert.strictEqual(warningCallback.mock.callCount(), 4)
 	})
 
+	/**
+	 * Instance selected when LwM2M object is multiple instance
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/004-instance-selected-when-multiple-instance.md for more details
+	 */
 	void it(`should select first instance when LwM2M object is an array`, () => {
 		const input = {
 			[Temperature_3303_urn]: [
 				{
+					// First instance of Temperature object
 					'5601': 27.18,
 					'5602': 27.71,
 					'5700': 27.18,
@@ -224,6 +234,7 @@ void describe('converter', () => {
 
 			[Humidity_3304_urn]: [
 				{
+					// First instance of Humidity object
 					'5601': 23.535,
 					'5602': 24.161,
 					'5700': 24.057,
@@ -241,6 +252,7 @@ void describe('converter', () => {
 
 			[Pressure_3323_urn]: [
 				{
+					// First instance of Pressure object
 					'5601': 101697,
 					'5602': 101705,
 					'5700': 10,
@@ -277,14 +289,19 @@ void describe('converter', () => {
 		assert.deepEqual(converter(input), output)
 	})
 
-	void it(`should select first element when LwM2M instance is an array`, () => {
+	/**
+	 * Element selected when LwM2M resource is multiple instance
+	 *
+	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md for more details
+	 */
+	void it(`should select first element when LwM2M resource is an array`, () => {
 		const input = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
 				'1': 'Thingy:91',
 				'2': '351358815340515',
 				'3': '22.8.1+0',
-				'7': [2754, 0, 1, 2, 3, 4, 5, 6, 7], // array instance
+				'7': [2754, 0, 1, 2, 3, 4, 5, 6, 7], // array resource
 				'11': [0],
 				'13': 1675874731,
 				'16': 'UQ',
