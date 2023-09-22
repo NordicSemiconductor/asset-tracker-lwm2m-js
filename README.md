@@ -133,7 +133,9 @@ export const input = {
 
 ## Expected output
 
-The output is a nRF Asset Tracker payload.
+The output is the
+[nRF Asset Tracker Reported](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Reported.ts)
+object.
 
 ```TypeScript
 const result = {

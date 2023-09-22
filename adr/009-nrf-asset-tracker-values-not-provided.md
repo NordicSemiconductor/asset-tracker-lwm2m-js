@@ -1,8 +1,8 @@
 # ADR: 009 nRF Asset Tracker values not provided
 
-nRF Asset tracker is expecting the following objects as input.
+`nRF Asset Tracker Reported` is expecting the following objects as input.
 
-| nRF Asset Tracker                         |
+| nRF Asset Tracker Reported                |
 | ----------------------------------------- |
 | [bat](.../documents/documents/battery.md) |
 | [dev](../documents/device.md)             |
@@ -18,7 +18,7 @@ However, the equivalent values of
 - `band` from `roam` object
 - `eest` from `roam` object
 
-Are not provided by Asset Tracker v2 firmware in the LwM2M protocol version.
+Are not provided by `asset_tracker_v2` firmware in the LwM2M protocol version.
 
 For that reason the output of this project will ignore them.
 

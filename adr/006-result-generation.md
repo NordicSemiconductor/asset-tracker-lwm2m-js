@@ -1,7 +1,8 @@
 # ADR 006: Result generation
 
-One characteristic of this conversion process is that both input and output
-structure type has all its objects as optional values.
+One characteristic of this conversion process is that both input
+(`LwM2M Asset Tracker v2`) and output (`nRF Asset Tracker Reported`) structure
+type has all its objects as optional values.
 
 Input:
 
