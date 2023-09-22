@@ -5,6 +5,7 @@ import {
 	Temperature_3303_urn,
 	Humidity_3304_urn,
 	Pressure_3323_urn,
+	parseURN,
 } from '@nordicsemiconductor/lwm2m-types'
 import type {
 	Device_3,
@@ -71,43 +72,44 @@ type ErrorDescription = {
 	message?: string
 }
 
+/**
+ * Error handler type
+ *
+ * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
+ */
 export class TypeError extends Error {
 	description: ErrorDescription[]
 
-	constructor({
-		name,
-		message,
-		description,
-	}: {
-		name: string
-		message: string
-		description: ErrorDescription[]
-	}) {
-		super()
-
-		this.name = name
-		this.message = message
+	constructor(description: ErrorDescription[]) {
+		super(`error validating type: ${JSON.stringify(description, null, 2)}`)
 		this.description = description
 	}
 }
 
-export class Warning extends Error {
-	description: string
+/**
+ * Warning handler type
+ *
+ * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
+ */
+export class UndefinedLwM2MObjectWarning extends Error {
+	undefinedLwM2MObject: {
+		ObjectID: string
+		ObjectVersion: string
+		LWM2MVersion: string
+	}
 
 	constructor({
-		name,
-		message,
-		description,
+		nRFAssetTrackerReportedId,
+		LwM2MObjectUrn,
 	}: {
-		name: string
-		message: string
-		description: string
+		nRFAssetTrackerReportedId: keyof nRFAssetTrackerReportedType
+		LwM2MObjectUrn: keyof LwM2MAssetTrackerV2
 	}) {
-		super()
-
-		this.name = name
-		this.message = message
-		this.description = description
+		const LwM2MObjectInfo = parseURN(LwM2MObjectUrn)
+		super(
+			`'${nRFAssetTrackerReportedId}' object can not be created because LwM2M object id '${LwM2MObjectInfo.ObjectID}' is undefined`,
+		)
+		this.undefinedLwM2MObject = LwM2MObjectInfo
 	}
 }
 
@@ -116,8 +118,8 @@ export class Warning extends Error {
  */
 export const converter = (
 	input: LwM2MAssetTrackerV2,
-	onWarning?: (warning: Error) => unknown,
-	onError?: (error: Error) => unknown,
+	onWarning?: (warning: UndefinedLwM2MObjectWarning) => unknown,
+	onError?: (error: TypeError) => unknown,
 ): typeof nRFAssetTrackerReported => {
 	const result = {} as typeof nRFAssetTrackerReported
 	const device = input[Device_3_urn]

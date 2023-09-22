@@ -3,8 +3,11 @@ import {
 	type GNSSData,
 	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { type Location_6 } from '@nordicsemiconductor/lwm2m-types'
-import { TypeError, Warning } from '../converter.js'
+import {
+	Location_6_urn,
+	type Location_6,
+} from '@nordicsemiconductor/lwm2m-types'
+import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**
  * Takes object id 6 (location) from 'LwM2M Asset Tracker v2' and convert into 'gnss' object from 'nRF Asset Tracker Reported'
@@ -13,13 +16,15 @@ import { TypeError, Warning } from '../converter.js'
  */
 export const getGnss = (
 	location?: Location_6,
-): { result: GNSSData } | { error: Error } | { warning: Warning } => {
+):
+	| { result: GNSSData }
+	| { error: TypeError }
+	| { warning: UndefinedLwM2MObjectWarning } => {
 	if (location === undefined)
 		return {
-			warning: new Warning({
-				name: 'warning',
-				message: 'GNSS object can not be created',
-				description: 'Location (6) object is undefined',
+			warning: new UndefinedLwM2MObjectWarning({
+				nRFAssetTrackerReportedId: 'gnss',
+				LwM2MObjectUrn: Location_6_urn,
 			}),
 		}
 
@@ -44,11 +49,7 @@ export const getGnss = (
 	const maybeValidGnss = validateWithType(GNSS)(object)
 	if ('errors' in maybeValidGnss) {
 		return {
-			error: new TypeError({
-				name: 'type error',
-				message: 'error validating type',
-				description: maybeValidGnss.errors,
-			}),
+			error: new TypeError(maybeValidGnss.errors),
 		}
 	}
 

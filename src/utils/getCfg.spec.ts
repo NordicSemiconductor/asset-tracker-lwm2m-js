@@ -1,8 +1,9 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import type { Config_50009 } from '../schemas/Config_50009.js'
+import { type Config_50009, Config_50009_urn } from '../schemas/Config_50009.js'
 import { getCfg } from './getCfg.js'
-import { TypeError, Warning } from '../converter.js'
+import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getCfg', () => {
 	void it(`should create the 'cfg' object expected by 'nRF Asset Tracker Reported'`, () => {
@@ -41,9 +42,15 @@ void describe('getCfg', () => {
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/documents/nRFAssetTracker.md
 	 */
 	void it(`should return a warning if the dependent LwM2M object for creating the 'cfg' object is undefined`, () => {
-		const cfg = getCfg(undefined) as { warning: Warning }
-		assert.equal(cfg.warning.message, 'Cfg object can not be created')
-		assert.equal(cfg.warning.description, 'Config (50009) object is undefined')
+		const cfg = getCfg(undefined) as { warning: UndefinedLwM2MObjectWarning }
+		assert.equal(
+			cfg.warning.message,
+			`'cfg' object can not be created because LwM2M object id '50009' is undefined`,
+		)
+		assert.deepEqual(
+			cfg.warning.undefinedLwM2MObject,
+			parseURN(Config_50009_urn),
+		)
 	})
 
 	void it('should return an error if the result of the conversion does not meet the expected types', () => {
@@ -62,9 +69,12 @@ void describe('getCfg', () => {
 
 		const config = getCfg(object) as { error: TypeError }
 		const message = config.error.description[0]?.message
+		const checkMessage = message?.includes(
+			"must have required property 'accath'",
+		)
 		const keyword = config.error.description[0]?.keyword
 
-		assert.equal(message, "must have required property 'accath'")
+		assert.equal(checkMessage, true)
 		assert.equal(keyword, 'required')
 	})
 })

@@ -3,8 +3,8 @@ import {
 	type BatteryData,
 	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { type Device_3 } from '@nordicsemiconductor/lwm2m-types'
-import { TypeError, Warning } from '../converter.js'
+import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
+import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'bat' object from 'nRF Asset Tracker Reported'
@@ -13,13 +13,15 @@ import { TypeError, Warning } from '../converter.js'
  */
 export const getBat = (
 	device?: Device_3,
-): { result: BatteryData } | { error: Error } | { warning: Warning } => {
+):
+	| { result: BatteryData }
+	| { error: TypeError }
+	| { warning: UndefinedLwM2MObjectWarning } => {
 	if (device === undefined)
 		return {
-			warning: new Warning({
-				name: 'warning',
-				message: 'Bat object can not be created',
-				description: 'Device (3) object is undefined',
+			warning: new UndefinedLwM2MObjectWarning({
+				nRFAssetTrackerReportedId: 'bat',
+				LwM2MObjectUrn: Device_3_urn,
 			}),
 		}
 
@@ -39,11 +41,7 @@ export const getBat = (
 	const maybeValidBat = validateWithType(Battery)(object)
 	if ('errors' in maybeValidBat) {
 		return {
-			error: new TypeError({
-				name: 'type error',
-				message: 'error validating type',
-				description: maybeValidBat.errors,
-			}),
+			error: new TypeError(maybeValidBat.errors),
 		}
 	}
 

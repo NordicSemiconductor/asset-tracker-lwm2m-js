@@ -4,11 +4,14 @@ import {
 	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
+	Humidity_3304_urn,
+	Pressure_3323_urn,
+	Temperature_3303_urn,
 	type Humidity_3304,
 	type Pressure_3323,
 	type Temperature_3303,
 } from '@nordicsemiconductor/lwm2m-types'
-import { TypeError, Warning } from '../converter.js'
+import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**
  * Check and create the 'env' object, expected by nRF Asset Tracker
@@ -25,31 +28,31 @@ export const getEnv = ({
 	temperature: Temperature_3303 | undefined
 	humidity: Humidity_3304 | undefined
 	pressure: Pressure_3323 | undefined
-}): { result: EnvironmentData } | { error: Error } | { warning: Warning } => {
+}):
+	| { result: EnvironmentData }
+	| { error: TypeError }
+	| { warning: UndefinedLwM2MObjectWarning } => {
 	if (temperature === undefined)
 		return {
-			warning: new Warning({
-				name: 'warning',
-				message: 'Env object can not be created',
-				description: 'Temperature (3303) object is undefined',
+			warning: new UndefinedLwM2MObjectWarning({
+				nRFAssetTrackerReportedId: 'env',
+				LwM2MObjectUrn: Temperature_3303_urn,
 			}),
 		}
 
 	if (humidity === undefined)
 		return {
-			warning: new Warning({
-				name: 'warning',
-				message: 'Env object can not be created',
-				description: 'Humidity (3304) object is undefined',
+			warning: new UndefinedLwM2MObjectWarning({
+				nRFAssetTrackerReportedId: 'env',
+				LwM2MObjectUrn: Humidity_3304_urn,
 			}),
 		}
 
 	if (pressure === undefined)
 		return {
-			warning: new Warning({
-				name: 'warning',
-				message: 'Env object can not be created',
-				description: 'Pressure (3323) object is undefined',
+			warning: new UndefinedLwM2MObjectWarning({
+				nRFAssetTrackerReportedId: 'env',
+				LwM2MObjectUrn: Pressure_3323_urn,
 			}),
 		}
 
@@ -81,11 +84,7 @@ export const getEnv = ({
 	const maybeValidEnvironment = validateWithType(Environment)(object)
 	if ('errors' in maybeValidEnvironment) {
 		return {
-			error: new TypeError({
-				name: 'type error',
-				message: 'error validating type',
-				description: maybeValidEnvironment.errors,
-			}),
+			error: new TypeError(maybeValidEnvironment.errors),
 		}
 	}
 

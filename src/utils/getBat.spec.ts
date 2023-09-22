@@ -2,7 +2,8 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getBat } from './getBat.js'
 import { type BatteryData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
-import { TypeError, Warning } from '../converter.js'
+import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { Device_3_urn, parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getBat', () => {
 	void it(`should create the 'bat' object expected by 'nRF Asset Tracker Reported'`, () => {
@@ -29,9 +30,15 @@ void describe('getBat', () => {
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/documents/nRFAssetTracker.md
 	 */
 	void it(`should return a warning if the dependent LwM2M object for creating the 'bat' object is undefined`, () => {
-		const result = getBat(undefined) as { warning: Warning }
-		assert.equal(result.warning.message, 'Bat object can not be created')
-		assert.equal(result.warning.description, 'Device (3) object is undefined')
+		const result = getBat(undefined) as { warning: UndefinedLwM2MObjectWarning }
+		assert.equal(
+			result.warning.message,
+			`'bat' object can not be created because LwM2M object id '3' is undefined`,
+		)
+		assert.deepEqual(
+			result.warning.undefinedLwM2MObject,
+			parseURN(Device_3_urn),
+		)
 	})
 
 	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
@@ -48,9 +55,10 @@ void describe('getBat', () => {
 		}
 		const bat = getBat(device) as { error: TypeError }
 		const message = bat.error.description[0]?.message
+		const checkMessage = message?.includes("must have required property 'v'")
 		const keyword = bat.error.description[0]?.keyword
 
-		assert.equal(message, "must have required property 'v'")
+		assert.equal(checkMessage, true)
 		assert.equal(keyword, 'required')
 	})
 })
