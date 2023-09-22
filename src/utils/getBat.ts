@@ -3,7 +3,7 @@ import {
 	type BatteryData,
 	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
+import { Device_3_urn, type Device_3 } from '../schemas/index.js'
 import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**

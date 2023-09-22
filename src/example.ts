@@ -5,8 +5,8 @@ import {
 	Temperature_3303_urn,
 	Humidity_3304_urn,
 	Pressure_3323_urn,
-} from '@nordicsemiconductor/lwm2m-types'
-import { Config_50009_urn } from './schemas/Config_50009.js'
+	Config_50009_urn,
+} from './schemas/index.js'
 import { converter, type LwM2MAssetTrackerV2 } from './converter.js'
 
 const lwM2MAssetTrackerV2: LwM2MAssetTrackerV2 = {

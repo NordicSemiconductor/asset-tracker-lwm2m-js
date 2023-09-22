@@ -30,11 +30,6 @@ jobs:
       - name: Make sure example runs
         run: npx tsx src/example.ts
 
-      - name: Run default versions checker
-        run:
-          node --loader tsx --test
-          non-functional-tests/defaultLwM2MVersions.spec.ts
-
       - name: Semantic release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

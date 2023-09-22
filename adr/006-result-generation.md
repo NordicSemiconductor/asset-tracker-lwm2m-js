@@ -41,8 +41,8 @@ For example, the LwM2M object 6 - Location is used to create the GNSS object in
 the output. If object 6 is missing, the GNSS object will not be part of the
 output.
 
-See [data transition](../documents/nRFAssetTracker.md) for check the
-dependencies between LwM2M objects and nRF Asset Tracker objects.
+See [data transition](documents/data-transition.md) for check the dependencies
+between LwM2M objects and nRF Asset Tracker objects.
 
 See
 [test - "should create output even when some expected objects in the input are missing"](../src/converter.spec.ts)

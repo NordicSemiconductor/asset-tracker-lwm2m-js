@@ -5,8 +5,8 @@ import {
 	Temperature_3303_urn,
 	Humidity_3304_urn,
 	Pressure_3323_urn,
-	parseURN,
-} from '@nordicsemiconductor/lwm2m-types'
+	Config_50009_urn,
+} from './schemas/index.js'
 import type {
 	Device_3,
 	ConnectivityMonitoring_4,
@@ -14,7 +14,8 @@ import type {
 	Temperature_3303,
 	Humidity_3304,
 	Pressure_3323,
-} from '@nordicsemiconductor/lwm2m-types'
+	Config_50009,
+} from './schemas/index.js'
 import {
 	Config,
 	Device,
@@ -23,7 +24,6 @@ import {
 	Environment,
 	GNSS,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
 import { getBat } from './utils/getBat.js'
 import { getDev } from './utils/getDev.js'
 import { getEnv } from './utils/getEnv.js'
@@ -32,6 +32,7 @@ import { getRoam } from './utils/getRoam.js'
 import { getCfg } from './utils/getCfg.js'
 
 import { Type, type Static } from '@sinclair/typebox'
+import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 /**
  * Expected input type

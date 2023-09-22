@@ -3,10 +3,10 @@ import assert from 'node:assert'
 import {
 	type ConnectivityMonitoring_4,
 	ConnectivityMonitoring_4_urn,
-	parseURN,
-} from '@nordicsemiconductor/lwm2m-types'
+} from '../schemas/index.js'
 import { getRoam } from './getRoam.js'
 import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getRoam', () => {
 	void it(`should create the 'roam' object expected by 'nRF Asset Tracker Reported'`, () => {

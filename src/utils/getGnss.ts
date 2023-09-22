@@ -6,7 +6,7 @@ import {
 import {
 	Location_6_urn,
 	type Location_6,
-} from '@nordicsemiconductor/lwm2m-types'
+} from '../schemas/index.js'
 import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**

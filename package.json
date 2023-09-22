@@ -4,7 +4,7 @@
   "description": "Converts a JSON document containing the asset_tracker_v2 device and sensor data encoded as LwM2M to the JSON document required by nRF Asset Tracker.",
   "main": "index.js",
   "scripts": {
-    "test": "find ./ -type f -name '*.spec.ts' ! -path '*/node_modules/*' -exec npx tsx {} ';'",
+    "test": "find ./ -type f -name '*.spec.ts' -not -path './node_modules/*' -print | xargs npx tsx --no-warnings --test",
     "prepare": "husky install",
     "prepublish": "npx swc -d dist ./src"
   },
