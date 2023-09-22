@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getBat } from './getBat.js'
 import { type BatteryData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { Device_3_urn, parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getBat', () => {
@@ -53,7 +53,7 @@ void describe('getBat', () => {
 			'16': 'UQ',
 			'19': '3.2.1',
 		}
-		const bat = getBat(device) as { error: TypeError }
+		const bat = getBat(device) as { error: ValidationError }
 		const message = bat.error.description[0]?.message
 		const checkMessage = message?.includes("must have required property 'v'")
 		const keyword = bat.error.description[0]?.keyword

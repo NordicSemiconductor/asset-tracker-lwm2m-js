@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getDev } from './getDev.js'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { Device_3_urn, parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getDev', () => {
@@ -55,7 +55,7 @@ void describe('getDev', () => {
 			'16': 'UQ',
 			'19': '3.2.1',
 		}
-		const dev = getDev(device) as { error: TypeError }
+		const dev = getDev(device) as { error: ValidationError }
 		const instancePathError = dev.error.description[0]?.instancePath
 		const message = dev.error.description[0]?.message
 		const checkMessage = message?.includes("must have required property 'imei'")

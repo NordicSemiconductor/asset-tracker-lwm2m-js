@@ -3,8 +3,8 @@ import {
 	Config,
 	type ConfigData,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**
  * Takes object id 50009 (config) from 'LwM2M Asset Tracker v2' and convert into 'cfg' object from 'nRF Asset Tracker Reported'
@@ -15,7 +15,7 @@ export const getCfg = (
 	config?: Config_50009,
 ):
 	| { result: ConfigData }
-	| { error: TypeError }
+	| { error: ValidationError }
 	| { warning: UndefinedLwM2MObjectWarning } => {
 	if (config === undefined)
 		return {

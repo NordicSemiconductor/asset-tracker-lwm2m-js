@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { Humidity_3304_urn, type Temperature_3303 } from '../schemas/index.js'
 import { getEnv } from './getEnv.js'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getEnv', () => {
@@ -116,7 +116,7 @@ void describe('getEnv', () => {
 			},
 		]
 		const result = getEnv({ temperature, humidity, pressure }) as {
-			error: TypeError
+			error: ValidationError
 		}
 		const instancePathError = result.error.description[0]?.instancePath
 		const message = result.error.description[0]?.message

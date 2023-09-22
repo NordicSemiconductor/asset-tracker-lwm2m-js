@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { Location_6_urn, type Location_6 } from '../schemas/index.js'
 import { getGnss } from './getGnss.js'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getGnss', () => {
@@ -57,7 +57,7 @@ void describe('getGnss', () => {
 			'5': 1665149633,
 			'6': 0.579327,
 		} as unknown as Location_6
-		const result = getGnss(location) as { error: TypeError }
+		const result = getGnss(location) as { error: ValidationError }
 		const instancePathError = result.error.description[0]?.instancePath
 		const message = result.error.description[0]?.message
 		const checkMessage = message?.includes("must have required property 'lat'")

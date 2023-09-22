@@ -7,8 +7,8 @@ import {
 	type ConnectivityMonitoring_4,
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
@@ -24,7 +24,7 @@ export const getRoam = ({
 	device: Device_3 | undefined
 }):
 	| { result: RoamingInfoData }
-	| { error: TypeError }
+	| { error: ValidationError }
 	| { warning: UndefinedLwM2MObjectWarning } => {
 	if (connectivityMonitoring === undefined)
 		return {

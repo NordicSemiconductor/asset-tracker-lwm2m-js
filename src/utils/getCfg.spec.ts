@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { type Config_50009, Config_50009_urn } from '../schemas/Config_50009.js'
 import { getCfg } from './getCfg.js'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getCfg', () => {
@@ -67,7 +67,7 @@ void describe('getCfg', () => {
 			'9': 0.5,
 		} as Config_50009
 
-		const config = getCfg(object) as { error: TypeError }
+		const config = getCfg(object) as { error: ValidationError }
 		const message = config.error.description[0]?.message
 		const checkMessage = message?.includes(
 			"must have required property 'accath'",

@@ -78,7 +78,7 @@ type ErrorDescription = {
  *
  * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
  */
-export class TypeError extends Error {
+export class ValidationError extends Error {
 	description: ErrorDescription[]
 
 	constructor(description: ErrorDescription[]) {
@@ -120,7 +120,7 @@ export class UndefinedLwM2MObjectWarning extends Error {
 export const converter = (
 	input: LwM2MAssetTrackerV2,
 	onWarning?: (warning: UndefinedLwM2MObjectWarning) => unknown,
-	onError?: (error: TypeError) => unknown,
+	onError?: (error: ValidationError) => unknown,
 ): typeof nRFAssetTrackerReported => {
 	const result = {} as typeof nRFAssetTrackerReported
 	const device = input[Device_3_urn]

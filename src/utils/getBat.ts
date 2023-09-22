@@ -3,8 +3,8 @@ import {
 	type BatteryData,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, type Device_3 } from '../schemas/index.js'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'bat' object from 'nRF Asset Tracker Reported'
@@ -15,7 +15,7 @@ export const getBat = (
 	device?: Device_3,
 ):
 	| { result: BatteryData }
-	| { error: TypeError }
+	| { error: ValidationError }
 	| { warning: UndefinedLwM2MObjectWarning } => {
 	if (device === undefined)
 		return {

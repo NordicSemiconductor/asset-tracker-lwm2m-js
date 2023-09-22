@@ -5,7 +5,7 @@ import {
 	ConnectivityMonitoring_4_urn,
 } from '../schemas/index.js'
 import { getRoam } from './getRoam.js'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('getRoam', () => {
@@ -107,7 +107,7 @@ void describe('getRoam', () => {
 			'19': '3.2.1',
 		}
 		const result = getRoam({ connectivityMonitoring, device }) as {
-			error: TypeError
+			error: ValidationError
 		}
 		const instancePathError = result.error.description[0]?.instancePath
 		const message = result.error.description[0]?.message

@@ -2,9 +2,9 @@ import {
 	GNSS,
 	type GNSSData,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { Location_6_urn, type Location_6 } from '../schemas/index.js'
-import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
+import { Location_6_urn, type Location_6 } from '../schemas/index.js'
+import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**
  * Takes object id 6 (location) from 'LwM2M Asset Tracker v2' and convert into 'gnss' object from 'nRF Asset Tracker Reported'
@@ -15,7 +15,7 @@ export const getGnss = (
 	location?: Location_6,
 ):
 	| { result: GNSSData }
-	| { error: TypeError }
+	| { error: ValidationError }
 	| { warning: UndefinedLwM2MObjectWarning } => {
 	if (location === undefined)
 		return {
