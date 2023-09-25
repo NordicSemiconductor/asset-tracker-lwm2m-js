@@ -31,7 +31,7 @@ export const getBat = (
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
 	 */
 	const value = device['7']?.[0]
-	const time = device['13'] !== undefined ? device['13'] * 1000 : undefined
+	const time = getTime(device)
 
 	const object = {
 		v: value,
@@ -40,3 +40,10 @@ export const getBat = (
 
 	return validateAgainstSchema(object, Battery)
 }
+
+/**
+ * Resource selected to reported timestamp value is 13.
+ * Value is in seconds and it is multiplied to transform to milliseconds.
+ */
+export const getTime = (device: Device_3): number | undefined =>
+	device['13'] !== undefined ? device['13'] * 1000 : undefined

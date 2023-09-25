@@ -5,6 +5,7 @@ import {
 import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { getTime } from './getBat.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
@@ -25,8 +26,8 @@ export const getDev = (
 			}),
 		}
 
-	const { 0: brdV, 2: imei, 3: modV, 13: maybeTime } = device
-	const time = maybeTime !== undefined ? maybeTime * 1000 : undefined
+	const { 0: brdV, 2: imei, 3: modV } = device
+	const time = getTime(device)
 
 	/**
 	 * iccid from Dev object is not provided.

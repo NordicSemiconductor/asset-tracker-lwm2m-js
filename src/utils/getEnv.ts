@@ -64,13 +64,7 @@ export const getEnv = ({
 	const temp = temperature?.[0]?.['5700']
 	const hum = humidity?.[0]?.['5700']
 	const atmp = pressure?.[0]?.['5700']
-
-	let time =
-		temperature?.[0]?.['5518'] ??
-		humidity?.[0]?.['5518'] ??
-		pressure?.[0]?.['5518']
-
-	if (time !== undefined) time = time * 1000
+	const time = getTime({ temperature, humidity, pressure })
 
 	const object = {
 		v: {
@@ -82,4 +76,27 @@ export const getEnv = ({
 	}
 
 	return validateAgainstSchema(object, Environment)
+}
+
+/**
+ * Resource selected to reported timestamp value is 5518.
+ * Value is in seconds and it is multiplied to transform to milliseconds.
+ */
+const getTime = ({
+	temperature,
+	humidity,
+	pressure,
+}: {
+	temperature: Temperature_3303
+	humidity: Humidity_3304
+	pressure: Pressure_3323
+}): number | undefined => {
+	let time =
+		temperature?.[0]?.['5518'] ??
+		humidity?.[0]?.['5518'] ??
+		pressure?.[0]?.['5518']
+
+	if (time !== undefined) time = time * 1000
+
+	return time
 }

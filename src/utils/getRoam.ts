@@ -2,13 +2,11 @@ import {
 	RoamingInfo,
 	type RoamingInfoData,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import {
-	type Device_3,
-	type ConnectivityMonitoring_4,
-	ConnectivityMonitoring_4_urn,
-} from '@nordicsemiconductor/lwm2m-types'
-import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { getTime } from './getBat.js'
+import { validateAgainstSchema } from './validateAgainstSchema.js'
+import { ConnectivityMonitoring_4_urn, type ConnectivityMonitoring_4, type Device_3, Device_3_urn } from 'src/schemas/index.js'
+
 
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
@@ -31,6 +29,14 @@ export const getRoam = ({
 			warning: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'roam',
 				LwM2MObjectUrn: ConnectivityMonitoring_4_urn,
+			}),
+		}
+
+	if (device === undefined)
+		return {
+			warning: new UndefinedLwM2MObjectWarning({
+				nRFAssetTrackerReportedId: 'roam',
+				LwM2MObjectUrn: Device_3_urn,
 			}),
 		}
 
@@ -58,7 +64,7 @@ export const getRoam = ({
 	 *
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
 	 */
-	const time = device?.['13'] !== undefined ? device['13'] * 1000 : undefined
+	const time = getTime(device)
 
 	/**
 	 * band and eest from Dev object are not provided.

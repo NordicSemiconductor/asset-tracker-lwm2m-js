@@ -25,7 +25,8 @@ export const getGnss = (
 			}),
 		}
 
-	const { 0: lat, 2: alt, 6: spd, 1: lng, 3: acc, 5: time } = location
+	const { 0: lat, 2: alt, 6: spd, 1: lng, 3: acc } = location
+	const time = getTime(location)
 
 	/**
 	 * hdg from GNSS object is not provided.
@@ -40,8 +41,14 @@ export const getGnss = (
 			alt,
 			spd,
 		},
-		ts: time * 1000,
+		ts: time,
 	}
 
 	return validateAgainstSchema(object, GNSS)
 }
+
+/**
+ * Resource selected to reported timestamp value is 5.
+ * Value is in seconds and it is multiplied to transform to milliseconds.
+ */
+const getTime = (location: Location_6): number => location['5'] * 1000
