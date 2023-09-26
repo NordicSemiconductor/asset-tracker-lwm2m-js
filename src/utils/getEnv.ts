@@ -76,15 +76,7 @@ export const getEnv = ({
 	const hum = humidity?.[0]?.['5700']
 	const atmp = pressure?.[0]?.['5700']
 	const time = getTime({ temperature, humidity, pressure })
-
-	const object = {
-		v: {
-			temp,
-			hum,
-			atmp,
-		},
-		ts: time,
-	}
+	const object = createEnv({ temp, hum, atmp, time })
 
 	return validateAgainstSchema(object, Environment)
 }
@@ -111,3 +103,26 @@ const getTime = ({
 
 	return time
 }
+
+/**
+ * Creates 'Env' object defined by 'nRF Asset Tracker Reported'.
+ * @see {@link documents/environment.md}
+ */
+const createEnv = ({
+	temp,
+	hum,
+	atmp,
+	time,
+}: {
+	temp: number | undefined
+	hum: number | undefined
+	atmp: number | undefined
+	time: number | undefined
+}) => ({
+	v: {
+		temp,
+		hum,
+		atmp,
+	},
+	ts: time,
+})
