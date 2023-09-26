@@ -8,6 +8,12 @@ import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ConnectivityMonitoring_4_urn, type ConnectivityMonitoring_4, type Device_3, Device_3_urn } from 'src/schemas/index.js'
 
 
+/**
+ * It defines the following objects
+ * - result: contains the validated roam object.
+ * - error: contains an object indicating the object has not the expected format.
+ * - warning: contains an object indicating that the LwM2M object for roam is undefined.
+ */
 type GetRoamResult =
 	| { result: RoamingInfoData }
 	| { error: ValidationError }
@@ -16,8 +22,11 @@ type GetRoamResult =
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
  * and convert into 'roam' object from 'nRF Asset Tracker Reported'
- *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/roam.md
+ *
+ * Connectivity Monitoring (4) object does not support timestamp, for that reason timestamp value is taken from
+ * Device (3) object.
+ * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
  */
 export const getRoam = ({
 	connectivityMonitoring,
@@ -62,14 +71,7 @@ export const getRoam = ({
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
 	 */
 	const ip = ipArray !== undefined ? ipArray[0] : undefined
-
-	/**
-	 * Connectivity Monitoring (4) object does not support timestamp
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
-	 */
 	const time = getTime(device)
-
 	const object = createRoamObject({ nw, rsrp, area, mccmnc, cell, ip, time })
 
 	return validateAgainstSchema(object, RoamingInfo)
