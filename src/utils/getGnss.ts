@@ -38,7 +38,7 @@ export const getGnss = (location?: Location_6): GetGnssResult => {
 }
 
 /**
- * Resource selected to reporte timestamp value is 5.
+ * The resource selected to report the timestamp value is 5.
  * Value is in seconds and it is multiplied to transform to milliseconds.
  */
 const getTime = (location: Location_6): number => location['5'] * 1000

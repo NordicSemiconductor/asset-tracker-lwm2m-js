@@ -90,7 +90,7 @@ export const getEnv = ({
 }
 
 /**
- * Resource selected to reporte timestamp value is 5518.
+ * The resource selected to report the timestamp value is 5518.
  * Value is in seconds and it is multiplied to transform to milliseconds.
  */
 const getTime = ({

@@ -40,7 +40,7 @@ export const getBat = (device?: Device_3): GetBatResult => {
 }
 
 /**
- * Resource selected to reporte timestamp value is 13.
+ * The resource selected to report the timestamp value is 13.
  * Value is in seconds and it is multiplied to transform to milliseconds.
  */
 export const getTime = (device: Device_3): number | undefined =>
