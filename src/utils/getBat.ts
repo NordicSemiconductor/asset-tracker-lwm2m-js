@@ -5,6 +5,7 @@ import {
 import { Device_3_urn, type Device_3 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { getFirstElementfromResource } from './getFirstElementfromResource.js'
 
 type GetBatResult =
 	| { result: BatteryData }
@@ -24,17 +25,9 @@ export const getBat = (device?: Device_3): GetBatResult => {
 			}),
 		}
 
-	/**
-	 * First element of resource selected
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
-	 */
-	const value = device['7']?.[0]
-	const time = getTime(device)
-
 	const object = {
-		v: value,
-		ts: time,
+		v: getFirstElementfromResource(device['7'] ?? []),
+		ts: getTime(device),
 	}
 
 	return validateAgainstSchema(object, Battery)

@@ -58,6 +58,9 @@ export const getEnv = ({
 			}),
 		}
 
+	// TODO: I would like to do something like this
+	// const temp = getFirstElementfromResource(temperature)?.['5700']
+	// however right now there is this problem: temperature is 'readonly' and cannot be assigned to the mutable
 	/**
 	 * First instance selected when object is multiple instance
 	 *

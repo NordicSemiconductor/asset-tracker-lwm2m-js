@@ -5,8 +5,13 @@ import {
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { getTime } from './getBat.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import { ConnectivityMonitoring_4_urn, type ConnectivityMonitoring_4, type Device_3, Device_3_urn } from 'src/schemas/index.js'
-
+import {
+	Device_3_urn,
+	ConnectivityMonitoring_4_urn,
+	type Device_3,
+	type ConnectivityMonitoring_4,
+} from 'src/schemas/index.js'
+import { getFirstElementfromResource } from './getFirstElementfromResource.js'
 
 /**
  * It defines the following objects
@@ -63,14 +68,7 @@ export const getRoam = ({
 
 	const nw = String(maybeNw)
 	const mccmnc = Number(`${smcc}${smnc}`)
-	/**
-	 * First element of resource selected
-	 *
-	 * TODO: Create method to do it generic.
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
-	 */
-	const ip = ipArray !== undefined ? ipArray[0] : undefined
+	const ip = getFirstElementfromResource(ipArray)
 	const time = getTime(device)
 	const object = createRoamObject({ nw, rsrp, area, mccmnc, cell, ip, time })
 
