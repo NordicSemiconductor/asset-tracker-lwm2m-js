@@ -31,9 +31,7 @@ export const getGnss = (location?: Location_6): GetGnssResult => {
 		}
 
 	const { [0]: lat, [2]: alt, [6]: spd, [1]: lng, [3]: acc } = location
-
 	const time = getTime(location)
-
 	const object = createGnssObject({ lat, lng, acc, alt, spd, time })
 
 	return validateAgainstSchema(object, GNSS)
