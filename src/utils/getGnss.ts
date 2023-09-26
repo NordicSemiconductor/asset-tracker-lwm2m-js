@@ -6,17 +6,17 @@ import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { Location_6_urn, type Location_6 } from '../schemas/index.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
+type GetGnssResult =
+	| { result: GNSSData }
+	| { error: ValidationError }
+	| { warning: UndefinedLwM2MObjectWarning }
+
 /**
  * Takes object id 6 (location) from 'LwM2M Asset Tracker v2' and convert into 'gnss' object from 'nRF Asset Tracker Reported'
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/gnss.md
  */
-export const getGnss = (
-	location?: Location_6,
-):
-	| { result: GNSSData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning } => {
+export const getGnss = (location?: Location_6): GetGnssResult => {
 	if (location === undefined)
 		return {
 			warning: new UndefinedLwM2MObjectWarning({

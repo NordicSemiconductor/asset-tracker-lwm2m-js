@@ -6,17 +6,17 @@ import {
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
+type GetCfgResult =
+	| { result: ConfigData }
+	| { error: ValidationError }
+	| { warning: UndefinedLwM2MObjectWarning }
+
 /**
  * Takes object id 50009 (config) from 'LwM2M Asset Tracker v2' and convert into 'cfg' object from 'nRF Asset Tracker Reported'
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/config.md
  */
-export const getCfg = (
-	config?: Config_50009,
-):
-	| { result: ConfigData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning } => {
+export const getCfg = (config?: Config_50009): GetCfgResult => {
 	if (config === undefined)
 		return {
 			warning: new UndefinedLwM2MObjectWarning({

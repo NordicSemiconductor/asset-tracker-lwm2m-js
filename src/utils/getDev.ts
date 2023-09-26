@@ -7,17 +7,17 @@ import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { getTime } from './getBat.js'
 
+type GetDevResult =
+	| { error: ValidationError }
+	| { result: DeviceData }
+	| { warning: UndefinedLwM2MObjectWarning }
+
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
  *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/device.md
  */
-export const getDev = (
-	device?: Device_3,
-):
-	| { error: ValidationError }
-	| { result: DeviceData }
-	| { warning: UndefinedLwM2MObjectWarning } => {
+export const getDev = (device?: Device_3): GetDevResult => {
 	if (device === undefined)
 		return {
 			warning: new UndefinedLwM2MObjectWarning({

@@ -8,6 +8,11 @@ import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ConnectivityMonitoring_4_urn, type ConnectivityMonitoring_4, type Device_3, Device_3_urn } from 'src/schemas/index.js'
 
 
+type GetRoamResult =
+	| { result: RoamingInfoData }
+	| { error: ValidationError }
+	| { warning: UndefinedLwM2MObjectWarning }
+
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
  * and convert into 'roam' object from 'nRF Asset Tracker Reported'
@@ -20,10 +25,7 @@ export const getRoam = ({
 }: {
 	connectivityMonitoring: ConnectivityMonitoring_4 | undefined
 	device: Device_3 | undefined
-}):
-	| { result: RoamingInfoData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning } => {
+}): GetRoamResult => {
 	if (connectivityMonitoring === undefined)
 		return {
 			warning: new UndefinedLwM2MObjectWarning({

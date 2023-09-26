@@ -13,6 +13,11 @@ import {
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
+type GetEnvResult =
+	| { result: EnvironmentData }
+	| { error: ValidationError }
+	| { warning: UndefinedLwM2MObjectWarning }
+
 /**
  * Check and create the 'env' object, expected by nRF Asset Tracker
  * Takes objects id 3303 (temperature), 3304 (humidity) and 3323 (pressure) from
@@ -28,10 +33,7 @@ export const getEnv = ({
 	temperature: Temperature_3303 | undefined
 	humidity: Humidity_3304 | undefined
 	pressure: Pressure_3323 | undefined
-}):
-	| { result: EnvironmentData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning } => {
+}): GetEnvResult => {
 	if (temperature === undefined)
 		return {
 			warning: new UndefinedLwM2MObjectWarning({
