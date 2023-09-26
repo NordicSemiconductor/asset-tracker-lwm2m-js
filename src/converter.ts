@@ -36,7 +36,6 @@ import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 /**
  * Expected input type
- *
  * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/006-result-generation.md
  */
 export type LwM2MAssetTrackerV2 = {
@@ -51,7 +50,6 @@ export type LwM2MAssetTrackerV2 = {
 
 /**
  * Expected output type
- *
  * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/006-result-generation.md
  */
 export const nRFAssetTrackerReported = Type.Object({
@@ -75,7 +73,6 @@ type ErrorDescription = {
 
 /**
  * Error handler type
- *
  * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
  */
 export class ValidationError extends Error {
@@ -89,7 +86,6 @@ export class ValidationError extends Error {
 
 /**
  * Warning handler type
- *
  * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
  */
 export class UndefinedLwM2MObjectWarning extends Error {
