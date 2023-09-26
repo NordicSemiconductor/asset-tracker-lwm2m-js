@@ -140,10 +140,13 @@ export const converter = (
 		cfg: getCfg(inputAssetTracker[Config_50009_urn]),
 	}
 
-	Object.entries(facade).forEach(([key, value]) => {
-		if ('result' in value) convertedAssetTracker[key] = value.result
+	Object.entries(facade).forEach(([object, convertedObject]) => {
+		if ('result' in convertedObject)
+			convertedAssetTracker[object] = convertedObject.result
 		else {
-			'warning' in value ? onWarning?.(value.warning) : onError?.(value.error)
+			'warning' in convertedObject
+				? onWarning?.(convertedObject.warning)
+				: onError?.(convertedObject.error)
 		}
 	})
 
