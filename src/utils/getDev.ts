@@ -55,13 +55,11 @@ const createDevObject = ({
 	modV: string | undefined
 	brdV: string | undefined
 	time: number | undefined
-}) => {
-	return {
-		v: {
-			imei,
-			modV,
-			brdV,
-		},
-		ts: time,
-	}
-}
+}) => ({
+	v: {
+		imei,
+		modV,
+		brdV,
+	},
+	ts: time,
+})

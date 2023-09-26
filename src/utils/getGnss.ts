@@ -64,15 +64,13 @@ const createGnssObject = ({
 	alt: number | undefined
 	spd: number | undefined
 	time: number
-}) => {
-	return {
-		v: {
-			lng,
-			lat,
-			acc,
-			alt,
-			spd,
-		},
-		ts: time,
-	}
-}
+}) => ({
+	v: {
+		lng,
+		lat,
+		acc,
+		alt,
+		spd,
+	},
+	ts: time,
+})

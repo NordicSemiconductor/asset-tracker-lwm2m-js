@@ -98,16 +98,14 @@ const createRoamObject = ({
 	cell: number | undefined
 	ip: string | undefined
 	time: number | undefined
-}) => {
-	return {
-		v: {
-			nw,
-			rsrp,
-			area,
-			mccmnc,
-			cell,
-			ip,
-		},
-		ts: time,
-	}
-}
+}) => ({
+	v: {
+		nw,
+		rsrp,
+		area,
+		mccmnc,
+		cell,
+		ip,
+	},
+	ts: time,
+})
