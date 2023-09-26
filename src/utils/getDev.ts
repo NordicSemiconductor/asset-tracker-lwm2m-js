@@ -20,7 +20,6 @@ type GetDevResult =
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
- *
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/device.md
  */
 export const getDev = (device?: Device_3): GetDevResult => {
@@ -34,13 +33,30 @@ export const getDev = (device?: Device_3): GetDevResult => {
 
 	const { 0: brdV, 2: imei, 3: modV } = device
 	const time = getTime(device)
+	const object = createDevObject({ brdV, imei, modV, time })
 
-	/**
-	 * iccid from Dev object is not provided.
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md
-	 */
-	const object = {
+	return validateAgainstSchema(object, Device)
+}
+
+/**
+ * Creates 'dev' object defined by 'nRF Asset Tracker Reported'.
+ * @see {@link documents/device.md}
+ *
+ * 'iccid' key from the 'dev' object defined by 'nRF Asset Tracker Reported' is not provided.
+ * @see @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md
+ */
+const createDevObject = ({
+	imei,
+	modV,
+	brdV,
+	time,
+}: {
+	imei: string | undefined
+	modV: string | undefined
+	brdV: string | undefined
+	time: number | undefined
+}) => {
+	return {
 		v: {
 			imei,
 			modV,
@@ -48,6 +64,4 @@ export const getDev = (device?: Device_3): GetDevResult => {
 		},
 		ts: time,
 	}
-
-	return validateAgainstSchema(object, Device)
 }
