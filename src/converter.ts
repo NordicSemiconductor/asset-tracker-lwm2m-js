@@ -118,18 +118,18 @@ export class UndefinedLwM2MObjectWarning extends Error {
  * convert LwM2M Asset Tracker v2 format into nRF Asset Tracker format
  */
 export const converter = (
-	input: LwM2MAssetTrackerV2,
+	lwm2mAssetTracker: LwM2MAssetTrackerV2,
 	onWarning?: (warning: UndefinedLwM2MObjectWarning) => unknown,
 	onError?: (error: ValidationError) => unknown,
 ): typeof nRFAssetTrackerReported => {
 	const result = {} as typeof nRFAssetTrackerReported
-	const device = input[Device_3_urn]
-	const temperature = input[Temperature_3303_urn]
-	const humidity = input[Humidity_3304_urn]
-	const pressure = input[Pressure_3323_urn]
-	const location = input[Location_6_urn]
-	const connectivityMonitoring = input[ConnectivityMonitoring_4_urn]
-	const config = input[Config_50009_urn]
+	const device = lwm2mAssetTracker[Device_3_urn]
+	const temperature = lwm2mAssetTracker[Temperature_3303_urn]
+	const humidity = lwm2mAssetTracker[Humidity_3304_urn]
+	const pressure = lwm2mAssetTracker[Pressure_3323_urn]
+	const location = lwm2mAssetTracker[Location_6_urn]
+	const connectivityMonitoring = lwm2mAssetTracker[ConnectivityMonitoring_4_urn]
+	const config = lwm2mAssetTracker[Config_50009_urn]
 
 	const bat = getBat(device)
 	if ('result' in bat) result['bat'] = bat.result
