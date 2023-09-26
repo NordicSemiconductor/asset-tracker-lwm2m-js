@@ -6,6 +6,12 @@ import {
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
+/**
+ * It defines the following objects
+ * - result: contains the validated cfg object.
+ * - error: contains an object indicating the object has not the expected format.
+ * - warning: contains an object indicating that the LwM2M object for cfg is undefined.
+ */
 type GetCfgResult =
 	| { result: ConfigData }
 	| { error: ValidationError }

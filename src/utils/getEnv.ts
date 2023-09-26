@@ -13,6 +13,12 @@ import {
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
+/**
+ * It defines the following objects
+ * - result: contains the validated env object.
+ * - error: contains an object indicating the object has not the expected format.
+ * - warning: contains an object indicating that the LwM2M object for env is undefined.
+ */
 type GetEnvResult =
 	| { result: EnvironmentData }
 	| { error: ValidationError }

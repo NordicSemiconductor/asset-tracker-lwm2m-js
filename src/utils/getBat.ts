@@ -7,6 +7,12 @@ import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { getFirstElementfromResource } from './getFirstElementfromResource.js'
 
+/**
+ * It defines the following objects
+ * - result: contains the validated bat object.
+ * - error: contains an object indicating the object has not the expected format.
+ * - warning: contains an object indicating that the LwM2M object for bat is undefined.
+ */
 type GetBatResult =
 	| { result: BatteryData }
 	| { error: ValidationError }
