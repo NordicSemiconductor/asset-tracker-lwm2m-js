@@ -115,7 +115,7 @@ export class UndefinedLwM2MObjectWarning extends Error {
 }
 
 /**
- * convert LwM2M Asset Tracker v2 format into nRF Asset Tracker format
+ * convert 'LwM2M Asset Tracker v2' format into 'nRF Asset Tracker reported' format
  */
 export const converter = (
 	inputAssetTracker: LwM2MAssetTrackerV2,
