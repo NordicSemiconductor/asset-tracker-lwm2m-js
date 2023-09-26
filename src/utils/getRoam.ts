@@ -57,6 +57,8 @@ export const getRoam = ({
 	/**
 	 * First element of resource selected
 	 *
+	 * TODO: Create method to do it generic.
+	 *
 	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md
 	 */
 	const ip = ipArray !== undefined ? ipArray[0] : undefined
@@ -68,12 +70,36 @@ export const getRoam = ({
 	 */
 	const time = getTime(device)
 
-	/**
-	 * band and eest from Dev object are not provided.
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md
-	 */
-	const object = {
+	const object = createRoamObject({ nw, rsrp, area, mccmnc, cell, ip, time })
+
+	return validateAgainstSchema(object, RoamingInfo)
+}
+
+/**
+ * Creates 'roam' object defined by 'nRF Asset Tracker Reported'.
+ * @see {@link documents/roam.md}
+ *
+ * 'band' and 'eest' key from the 'roam' object defined by 'nRF Asset Tracker Reported' is not provided.
+ * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md
+ */
+const createRoamObject = ({
+	nw,
+	rsrp,
+	area,
+	mccmnc,
+	cell,
+	ip,
+	time,
+}: {
+	nw: string
+	rsrp: number
+	area: number | undefined
+	mccmnc: number
+	cell: number | undefined
+	ip: string | undefined
+	time: number | undefined
+}) => {
+	return {
 		v: {
 			nw,
 			rsrp,
@@ -84,6 +110,4 @@ export const getRoam = ({
 		},
 		ts: time,
 	}
-
-	return validateAgainstSchema(object, RoamingInfo)
 }
