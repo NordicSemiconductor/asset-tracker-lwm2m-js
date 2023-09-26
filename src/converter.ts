@@ -118,27 +118,27 @@ export class UndefinedLwM2MObjectWarning extends Error {
  * convert LwM2M Asset Tracker v2 format into nRF Asset Tracker format
  */
 export const converter = (
-	lwm2mAssetTracker: LwM2MAssetTrackerV2,
+	inputAssetTracker: LwM2MAssetTrackerV2,
 	onWarning?: (warning: UndefinedLwM2MObjectWarning) => unknown,
 	onError?: (error: ValidationError) => unknown,
 ): typeof nRFAssetTrackerReported => {
-	const result = {} as typeof nRFAssetTrackerReported
-	const device = lwm2mAssetTracker[Device_3_urn]
-	const temperature = lwm2mAssetTracker[Temperature_3303_urn]
-	const humidity = lwm2mAssetTracker[Humidity_3304_urn]
-	const pressure = lwm2mAssetTracker[Pressure_3323_urn]
-	const location = lwm2mAssetTracker[Location_6_urn]
-	const connectivityMonitoring = lwm2mAssetTracker[ConnectivityMonitoring_4_urn]
-	const config = lwm2mAssetTracker[Config_50009_urn]
+	const convertedAssetTracker = {} as typeof nRFAssetTrackerReported
+	const device = inputAssetTracker[Device_3_urn]
+	const temperature = inputAssetTracker[Temperature_3303_urn]
+	const humidity = inputAssetTracker[Humidity_3304_urn]
+	const pressure = inputAssetTracker[Pressure_3323_urn]
+	const location = inputAssetTracker[Location_6_urn]
+	const connectivityMonitoring = inputAssetTracker[ConnectivityMonitoring_4_urn]
+	const config = inputAssetTracker[Config_50009_urn]
 
 	const bat = getBat(device)
-	if ('result' in bat) result['bat'] = bat.result
+	if ('result' in bat) convertedAssetTracker['bat'] = bat.result
 	else {
 		'warning' in bat ? onWarning?.(bat.warning) : onError?.(bat.error)
 	}
 
 	const dev = getDev(device)
-	if ('result' in dev) result['dev'] = dev.result
+	if ('result' in dev) convertedAssetTracker['dev'] = dev.result
 	else {
 		'warning' in dev ? onWarning?.(dev.warning) : onError?.(dev.error)
 	}
@@ -148,13 +148,13 @@ export const converter = (
 		humidity,
 		pressure,
 	})
-	if ('result' in env) result['env'] = env.result
+	if ('result' in env) convertedAssetTracker['env'] = env.result
 	else {
 		'warning' in env ? onWarning?.(env.warning) : onError?.(env.error)
 	}
 
 	const gnss = getGnss(location)
-	if ('result' in gnss) result['gnss'] = gnss.result
+	if ('result' in gnss) convertedAssetTracker['gnss'] = gnss.result
 	else {
 		'warning' in gnss ? onWarning?.(gnss.warning) : onError?.(gnss.error)
 	}
@@ -163,16 +163,16 @@ export const converter = (
 		connectivityMonitoring,
 		device,
 	})
-	if ('result' in roam) result['roam'] = roam.result
+	if ('result' in roam) convertedAssetTracker['roam'] = roam.result
 	else {
 		'warning' in roam ? onWarning?.(roam.warning) : onError?.(roam.error)
 	}
 
 	const cfg = getCfg(config)
-	if ('result' in cfg) result['cfg'] = cfg.result
+	if ('result' in cfg) convertedAssetTracker['cfg'] = cfg.result
 	else {
 		'warning' in cfg ? onWarning?.(cfg.warning) : onError?.(cfg.error)
 	}
 
-	return result
+	return convertedAssetTracker
 }
