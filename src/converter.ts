@@ -123,56 +123,29 @@ export const converter = (
 	onError?: (error: ValidationError) => unknown,
 ): typeof nRFAssetTrackerReported => {
 	const convertedAssetTracker = {} as typeof nRFAssetTrackerReported
-	const device = inputAssetTracker[Device_3_urn]
-	const temperature = inputAssetTracker[Temperature_3303_urn]
-	const humidity = inputAssetTracker[Humidity_3304_urn]
-	const pressure = inputAssetTracker[Pressure_3323_urn]
-	const location = inputAssetTracker[Location_6_urn]
-	const connectivityMonitoring = inputAssetTracker[ConnectivityMonitoring_4_urn]
-	const config = inputAssetTracker[Config_50009_urn]
 
-	const bat = getBat(device)
-	if ('result' in bat) convertedAssetTracker['bat'] = bat.result
-	else {
-		'warning' in bat ? onWarning?.(bat.warning) : onError?.(bat.error)
+	const facade = {
+		bat: getBat(inputAssetTracker[Device_3_urn]),
+		dev: getDev(inputAssetTracker[Device_3_urn]),
+		env: getEnv({
+			temperature: inputAssetTracker[Temperature_3303_urn],
+			humidity: inputAssetTracker[Humidity_3304_urn],
+			pressure: inputAssetTracker[Pressure_3323_urn],
+		}),
+		gnss: getGnss(inputAssetTracker[Location_6_urn]),
+		roam: getRoam({
+			connectivityMonitoring: inputAssetTracker[ConnectivityMonitoring_4_urn],
+			device: inputAssetTracker[Device_3_urn],
+		}),
+		cfg: getCfg(inputAssetTracker[Config_50009_urn]),
 	}
 
-	const dev = getDev(device)
-	if ('result' in dev) convertedAssetTracker['dev'] = dev.result
-	else {
-		'warning' in dev ? onWarning?.(dev.warning) : onError?.(dev.error)
-	}
-
-	const env = getEnv({
-		temperature,
-		humidity,
-		pressure,
+	Object.entries(facade).forEach(([key, value]) => {
+		if ('result' in value) convertedAssetTracker[key] = value.result
+		else {
+			'warning' in value ? onWarning?.(value.warning) : onError?.(value.error)
+		}
 	})
-	if ('result' in env) convertedAssetTracker['env'] = env.result
-	else {
-		'warning' in env ? onWarning?.(env.warning) : onError?.(env.error)
-	}
-
-	const gnss = getGnss(location)
-	if ('result' in gnss) convertedAssetTracker['gnss'] = gnss.result
-	else {
-		'warning' in gnss ? onWarning?.(gnss.warning) : onError?.(gnss.error)
-	}
-
-	const roam = getRoam({
-		connectivityMonitoring,
-		device,
-	})
-	if ('result' in roam) convertedAssetTracker['roam'] = roam.result
-	else {
-		'warning' in roam ? onWarning?.(roam.warning) : onError?.(roam.error)
-	}
-
-	const cfg = getCfg(config)
-	if ('result' in cfg) convertedAssetTracker['cfg'] = cfg.result
-	else {
-		'warning' in cfg ? onWarning?.(cfg.warning) : onError?.(cfg.error)
-	}
 
 	return convertedAssetTracker
 }
