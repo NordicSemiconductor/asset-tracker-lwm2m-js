@@ -124,7 +124,7 @@ export const converter = (
 ): typeof nRFAssetTrackerReported => {
 	const convertedAssetTracker = {} as typeof nRFAssetTrackerReported
 
-	const facade = {
+	const assetTrackerReportedData = {
 		bat: getBat(inputAssetTracker[Device_3_urn]),
 		dev: getDev(inputAssetTracker[Device_3_urn]),
 		env: getEnv({
@@ -140,15 +140,17 @@ export const converter = (
 		cfg: getCfg(inputAssetTracker[Config_50009_urn]),
 	}
 
-	Object.entries(facade).forEach(([object, convertedObject]) => {
-		if ('result' in convertedObject)
-			convertedAssetTracker[object] = convertedObject.result
-		else {
-			'warning' in convertedObject
-				? onWarning?.(convertedObject.warning)
-				: onError?.(convertedObject.error)
-		}
-	})
+	Object.entries(assetTrackerReportedData).forEach(
+		([object, convertedObject]) => {
+			if ('result' in convertedObject)
+				convertedAssetTracker[object] = convertedObject.result
+			else {
+				'warning' in convertedObject
+					? onWarning?.(convertedObject.warning)
+					: onError?.(convertedObject.error)
+			}
+		},
+	)
 
 	return convertedAssetTracker
 }
