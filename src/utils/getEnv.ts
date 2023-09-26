@@ -14,7 +14,7 @@ import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 
 /**
- * It defines the following objects
+ * Defines the result type of 'getEnv' method, which will be one of the following options:
  * - result: contains the validated env object.
  * - error: contains an object indicating the object has not the expected format.
  * - warning: contains an object indicating that the LwM2M object for env is undefined.

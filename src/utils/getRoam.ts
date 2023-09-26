@@ -14,7 +14,7 @@ import {
 import { getFirstElementfromResource } from './getFirstElementfromResource.js'
 
 /**
- * It defines the following objects
+ * Defines the result type of 'getRoam' method, which will be one of the following options
  * - result: contains the validated roam object.
  * - error: contains an object indicating the object has not the expected format.
  * - warning: contains an object indicating that the LwM2M object for roam is undefined.
