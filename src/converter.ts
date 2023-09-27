@@ -114,32 +114,32 @@ export class UndefinedLwM2MObjectWarning extends Error {
  * convert 'LwM2M Asset Tracker v2' format into 'nRF Asset Tracker reported' format
  */
 export const converter = (
-	inputAssetTracker: LwM2MAssetTrackerV2,
+	LwM2MAssetTracker: LwM2MAssetTrackerV2,
 	onWarning?: (warning: UndefinedLwM2MObjectWarning) => unknown,
 	onError?: (error: ValidationError) => unknown,
 ): typeof nRFAssetTrackerReported => {
-	const convertedAssetTracker = {} as typeof nRFAssetTrackerReported
+	const conversionResult = {} as typeof nRFAssetTrackerReported
 
-	const assetTrackerReportedData = {
-		bat: getBat(inputAssetTracker[Device_3_urn]),
-		dev: getDev(inputAssetTracker[Device_3_urn]),
+	const nRFAssetTrackerReportedObjects = {
+		bat: getBat(LwM2MAssetTracker[Device_3_urn]),
+		dev: getDev(LwM2MAssetTracker[Device_3_urn]),
 		env: getEnv({
-			temperature: inputAssetTracker[Temperature_3303_urn],
-			humidity: inputAssetTracker[Humidity_3304_urn],
-			pressure: inputAssetTracker[Pressure_3323_urn],
+			temperature: LwM2MAssetTracker[Temperature_3303_urn],
+			humidity: LwM2MAssetTracker[Humidity_3304_urn],
+			pressure: LwM2MAssetTracker[Pressure_3323_urn],
 		}),
-		gnss: getGnss(inputAssetTracker[Location_6_urn]),
+		gnss: getGnss(LwM2MAssetTracker[Location_6_urn]),
 		roam: getRoam({
-			connectivityMonitoring: inputAssetTracker[ConnectivityMonitoring_4_urn],
-			device: inputAssetTracker[Device_3_urn],
+			connectivityMonitoring: LwM2MAssetTracker[ConnectivityMonitoring_4_urn],
+			device: LwM2MAssetTracker[Device_3_urn],
 		}),
-		cfg: getCfg(inputAssetTracker[Config_50009_urn]),
+		cfg: getCfg(LwM2MAssetTracker[Config_50009_urn]),
 	}
 
-	Object.entries(assetTrackerReportedData).forEach(
-		([object, convertedObject]) => {
+	Object.entries(nRFAssetTrackerReportedObjects).forEach(
+		([objectId, convertedObject]) => {
 			if ('result' in convertedObject)
-				convertedAssetTracker[object] = convertedObject.result
+				conversionResult[objectId] = convertedObject.result
 			else {
 				'warning' in convertedObject
 					? onWarning?.(convertedObject.warning)
@@ -148,5 +148,5 @@ export const converter = (
 		},
 	)
 
-	return convertedAssetTracker
+	return conversionResult
 }
