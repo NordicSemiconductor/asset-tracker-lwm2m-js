@@ -1,4 +1,4 @@
-import { TypeError } from '../converter.js'
+import { ValidationError } from '../converter.js'
 import type { Static, TSchema } from '@sinclair/typebox'
 import Ajv, { type ErrorObject } from 'ajv'
 
@@ -8,11 +8,11 @@ import Ajv, { type ErrorObject } from 'ajv'
 export const validateAgainstSchema = <T extends TSchema>(
 	object: Record<string, unknown>,
 	schema: T,
-): { result: Static<typeof schema> } | { error: TypeError } => {
+): { result: Static<typeof schema> } | { error: ValidationError } => {
 	const validatedObject = validateWithTypebox(object, schema)
 	if ('errors' in validatedObject) {
 		return {
-			error: new TypeError(validatedObject.errors),
+			error: new ValidationError(validatedObject.errors),
 		}
 	}
 
