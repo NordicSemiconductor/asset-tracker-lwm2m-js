@@ -20,7 +20,7 @@ type GetGnssResult =
 
 /**
  * Takes object id 6 (location) from 'LwM2M Asset Tracker v2' and convert into 'GNSS' object from 'nRF Asset Tracker Reported'.
- * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/gnss.md
+ * @see {@link ../../documents/gnss.md}
  */
 export const getGnss = (location?: Location_6): GetGnssResult => {
 	if (location === undefined)
@@ -41,12 +41,13 @@ export const getGnss = (location?: Location_6): GetGnssResult => {
 /**
  * The resource selected to report the timestamp value is 5.
  * Value is in seconds and it is multiplied to transform to milliseconds.
+ * {@link ../../documents/gnss.md}
  */
 const getTime = (location: Location_6): number => location['5'] * 1000
 
 /**
  * Creates GNSS object defined by 'nRF Asset Tracker Reported'.
- * @see {@link documents/gnss.md}
+ * @see {@link ../../documents/gnss.md}
  *
  * 'hdg' key from 'GNSS' object defined by 'nRF Asset Tracker Reported' is not provided.
  * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md

@@ -28,7 +28,7 @@ type GetRoamResult =
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
  * and convert into 'roam' object from 'nRF Asset Tracker Reported'
- * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/roam.md
+ * @see {@link ../../documents/roam.md}
  *
  * Connectivity Monitoring (4) object does not support timestamp, for that reason timestamp value is taken from
  * Device (3) object.
@@ -78,7 +78,7 @@ export const getRoam = ({
 
 /**
  * Creates 'roam' object defined by 'nRF Asset Tracker Reported'.
- * @see {@link documents/roam.md}
+ * @see {@link ../../documents/roam.md}
  *
  * 'band' and 'eest' key from the 'roam' object defined by 'nRF Asset Tracker Reported' is not provided.
  * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md

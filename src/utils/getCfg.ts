@@ -20,7 +20,7 @@ type GetCfgResult =
 
 /**
  * Takes object id 50009 (config) from 'LwM2M Asset Tracker v2' and convert into 'cfg' object from 'nRF Asset Tracker Reported'
- * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/config.md
+ * @see {@link ../../documents/config.md}
  */
 export const getCfg = (config?: Config_50009): GetCfgResult => {
 	if (config === undefined)

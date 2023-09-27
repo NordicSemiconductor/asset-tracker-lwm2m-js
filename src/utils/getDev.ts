@@ -21,7 +21,7 @@ type GetDevResult =
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
- * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/device.md
+ * @see {@link ../../documents/device.md}
  */
 export const getDev = (device?: Device_3): GetDevResult => {
 	if (device === undefined)
@@ -41,7 +41,7 @@ export const getDev = (device?: Device_3): GetDevResult => {
 
 /**
  * Creates 'dev' object defined by 'nRF Asset Tracker Reported'.
- * @see {@link documents/device.md}
+ * @see {@link ../../documents/device.md}
  *
  * 'iccid' key from the 'dev' object defined by 'nRF Asset Tracker Reported' is not provided.
  * @see @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/009-nrf-asset-tracker-values-not-provided.md
