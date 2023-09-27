@@ -1,7 +1,6 @@
 import {
 	Environment,
 	type EnvironmentData,
-	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
 	Humidity_3304_urn,
@@ -12,6 +11,7 @@ import {
 	type Temperature_3303,
 } from '../schemas/index.js'
 import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { validateAgainstSchema } from './validateAgainstSchema.js'
 
 /**
  * Check and create the 'env' object, expected by nRF Asset Tracker
@@ -81,12 +81,5 @@ export const getEnv = ({
 		ts: time,
 	}
 
-	const maybeValidEnvironment = validateWithType(Environment)(object)
-	if ('errors' in maybeValidEnvironment) {
-		return {
-			error: new TypeError(maybeValidEnvironment.errors),
-		}
-	}
-
-	return { result: maybeValidEnvironment }
+	return validateAgainstSchema(object, Environment)
 }

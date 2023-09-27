@@ -1,7 +1,6 @@
 import {
 	RoamingInfo,
 	type RoamingInfoData,
-	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
 	type Device_3,
@@ -9,6 +8,7 @@ import {
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { validateAgainstSchema } from './validateAgainstSchema.js'
 
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
@@ -77,12 +77,5 @@ export const getRoam = ({
 		ts: time,
 	}
 
-	const maybeValidRoam = validateWithType(RoamingInfo)(object)
-	if ('errors' in maybeValidRoam) {
-		return {
-			error: new TypeError(maybeValidRoam.errors),
-		}
-	}
-
-	return { result: maybeValidRoam }
+	return validateAgainstSchema(object, RoamingInfo)
 }

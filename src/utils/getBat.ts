@@ -1,10 +1,10 @@
 import {
 	Battery,
 	type BatteryData,
-	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, type Device_3 } from '../schemas/index.js'
 import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { validateAgainstSchema } from './validateAgainstSchema.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'bat' object from 'nRF Asset Tracker Reported'
@@ -38,12 +38,5 @@ export const getBat = (
 		ts: time,
 	}
 
-	const maybeValidBat = validateWithType(Battery)(object)
-	if ('errors' in maybeValidBat) {
-		return {
-			error: new TypeError(maybeValidBat.errors),
-		}
-	}
-
-	return { result: maybeValidBat }
+	return validateAgainstSchema(object, Battery)
 }

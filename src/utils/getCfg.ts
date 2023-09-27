@@ -2,9 +2,9 @@ import { type Config_50009, Config_50009_urn } from '../schemas/Config_50009.js'
 import {
 	Config,
 	type ConfigData,
-	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { validateAgainstSchema } from './validateAgainstSchema.js'
 
 /**
  * Takes object id 50009 (config) from 'LwM2M Asset Tracker v2' and convert into 'cfg' object from 'nRF Asset Tracker Reported'
@@ -48,13 +48,5 @@ export const getCfg = (
 		nod: [],
 	}
 
-	const maybeValidCfg = validateWithType(Config)(cfg)
-
-	if ('errors' in maybeValidCfg) {
-		return {
-			error: new TypeError(maybeValidCfg.errors),
-		}
-	}
-
-	return { result: maybeValidCfg }
+	return validateAgainstSchema(cfg, Config)
 }

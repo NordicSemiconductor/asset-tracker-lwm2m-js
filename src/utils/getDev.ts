@@ -1,10 +1,10 @@
 import {
 	Device,
 	type DeviceData,
-	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { TypeError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import { validateAgainstSchema } from './validateAgainstSchema.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
@@ -42,12 +42,5 @@ export const getDev = (
 		ts: time,
 	}
 
-	const maybeValidDeviceData = validateWithType(Device)(object)
-	if ('errors' in maybeValidDeviceData) {
-		return {
-			error: new TypeError(maybeValidDeviceData.errors),
-		}
-	}
-
-	return { result: maybeValidDeviceData }
+	return validateAgainstSchema(object, Device)
 }
