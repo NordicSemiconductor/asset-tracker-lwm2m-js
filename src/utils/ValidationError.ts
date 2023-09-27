@@ -8,7 +8,7 @@ type ErrorDescription = {
 
 /**
  * Error handler type
- * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
+ * @see @see {@link ../../adr/007-warning-and-error-handling.md}
  */
 export class ValidationError extends Error {
 	description: ErrorDescription[]

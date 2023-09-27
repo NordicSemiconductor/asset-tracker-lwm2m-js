@@ -6,7 +6,7 @@ import type {
 
 /**
  * Warning handler type
- * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
+ * @see {@link ../../adr/007-warning-and-error-handling.md}
  */
 export class UndefinedLwM2MObjectWarning extends Error {
 	undefinedLwM2MObject: {

@@ -39,8 +39,7 @@ void describe('getCfg', () => {
 
 	/**
 	 * For transition from 'LwM2M Asset Tracker v2' objects to 'nRF Asset Tracker Reported' objects
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/documents/nRFAssetTracker.md
+	 * @see {@link ../../documents/nRFAssetTracker.md}
 	 */
 	void it(`should return a warning if the dependent LwM2M object for creating the 'cfg' object is undefined`, () => {
 		const cfg = getCfg(undefined) as { warning: UndefinedLwM2MObjectWarning }

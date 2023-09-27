@@ -70,8 +70,7 @@ export const getEnv = ({
 	// however right now there is this problem: temperature is 'readonly' and cannot be assigned to the mutable
 	/**
 	 * First instance selected when object is multiple instance
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/004-instance-selected-when-multiple-instance.md
+	 * @see {@link ../../adr/004-instance-selected-when-multiple-instance.md}
 	 */
 	const temp = temperature?.[0]?.['5700']
 	const hum = humidity?.[0]?.['5700']

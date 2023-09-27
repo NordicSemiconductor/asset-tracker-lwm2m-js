@@ -202,8 +202,7 @@ void describe('converter', () => {
 
 	/**
 	 * Instance selected when LwM2M object is multiple instance
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/004-instance-selected-when-multiple-instance.md for more details
+	 * @see {@link ../adr/004-instance-selected-when-multiple-instance.md}
 	 */
 	void it(`should select first instance when LwM2M object is an array`, () => {
 		const input = {

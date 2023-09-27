@@ -33,7 +33,7 @@ void describe('getRoam', () => {
 			/**
 			 * Timestamp is taken from resource 13.
 			 *
-			 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
+			 * @see {@link ../../adr/010-roam-timestamp-not-supported-by-lwm2m.md}
 			 *
 			 */
 			'13': 1675874731,
@@ -61,7 +61,7 @@ void describe('getRoam', () => {
 	/**
 	 * For transition from 'LwM2M Asset Tracker v2' objects to 'nRF Asset Tracker Reported' objects
 	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/documents/nRFAssetTracker.md
+	 * @see {@link ../../documents/nRFAssetTracker.md}
 	 */
 	void it(`should return a warning if the dependent LwM2M object for creating the 'roam' object is undefined`, () => {
 		const connectivityMonitoring = undefined
@@ -101,7 +101,7 @@ void describe('getRoam', () => {
 			/**
 			 * Timestamp is taken from resource 13.
 			 *
-			 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/010-roam-timestamp-not-supported-by-lwm2m.md
+			 * @see {@link ../../adr/010-roam-timestamp-not-supported-by-lwm2m.md}
 			 */
 			'13': 1675874731,
 			'16': 'UQ',

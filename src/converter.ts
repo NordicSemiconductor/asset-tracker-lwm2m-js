@@ -36,7 +36,7 @@ import { Type, type Static } from '@sinclair/typebox'
 
 /**
  * Expected input type
- * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/006-result-generation.md
+ * @see {@link ../adr/006-result-generation.md}
  */
 export type LwM2MAssetTrackerV2 = {
 	[Device_3_urn]?: Device_3
@@ -50,7 +50,7 @@ export type LwM2MAssetTrackerV2 = {
 
 /**
  * Expected output type
- * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/006-result-generation.md
+ * @see {@link ../adr/006-result-generation.md}
  */
 export const nRFAssetTrackerReported = Type.Object({
 	cfg: Type.Optional(Config),
