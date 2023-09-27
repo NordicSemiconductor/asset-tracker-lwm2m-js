@@ -4,8 +4,9 @@ import {
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { getTime } from './getBat.js'
+import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
+import type { ValidationError } from './ValidationError.js'
 
 /**
  * Defines the result type of 'getDev' method, which will be one of the following options:

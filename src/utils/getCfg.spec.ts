@@ -2,8 +2,9 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { type Config_50009, Config_50009_urn } from '../schemas/Config_50009.js'
 import { getCfg } from './getCfg.js'
-import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
+import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
+import type { ValidationError } from './ValidationError.js'
 
 void describe('getCfg', () => {
 	void it(`should create the 'cfg' object expected by 'nRF Asset Tracker Reported'`, () => {

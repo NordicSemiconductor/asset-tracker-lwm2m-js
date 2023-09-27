@@ -24,15 +24,15 @@ import {
 	Environment,
 	GNSS,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
+import type { UndefinedLwM2MObjectWarning } from './utils/UndefinedLwM2MObjectWarning.js'
+import type { ValidationError } from './utils/ValidationError.js'
 import { getBat } from './utils/getBat.js'
 import { getDev } from './utils/getDev.js'
 import { getEnv } from './utils/getEnv.js'
 import { getGnss } from './utils/getGnss.js'
 import { getRoam } from './utils/getRoam.js'
 import { getCfg } from './utils/getCfg.js'
-
 import { Type, type Static } from '@sinclair/typebox'
-import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 
 /**
  * Expected input type
@@ -62,53 +62,6 @@ export const nRFAssetTrackerReported = Type.Object({
 })
 
 export type nRFAssetTrackerReportedType = Static<typeof nRFAssetTrackerReported>
-
-type ErrorDescription = {
-	instancePath: string
-	schemaPath: string
-	keyword: string
-	params: Record<string, unknown>
-	message?: string
-}
-
-/**
- * Error handler type
- * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
- */
-export class ValidationError extends Error {
-	description: ErrorDescription[]
-
-	constructor(description: ErrorDescription[]) {
-		super(`error validating type: ${JSON.stringify(description, null, 2)}`)
-		this.description = description
-	}
-}
-
-/**
- * Warning handler type
- * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/007-warning-and-error-handling.md
- */
-export class UndefinedLwM2MObjectWarning extends Error {
-	undefinedLwM2MObject: {
-		ObjectID: string
-		ObjectVersion: string
-		LWM2MVersion: string
-	}
-
-	constructor({
-		nRFAssetTrackerReportedId,
-		LwM2MObjectUrn,
-	}: {
-		nRFAssetTrackerReportedId: keyof nRFAssetTrackerReportedType
-		LwM2MObjectUrn: keyof LwM2MAssetTrackerV2
-	}) {
-		const LwM2MObjectInfo = parseURN(LwM2MObjectUrn)
-		super(
-			`'${nRFAssetTrackerReportedId}' object can not be created because LwM2M object id '${LwM2MObjectInfo.ObjectID}' is undefined`,
-		)
-		this.undefinedLwM2MObject = LwM2MObjectInfo
-	}
-}
 
 /**
  * convert 'LwM2M Asset Tracker v2' format into 'nRF Asset Tracker reported' format

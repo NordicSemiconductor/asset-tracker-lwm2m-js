@@ -11,7 +11,8 @@ import {
 	type Temperature_3303,
 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import type { ValidationError } from './ValidationError.js'
+import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 
 /**
  * Defines the result type of 'getEnv' method, which will be one of the following options:

@@ -4,7 +4,8 @@ import {
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { Location_6_urn, type Location_6 } from '../schemas/index.js'
-import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
+import type { ValidationError } from './ValidationError.js'
+import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 
 /**
  * Defines the result type of 'getGnss' method, which will be one of the following options

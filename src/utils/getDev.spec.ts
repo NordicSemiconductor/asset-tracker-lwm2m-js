@@ -1,8 +1,9 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getDev } from './getDev.js'
-import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { Device_3_urn, parseURN } from '@nordicsemiconductor/lwm2m-types'
+import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
+import type { ValidationError } from './ValidationError.js'
 
 void describe('getDev', () => {
 	void it(`should create the 'dev' object expected by 'nRF Asset Tracker Reported'`, () => {

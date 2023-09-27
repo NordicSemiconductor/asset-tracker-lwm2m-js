@@ -2,7 +2,6 @@ import {
 	RoamingInfo,
 	type RoamingInfoData,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { getTime } from './getBat.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import {
@@ -12,6 +11,8 @@ import {
 	type ConnectivityMonitoring_4,
 } from 'src/schemas/index.js'
 import { getFirstElementfromResource } from './getFirstElementfromResource.js'
+import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
+import type { ValidationError } from './ValidationError.js'
 
 /**
  * Defines the result type of 'getRoam' method, which will be one of the following options

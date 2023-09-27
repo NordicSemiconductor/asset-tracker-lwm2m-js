@@ -5,8 +5,9 @@ import {
 	ConnectivityMonitoring_4_urn,
 } from '../schemas/index.js'
 import { getRoam } from './getRoam.js'
-import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
+import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
+import type { ValidationError } from './ValidationError.js'
 
 void describe('getRoam', () => {
 	void it(`should create the 'roam' object expected by 'nRF Asset Tracker Reported'`, () => {

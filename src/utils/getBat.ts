@@ -4,8 +4,9 @@ import {
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, type Device_3 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import { ValidationError, UndefinedLwM2MObjectWarning } from '../converter.js'
 import { getFirstElementfromResource } from './getFirstElementfromResource.js'
+import type { ValidationError } from './ValidationError.js'
+import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 
 /**
  * Defines the result type of 'getBat' method, which will be one of the following options

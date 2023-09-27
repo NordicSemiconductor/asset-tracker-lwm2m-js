@@ -1,6 +1,6 @@
-import { ValidationError } from '../converter.js'
 import type { Static, TSchema } from '@sinclair/typebox'
 import Ajv, { type ErrorObject } from 'ajv'
+import { ValidationError } from './ValidationError.js'
 
 /**
  * Check if object follow the schema definition
