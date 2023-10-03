@@ -31,10 +31,6 @@ void describe('getDev', () => {
 		assert.deepEqual(dev.result, expected)
 	})
 
-	/**
-	 * For transition from 'LwM2M Asset Tracker v2' objects to 'nRF Asset Tracker Reported' objects
-	 * @see {@link ../../documents/nRFAssetTracker.md}
-	 */
 	void it(`should return a warning if the dependent LwM2M object for creating the 'dev' object is undefined`, () => {
 		const dev = getDev(undefined) as { warning: UndefinedLwM2MObjectWarning }
 		assert.equal(

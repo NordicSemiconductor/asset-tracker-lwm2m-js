@@ -31,10 +31,6 @@ void describe('getGnss', () => {
 		assert.deepEqual(gnss.result, expected)
 	})
 
-	/**
-	 * For transition from 'LwM2M Asset Tracker v2' objects to 'nRF Asset Tracker Reported' objects
-	 * @see {@link ../../documents/nRFAssetTracker.md}
-	 */
 	void it(`should return a warning if the dependent LwM2M object for creating the 'gnss' object is undefined`, () => {
 		const result = getGnss(undefined) as {
 			warning: UndefinedLwM2MObjectWarning

@@ -25,10 +25,6 @@ void describe('getBat', () => {
 		assert.equal(bat.result.ts, 1675874731000)
 	})
 
-	/**
-	 * For transition from 'LwM2M Asset Tracker v2' objects to 'nRF Asset Tracker Reported' objects
-	 * @see {@link ../../documents/nRFAssetTracker.md}
-	 */
 	void it(`should return a warning if the dependent LwM2M object for creating the 'bat' object is undefined`, () => {
 		const result = getBat(undefined) as { warning: UndefinedLwM2MObjectWarning }
 		assert.equal(
