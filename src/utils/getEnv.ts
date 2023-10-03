@@ -65,16 +65,15 @@ export const getEnv = ({
 			}),
 		}
 
-	// TODO: I would like to do something like this
-	// const temp = getFirstElementfromResource(temperature)?.['5700']
-	// however right now there is this problem: temperature is 'readonly' and cannot be assigned to the mutable
 	/**
-	 * First instance selected when object is multiple instance
+	 * First element from instances is the default option to be selected
 	 * @see {@link ../../adr/004-instance-selected-when-multiple-instance.md}
 	 */
-	const temp = temperature?.[0]?.['5700']
-	const hum = humidity?.[0]?.['5700']
-	const atmp = pressure?.[0]?.['5700']
+	const defaultInstance = 0
+
+	const temp = temperature?.[defaultInstance]?.['5700']
+	const hum = humidity?.[defaultInstance]?.['5700']
+	const atmp = pressure?.[defaultInstance]?.['5700']
 	const time = getTime({ temperature, humidity, pressure })
 	const object = createEnv({ temp, hum, atmp, time })
 
