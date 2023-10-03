@@ -4,7 +4,6 @@ import {
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, type Device_3 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import { getFirstElementfromResource } from './getFirstElementfromResource.js'
 import type { ValidationError } from './ValidationError.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 
@@ -32,8 +31,12 @@ export const getBat = (device?: Device_3): GetBatResult => {
 			}),
 		}
 
+	/**
+	 * First element selected when resource is multiple instance
+	 */
+	const defaultResource = 0
 	const object = {
-		v: getFirstElementfromResource(device['7'] ?? []),
+		v: device['7']?.[defaultResource],
 		ts: getTime(device),
 	}
 

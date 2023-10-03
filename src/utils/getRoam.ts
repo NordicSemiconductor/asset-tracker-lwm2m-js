@@ -10,7 +10,6 @@ import {
 	type Device_3,
 	type ConnectivityMonitoring_4,
 } from 'src/schemas/index.js'
-import { getFirstElementfromResource } from './getFirstElementfromResource.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ValidationError } from './ValidationError.js'
 
@@ -67,9 +66,14 @@ export const getRoam = ({
 		12: area,
 	} = connectivityMonitoring
 
+	/**
+	 * First element selected when resource is multiple instance
+	 */
+	const defaultResource = 0
+
 	const nw = String(maybeNw)
 	const mccmnc = Number(`${smcc}${smnc}`)
-	const ip = getFirstElementfromResource(ipArray)
+	const ip = ipArray !== undefined ? ipArray[defaultResource] : undefined
 	const time = getTime(device)
 	const object = createRoamObject({ nw, rsrp, area, mccmnc, cell, ip, time })
 
