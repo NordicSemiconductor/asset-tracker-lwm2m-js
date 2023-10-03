@@ -4,13 +4,13 @@
 
 ## Data
 
-| Field | LwM2M                                                                     |
-| ----- | ------------------------------------------------------------------------- |
-| imei  | /3/0/2                                                                    |
-| iccid | [value not provided](../adr/009-nrf-asset-tracker-values-not-provided.md) |
-| modV  | /3/0/3                                                                    |
-| brdV  | /3/0/0                                                                    |
-| ts    | /3/0/13                                                                   |
+| Field | LwM2M                                                                              |
+| ----- | ---------------------------------------------------------------------------------- |
+| imei  | /3/0/2                                                                             |
+| iccid | [value not provided](../adr/004-nrf-asset-tracker-reported-values-not-provided.md) |
+| modV  | /3/0/3                                                                             |
+| brdV  | /3/0/0                                                                             |
+| ts    | /3/0/13                                                                            |
 
 ## Details
 

@@ -1,4 +1,4 @@
-# ADR: 009 nRF Asset Tracker values not provided
+# ADR: 004 'nRF Asset Tracker reported' values not provided
 
 `nRF Asset Tracker Reported` is expecting the following objects as input.
 

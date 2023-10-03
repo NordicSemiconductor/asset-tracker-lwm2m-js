@@ -9,10 +9,11 @@ import {
 	Pressure_3323_urn,
 	Config_50009_urn,
 } from './schemas/index.js'
-import { converter } from './converter.js'
+import { converter, type LwM2MAssetTrackerV2 } from './converter.js'
+import type { UndefinedLwM2MObjectWarning } from './utils/UndefinedLwM2MObjectWarning.js'
 
 void describe('converter', () => {
-	void it('should convert LwM2M Asset Tracker v2 format into nRF Asset Tracker format', () => {
+	void it(`should convert 'LwM2M Asset Tracker v2' format into 'nRF Asset Tracker reported' format`, () => {
 		const input = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
@@ -156,10 +157,12 @@ void describe('converter', () => {
 		assert.deepEqual(result.gnss, expected.gnss)
 	})
 
-	/**
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/006-result-generation.md for more details
-	 */
-	void it(`should create output even when some expected objects in the input are missing`, (context) => {
+	void it(`should create output even when some expected objects in the input are missing`, () => {
+		/**
+		 * Check the data transition document to see the dependency between
+		 * 'LwM2M Asset Tracker v2' and 'Asset Tracker reported' objects
+		 * @see {@link ../documents/data-transition.md}
+		 */
 		const input = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
@@ -189,21 +192,64 @@ void describe('converter', () => {
 			},
 		}
 
-		const warningCallback = context.mock.fn()
-		const result = converter(input, warningCallback)
+		const result = converter(input)
 		assert.deepEqual(result, expected)
+	})
+
+	void it(`should trigger a warning if an 'Asset Tracker reported' object can not be created because equivalent LwM2M object is undefined`, (context) => {
+		const input = {
+			[Device_3_urn]: {
+				'0': 'Nordic Semiconductor ASA',
+				'1': 'Thingy:91',
+				'2': '351358815340515',
+				'3': '22.8.1+0',
+				'7': [2754],
+				'11': [0],
+				'13': 1675874731,
+				'16': 'UQ',
+				'19': '3.2.1',
+			},
+		}
+
+		const warningCallback = context.mock.fn()
+		converter(input, warningCallback)
+
 		/**
-		 * 4 objects (env, gnss, cfg, roam) from nRF Asset Tracker were not generated
+		 * 4 objects (env, gnss, cfg, roam) from 'Asset Tracker reported' were not generated
 		 * because dependent objects were not present in input, thats why it is expecting
 		 * the warning callback to be called 4 times
+		 *
+		 * @see {@link ../documents/data-transition.md}
 		 */
 		assert.strictEqual(warningCallback.mock.callCount(), 4)
 	})
 
-	/**
-	 * Instance selected when LwM2M object is multiple instance
-	 * @see {@link ../adr/004-instance-selected-when-multiple-instance.md}
-	 */
+	void it(`should trigger an error if an 'Asset Tracker reported' object can not be created because convertion went wrong`, (context) => {
+		const input = {
+			[Device_3_urn]: {
+				'0': 'Nordic Semiconductor ASA',
+				'1': 'Thingy:91',
+				'2': '351358815340515',
+				'3': '22.8.1+0',
+				'7': [2754],
+				'11': [0],
+				//'13': 1675874731,
+				'16': 'UQ',
+				'19': '3.2.1',
+			},
+		}
+
+		const errorCallback = context.mock.fn()
+		converter(input, () => {}, errorCallback)
+
+		/**
+		 * Bat and Dev objects from 'Asset Tracker reported' uses resource 13 from LwM2M object id 3 as the timestamp value,
+		 * thats why it is expected the error callback to be called 2 times
+		 * @see {@link ../documents/data-transition.md}
+		 */
+		assert.strictEqual(errorCallback.mock.callCount(), 2)
+	})
+
 	void it(`should select first instance when LwM2M object is an array`, () => {
 		const input = {
 			[Temperature_3303_urn]: [
@@ -288,11 +334,6 @@ void describe('converter', () => {
 		assert.deepEqual(converter(input), output)
 	})
 
-	/**
-	 * Element selected when LwM2M resource is multiple instance
-	 *
-	 * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/blob/saga/adr/005-element-selected-when-multiple-resource.md for more details
-	 */
 	void it(`should select first element when LwM2M resource is an array`, () => {
 		const input = {
 			[Device_3_urn]: {
@@ -324,5 +365,121 @@ void describe('converter', () => {
 		}
 
 		assert.deepEqual(converter(input), output)
+	})
+
+	void describe(`Dependency between 'LwM2M Asset Tracker v2' and 'nRF Asset Tracker reported'`, () => {
+		const LwM2MAssetTrackerV2 = {
+			[Device_3_urn]: {
+				'0': 'Nordic Semiconductor ASA',
+				'1': 'Thingy:91',
+				'2': '351358815340515',
+				'3': '22.8.1+0',
+				'7': [2754],
+				'11': [0],
+				'13': 1675874731,
+				'16': 'UQ',
+				'19': '3.2.1',
+			},
+
+			[ConnectivityMonitoring_4_urn]: {
+				'0': 6,
+				'1': [6, 7],
+				'2': -85,
+				'3': 23,
+				'4': ['10.160.120.155'],
+				'8': 34237196,
+				'9': 20,
+				'10': 242,
+				'12': 12,
+			},
+
+			[Location_6_urn]: {
+				'0': -43.5723,
+				'1': 153.2176,
+				'2': 2,
+				'3': 24.798573,
+				'5': 1665149633,
+				'6': 0.579327,
+			},
+
+			[Temperature_3303_urn]: [
+				{
+					'5601': 27.18,
+					'5602': 27.71,
+					'5700': 27.18,
+					'5701': 'Cel',
+					'5518': 1675874731,
+				},
+			],
+
+			[Humidity_3304_urn]: [
+				{
+					'5601': 23.535,
+					'5602': 24.161,
+					'5700': 24.057,
+					'5701': '%RH',
+					'5518': 1675874731,
+				},
+			],
+
+			[Pressure_3323_urn]: [
+				{
+					'5601': 101697,
+					'5602': 101705,
+					'5700': 10,
+					'5701': 'Pa',
+					'5518': 1675874731,
+				},
+			],
+
+			[Config_50009_urn]: {
+				'0': true,
+				'1': 120,
+				'2': 120,
+				'3': 600,
+				'4': 7200,
+				'5': 8.5,
+				'6': false,
+				'7': true,
+				'8': 2.5,
+				'9': 0.5,
+			},
+		}
+		/**
+		 * @see {@link ../documents/data-transition.md}
+		 */
+		const objectsRelation = [
+			{ [Device_3_urn]: ['bat', 'dev', 'roam'] },
+			{ [ConnectivityMonitoring_4_urn]: ['roam'] },
+			{ [Location_6_urn]: ['gnss'] },
+			{ [Temperature_3303_urn]: ['env'] },
+			{ [Humidity_3304_urn]: ['env'] },
+			{ [Pressure_3323_urn]: ['env'] },
+			{ [Config_50009_urn]: ['cfg'] },
+		]
+
+		objectsRelation.forEach((element) => {
+			const LwM2MObjectId = Object.keys(element)[0]
+			const dependentnRFAssetTrackerReportedObjects = Object.values(element)[0]
+
+			void it(`without LwM2M object ${LwM2MObjectId}, the object(s) ${dependentnRFAssetTrackerReportedObjects} from 'nRF Asset Tracker reported' will not be generated`, () => {
+				// remove LwM2M object from LwM2MAssetTrackerV2
+				const LwM2MAssetTrackerV2Updated = {
+					...LwM2MAssetTrackerV2,
+					[LwM2MObjectId as keyof LwM2MAssetTrackerV2]: undefined,
+				}
+				converter(
+					LwM2MAssetTrackerV2Updated,
+					(warning: UndefinedLwM2MObjectWarning) => {
+						assert.equal(
+							dependentnRFAssetTrackerReportedObjects?.includes(
+								warning.notCreatednRFAssetTrackerReportedObject,
+							),
+							true,
+						)
+					},
+				)
+			})
+		})
 	})
 })

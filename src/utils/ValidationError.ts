@@ -8,7 +8,6 @@ type ErrorDescription = {
 
 /**
  * Error handler type
- * @see @see {@link ../../adr/007-warning-and-error-handling.md}
  */
 export class ValidationError extends Error {
 	description: ErrorDescription[]

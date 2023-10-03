@@ -5,6 +5,7 @@ import { getGnss } from './getGnss.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ValidationError } from './ValidationError.js'
+import type { GNSSData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 
 void describe('getGnss', () => {
 	void it(`should create the 'gnss' object expected by 'nRF Asset Tracker Reported'`, () => {
@@ -16,7 +17,7 @@ void describe('getGnss', () => {
 			'5': 1665149633,
 			'6': 0.579327,
 		}
-		const gnss = getGnss(location) as { result: unknown }
+		const gnss = getGnss(location) as { result: GNSSData }
 		const expected = {
 			v: {
 				lng: 153.2176,
@@ -66,5 +67,21 @@ void describe('getGnss', () => {
 		assert.equal(instancePathError, `/v`)
 		assert.equal(checkMessage, true)
 		assert.equal(keyword, 'required')
+	})
+
+	/**
+	 * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
+	 */
+	void it(`should not create 'hdg' from 'GNSS' object`, () => {
+		const location = {
+			'0': -43.5723,
+			'1': 153.2176,
+			'2': 2,
+			'3': 24.798573,
+			'5': 1665149633,
+			'6': 0.579327,
+		}
+		const gnss = getGnss(location) as { result: GNSSData }
+		assert.deepEqual(gnss.result.v.hdg, undefined)
 	})
 })

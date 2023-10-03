@@ -6,7 +6,6 @@ import type {
 
 /**
  * Warning handler type
- * @see {@link ../../adr/007-warning-and-error-handling.md}
  */
 export class UndefinedLwM2MObjectWarning extends Error {
 	undefinedLwM2MObject: {
@@ -14,6 +13,8 @@ export class UndefinedLwM2MObjectWarning extends Error {
 		ObjectVersion: string
 		LWM2MVersion: string
 	}
+
+	notCreatednRFAssetTrackerReportedObject: string
 
 	constructor({
 		nRFAssetTrackerReportedId,
@@ -27,5 +28,6 @@ export class UndefinedLwM2MObjectWarning extends Error {
 			`'${nRFAssetTrackerReportedId}' object can not be created because LwM2M object id '${LwM2MObjectInfo.ObjectID}' is undefined`,
 		)
 		this.undefinedLwM2MObject = LwM2MObjectInfo
+		this.notCreatednRFAssetTrackerReportedObject = nRFAssetTrackerReportedId
 	}
 }

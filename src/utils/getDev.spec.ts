@@ -4,6 +4,7 @@ import { getDev } from './getDev.js'
 import { Device_3_urn, parseURN } from '@nordicsemiconductor/lwm2m-types'
 import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ValidationError } from './ValidationError.js'
+import type { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 
 void describe('getDev', () => {
 	void it(`should create the 'dev' object expected by 'nRF Asset Tracker Reported'`, () => {
@@ -18,7 +19,7 @@ void describe('getDev', () => {
 			'16': 'UQ',
 			'19': '3.2.1',
 		}
-		const dev = getDev(device) as { result: unknown }
+		const dev = getDev(device) as { result: DeviceData }
 		const expected = {
 			v: {
 				imei: '351358815340515',
@@ -64,5 +65,24 @@ void describe('getDev', () => {
 		assert.equal(instancePathError, `/v`)
 		assert.equal(checkMessage, true)
 		assert.equal(keyword, 'required')
+	})
+
+	/**
+	 * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
+	 */
+	void it(`should not create the 'iccid' key from the 'Dev' object`, () => {
+		const device = {
+			'0': 'Nordic Semiconductor ASA',
+			'1': 'Thingy:91',
+			'2': '351358815340515',
+			'3': '22.8.1+0',
+			'7': [2754],
+			'11': [0],
+			'13': 1675874731,
+			'16': 'UQ',
+			'19': '3.2.1',
+		}
+		const dev = getDev(device) as { result: DeviceData }
+		assert.deepEqual(dev.result.v.iccid, undefined)
 	})
 })

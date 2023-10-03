@@ -1,4 +1,4 @@
-# ADR 010: Roam timestamp is not supported by LwM2M
+# ADR 005: Roam timestamp is not supported by Roam timestamp is not supported by LwM2MLwM2M
 
 The roam object expecting by nRF Asset Tracker is creating using the object 4
 from LwM2M (Connectivity Monitoring). See

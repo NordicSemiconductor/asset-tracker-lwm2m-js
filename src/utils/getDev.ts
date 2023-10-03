@@ -44,7 +44,7 @@ export const getDev = (device?: Device_3): GetDevResult => {
  * @see {@link ../../documents/device.md}
  *
  * 'iccid' key from the 'dev' object defined by 'nRF Asset Tracker Reported' is not provided.
- * @see {@link ../../adr/009-nrf-asset-tracker-values-not-provided.md}
+ * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
  */
 const createDevObject = ({
 	imei,

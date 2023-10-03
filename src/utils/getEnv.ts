@@ -66,8 +66,7 @@ export const getEnv = ({
 		}
 
 	/**
-	 * First element from instances is the default option to be selected
-	 * @see {@link ../../adr/004-instance-selected-when-multiple-instance.md}
+	 * First instance selected when object is multiple instance
 	 */
 	const defaultInstance = 0
 
