@@ -5,7 +5,7 @@ import type {
 } from 'src/converter.js'
 
 /**
- * Warning handler type
+ * Warning callback type
  */
 export class UndefinedLwM2MObjectWarning extends Error {
 	undefinedLwM2MObject: {

@@ -7,7 +7,7 @@ type ErrorDescription = {
 }
 
 /**
- * Error handler type
+ * Error callback type
  */
 export class ValidationError extends Error {
 	description: ErrorDescription[]
