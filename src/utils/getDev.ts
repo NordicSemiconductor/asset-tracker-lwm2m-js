@@ -4,7 +4,7 @@ import {
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import { getTime } from './getBat.js'
+import { getTimeInMS } from './getBat.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ValidationError } from './ValidationError.js'
 
@@ -21,6 +21,9 @@ type GetDevResult =
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
  * @see {@link ../../docs/device.md}
+ *
+ * 'iccid' key from the 'dev' object defined by 'nRF Asset Tracker Reported' is not provided by 'LwM2M Asset Tracker v2'.
+ * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
  */
 export const getDev = (device?: Device_3): GetDevResult => {
 	if (device === undefined)
@@ -32,34 +35,16 @@ export const getDev = (device?: Device_3): GetDevResult => {
 		}
 
 	const { 0: brdV, 2: imei, 3: modV } = device
-	const time = getTime(device)
-	const object = createDevObject({ brdV, imei, modV, time })
 
-	return validateAgainstSchema(object, Device)
+	return validateAgainstSchema(
+		{
+			v: {
+				imei,
+				modV,
+				brdV,
+			},
+			ts: getTimeInMS(device),
+		},
+		Device,
+	)
 }
-
-/**
- * Creates 'dev' object defined by 'nRF Asset Tracker Reported'.
- * @see {@link ../../docs/device.md}
- *
- * 'iccid' key from the 'dev' object defined by 'nRF Asset Tracker Reported' is not provided by 'LwM2M Asset Tracker v2'.
- * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
- */
-const createDevObject = ({
-	imei,
-	modV,
-	brdV,
-	time,
-}: {
-	imei: string | undefined
-	modV: string | undefined
-	brdV: string | undefined
-	time: number | undefined
-}) => ({
-	v: {
-		imei,
-		modV,
-		brdV,
-	},
-	ts: time,
-})

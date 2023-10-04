@@ -20,6 +20,9 @@ type GetGnssResult =
 /**
  * Takes object id 6 (location) from 'LwM2M Asset Tracker v2' and convert into 'GNSS' object from 'nRF Asset Tracker Reported'.
  * @see {@link ../../docs/gnss.md}
+ *
+ * 'hdg' key from 'GNSS' object defined by 'nRF Asset Tracker Reported' is not provided by 'LwM2M Asset Tracker v2'.
+ * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
  */
 export const getGnss = (location?: Location_6): GetGnssResult => {
 	if (location === undefined)
@@ -31,47 +34,18 @@ export const getGnss = (location?: Location_6): GetGnssResult => {
 		}
 
 	const { [0]: lat, [2]: alt, [6]: spd, [1]: lng, [3]: acc } = location
-	const time = getTime(location)
-	const object = createGnssObject({ lat, lng, acc, alt, spd, time })
 
-	return validateAgainstSchema(object, GNSS)
+	return validateAgainstSchema(
+		{
+			v: {
+				lng,
+				lat,
+				acc,
+				alt,
+				spd,
+			},
+			ts: location['5'] * 1000,
+		},
+		GNSS,
+	)
 }
-
-/**
- * The resource selected to report the timestamp value is 5.
- * Value is in seconds and it is multiplied to transform to milliseconds.
- * {@link ../../docs/gnss.md}
- */
-const getTime = (location: Location_6): number => location['5'] * 1000
-
-/**
- * Creates GNSS object defined by 'nRF Asset Tracker Reported'.
- * @see {@link ../../docs/gnss.md}
- *
- * 'hdg' key from 'GNSS' object defined by 'nRF Asset Tracker Reported' is not provided by 'LwM2M Asset Tracker v2'.
- * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
- */
-const createGnssObject = ({
-	lat,
-	lng,
-	acc,
-	alt,
-	spd,
-	time,
-}: {
-	lat: number
-	lng: number
-	acc: number | undefined
-	alt: number | undefined
-	spd: number | undefined
-	time: number
-}) => ({
-	v: {
-		lng,
-		lat,
-		acc,
-		alt,
-		spd,
-	},
-	ts: time,
-})

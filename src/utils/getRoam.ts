@@ -2,7 +2,7 @@ import {
 	RoamingInfo,
 	type RoamingInfoData,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { getTime } from './getBat.js'
+import { getTimeInMS } from './getBat.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import {
 	Device_3_urn,
@@ -31,6 +31,9 @@ type GetRoamResult =
  * Connectivity Monitoring (4) object does not support timestamp, for that reason timestamp value is taken from
  * Device (3) object.
  * @see {@link ../../adr/005-roam-timestamp-not-supported-by-lwm2m.md}
+ *
+ * 'band' and 'eest' key from the 'roam' object defined by 'nRF Asset Tracker Reported' are not provided by 'LwM2M Asset Tracker v2'.
+ * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
  */
 export const getRoam = ({
 	connectivityMonitoring,
@@ -73,43 +76,19 @@ export const getRoam = ({
 	const nw = String(maybeNw)
 	const mccmnc = Number(`${smcc}${smnc}`)
 	const ip = ipArray !== undefined ? ipArray[defaultResource] : undefined
-	const time = getTime(device)
-	const object = createRoamObject({ nw, rsrp, area, mccmnc, cell, ip, time })
 
-	return validateAgainstSchema(object, RoamingInfo)
+	return validateAgainstSchema(
+		{
+			v: {
+				nw,
+				rsrp,
+				area,
+				mccmnc,
+				cell,
+				ip,
+			},
+			ts: getTimeInMS(device),
+		},
+		RoamingInfo,
+	)
 }
-
-/**
- * Creates 'roam' object defined by 'nRF Asset Tracker Reported'.
- * @see {@link ../../docs/roam.md}
- *
- * 'band' and 'eest' key from the 'roam' object defined by 'nRF Asset Tracker Reported' are not provided by 'LwM2M Asset Tracker v2'.
- * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
- */
-const createRoamObject = ({
-	nw,
-	rsrp,
-	area,
-	mccmnc,
-	cell,
-	ip,
-	time,
-}: {
-	nw: string
-	rsrp: number
-	area: number | undefined
-	mccmnc: number
-	cell: number | undefined
-	ip: string | undefined
-	time: number | undefined
-}) => ({
-	v: {
-		nw,
-		rsrp,
-		area,
-		mccmnc,
-		cell,
-		ip,
-	},
-	ts: time,
-})

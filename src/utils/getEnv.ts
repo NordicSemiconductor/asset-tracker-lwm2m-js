@@ -71,17 +71,25 @@ export const getEnv = ({
 	const temp = temperature?.[defaultInstance]?.['5700']
 	const hum = humidity?.[defaultInstance]?.['5700']
 	const atmp = pressure?.[defaultInstance]?.['5700']
-	const time = getTime({ temperature, humidity, pressure })
-	const object = createEnv({ temp, hum, atmp, time })
 
-	return validateAgainstSchema(object, Environment)
+	return validateAgainstSchema(
+		{
+			v: {
+				temp,
+				hum,
+				atmp,
+			},
+			ts: getTimeInMS({ temperature, humidity, pressure }),
+		},
+		Environment,
+	)
 }
 
 /**
  * The resource selected to report the timestamp value is 5518.
  * Value is in seconds and it is multiplied to transform to milliseconds.
  */
-const getTime = ({
+const getTimeInMS = ({
 	temperature,
 	humidity,
 	pressure,
@@ -99,26 +107,3 @@ const getTime = ({
 
 	return time
 }
-
-/**
- * Creates 'Env' object defined by 'nRF Asset Tracker Reported'.
- * @see {@link ../../docs/environment.md}
- */
-const createEnv = ({
-	temp,
-	hum,
-	atmp,
-	time,
-}: {
-	temp: number | undefined
-	hum: number | undefined
-	atmp: number | undefined
-	time: number | undefined
-}) => ({
-	v: {
-		temp,
-		hum,
-		atmp,
-	},
-	ts: time,
-})

@@ -36,7 +36,7 @@ export const getBat = (device?: Device_3): GetBatResult => {
 	const defaultResource = 0
 	const object = {
 		v: device['7']?.[defaultResource],
-		ts: getTime(device),
+		ts: getTimeInMS(device),
 	}
 
 	return validateAgainstSchema(object, Battery)
@@ -47,5 +47,5 @@ export const getBat = (device?: Device_3): GetBatResult => {
  * Value is in seconds and it is multiplied to transform to milliseconds.
  * @see {@link ../../docs/battery.md}
  */
-export const getTime = (device: Device_3): number | undefined =>
+export const getTimeInMS = (device: Device_3): number | undefined =>
 	device['13'] !== undefined ? device['13'] * 1000 : undefined
