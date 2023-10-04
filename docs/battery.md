@@ -1,17 +1,10 @@
 # Battery
 
-## Link: [here](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/v31.0.0/docs/cloud-protocol/Reported.ts)
+[`Battery` definition in nRF Asset Tracker cloud protocol](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/v31.0.0/docs/cloud-protocol/Reported.ts#L90)
 
-## Data
+## LwM2M data mapping
 
-| Field | LwM2M   |
-| ----- | ------- |
-| v     | /3/0/7  |
-| ts    | /3/0/13 |
-
-## Details
-
-| Field | Description                                              | Type    | Minimum       | Required |
-| ----- | -------------------------------------------------------- | ------- | ------------- | -------- |
-| v     | Battery reading read by the modem                        | integer | 1             | Yes      |
-| ts    | Timestamp as Unix epoch with millisecond precision (UTC) | integer | 1234567890123 | Yes      |
+| Field | LwM2M     |
+| ----- | --------- |
+| `v`   | `/3/0/7`  |
+| `ts`  | `/3/0/13` |
