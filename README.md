@@ -17,7 +17,7 @@ data encoded as LwM2M to the JSON document required by nRF Asset Tracker.
 
 ## LwM2M to JSON mapping
 
-Data transition from `asset_tracker_v2 LwM2M` to `nRF Asset Tracker reported`
+Data transition from `asset_tracker_v2` LwM2M to `nRF Asset Tracker reported`
 
 | LwM2M ID                                                                                                                                             | LwM2M Obj Version | LwM2M version | Name                    | nRF Asset Tracker Reported                                                   |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------- | ----------------------- | ---------------------------------------------------------------------------- |
