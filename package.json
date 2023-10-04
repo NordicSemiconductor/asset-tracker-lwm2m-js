@@ -1,5 +1,5 @@
 {
-  "name": "@nordicsemiconductor/asset-tracker-lwm2m-js",
+  "name": "@nordicsemiconductor/asset-tracker-lwm2m",
   "version": "0.0.0-development",
   "description": "Converts a JSON document containing the asset_tracker_v2 device and sensor data encoded as LwM2M to the JSON document required by nRF Asset Tracker.",
   "main": "index.js",
