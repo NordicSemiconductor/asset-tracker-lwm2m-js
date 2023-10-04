@@ -60,6 +60,9 @@ export const nRFAssetTrackerReported = Type.Object({
 })
 
 export type nRFAssetTrackerReportedType = Static<typeof nRFAssetTrackerReported>
+export type TransformationResult<Result extends Record<string, any>> =
+	| { result: Result }
+	| { error: ValidationError | UndefinedLwM2MObjectWarning }
 
 /**
  * convert 'LwM2M Asset Tracker v2' format into 'nRF Asset Tracker reported' format

@@ -11,17 +11,7 @@ import {
 	type ConnectivityMonitoring_4,
 } from 'src/schemas/index.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { ValidationError } from './ValidationError.js'
-
-/**
- * Defines the result type of 'getRoam' method, which will be one of the following options
- * - result: contains the validated roam object.
- * - error: contains an object indicating the object has not the expected format.
- * - error: contains an object indicating that the LwM2M object for roam is undefined.
- */
-type GetRoamResult =
-	| { result: RoamingInfoData }
-	| { error: ValidationError | UndefinedLwM2MObjectWarning }
+import type { TransformationResult } from 'src/converter.js'
 
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
@@ -41,7 +31,7 @@ export const getRoam = ({
 }: {
 	connectivityMonitoring: ConnectivityMonitoring_4 | undefined
 	device: Device_3 | undefined
-}): GetRoamResult => {
+}): TransformationResult<RoamingInfoData> => {
 	if (connectivityMonitoring === undefined)
 		return {
 			error: new UndefinedLwM2MObjectWarning({

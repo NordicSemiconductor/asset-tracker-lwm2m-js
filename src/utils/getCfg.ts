@@ -4,24 +4,16 @@ import {
 	type ConfigData,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import type { ValidationError } from './ValidationError.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-
-/**
- * Defines the result type of 'getCfg' method, which will be one of the following options:
- * - result: contains the validated cfg object.
- * - error: contains an object indicating the object has not the expected format.
- * - error: contains an object indicating that the LwM2M object for cfg is undefined.
- */
-type GetCfgResult =
-	| { result: ConfigData }
-	| { error: ValidationError | UndefinedLwM2MObjectWarning }
+import type { TransformationResult } from 'src/converter.js'
 
 /**
  * Takes object id 50009 (config) from 'LwM2M Asset Tracker v2' and convert into 'cfg' object from 'nRF Asset Tracker Reported'
  * @see {@link ../../docs/config.md}
  */
-export const getCfg = (config?: Config_50009): GetCfgResult => {
+export const getCfg = (
+	config?: Config_50009,
+): TransformationResult<ConfigData> => {
 	if (config === undefined)
 		return {
 			error: new UndefinedLwM2MObjectWarning({

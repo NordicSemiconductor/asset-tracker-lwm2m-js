@@ -11,18 +11,8 @@ import {
 	type Temperature_3303,
 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import type { ValidationError } from './ValidationError.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-
-/**
- * Defines the result type of 'getEnv' method, which will be one of the following options:
- * - result: contains the validated env object.
- * - error: contains an object indicating the object has not the expected format.
- * - error: contains an object indicating that the LwM2M object for env is undefined.
- */
-type GetEnvResult =
-	| { result: EnvironmentData }
-	| { error: ValidationError | UndefinedLwM2MObjectWarning }
+import type { TransformationResult } from 'src/converter.js'
 
 /**
  * Takes objects id 3303 (temperature), 3304 (humidity) and 3323 (pressure) from
@@ -38,7 +28,7 @@ export const getEnv = ({
 	temperature: Temperature_3303 | undefined
 	humidity: Humidity_3304 | undefined
 	pressure: Pressure_3323 | undefined
-}): GetEnvResult => {
+}): TransformationResult<EnvironmentData> => {
 	if (temperature === undefined)
 		return {
 			error: new UndefinedLwM2MObjectWarning({

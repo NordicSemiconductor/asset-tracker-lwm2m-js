@@ -4,24 +4,16 @@ import {
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, type Device_3 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
-import type { ValidationError } from './ValidationError.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-
-/**
- * Defines the result type of 'getBat' method, which will be one of the following options
- * - result: contains the validated bat object.
- * - error: contains an object indicating the object has not the expected format.
- * - error: contains an object indicating that the LwM2M object for bat is undefined.
- */
-type GetBatResult =
-	| { result: BatteryData }
-	| { error: ValidationError | UndefinedLwM2MObjectWarning }
+import type { TransformationResult } from 'src/converter.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'bat' object from 'nRF Asset Tracker Reported'
  * @see {@link ../../docs/battery.md}
  */
-export const getBat = (device?: Device_3): GetBatResult => {
+export const getBat = (
+	device?: Device_3,
+): TransformationResult<BatteryData> => {
 	if (device === undefined)
 		return {
 			error: new UndefinedLwM2MObjectWarning({
