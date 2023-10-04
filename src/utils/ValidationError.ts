@@ -7,7 +7,7 @@ type ErrorDescription = {
 }
 
 /**
- * Error callback type
+ * This error is returned when the converted object is not valid.
  */
 export class ValidationError extends Error {
 	description: ErrorDescription[]

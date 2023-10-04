@@ -5,7 +5,7 @@ import type {
 } from 'src/converter.js'
 
 /**
- * Warning callback type
+ * This error is returned when an object is missing in the input document
  */
 export class UndefinedLwM2MObjectWarning extends Error {
 	undefinedLwM2MObject: {
