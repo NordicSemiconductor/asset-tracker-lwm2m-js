@@ -5,15 +5,13 @@ import {
 import { Device_3_urn, type Device_3 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { TransformationResult } from 'src/converter.js'
+import type { ConversionResult } from 'src/converter.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'bat' object from 'nRF Asset Tracker Reported'
  * @see {@link ../../docs/battery.md}
  */
-export const getBat = (
-	device?: Device_3,
-): TransformationResult<BatteryData> => {
+export const getBat = (device?: Device_3): ConversionResult<BatteryData> => {
 	if (device === undefined)
 		return {
 			error: new UndefinedLwM2MObjectWarning({

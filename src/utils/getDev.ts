@@ -6,7 +6,7 @@ import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { getTimeInMS } from './getBat.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { TransformationResult } from 'src/converter.js'
+import type { ConversionResult } from 'src/converter.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
@@ -15,7 +15,7 @@ import type { TransformationResult } from 'src/converter.js'
  * 'iccid' key from the 'dev' object defined by 'nRF Asset Tracker Reported' is not provided by 'LwM2M Asset Tracker v2'.
  * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
  */
-export const getDev = (device?: Device_3): TransformationResult<DeviceData> => {
+export const getDev = (device?: Device_3): ConversionResult<DeviceData> => {
 	if (device === undefined)
 		return {
 			error: new UndefinedLwM2MObjectWarning({

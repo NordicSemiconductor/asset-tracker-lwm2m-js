@@ -12,7 +12,7 @@ import {
 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { TransformationResult } from 'src/converter.js'
+import type { ConversionResult } from 'src/converter.js'
 
 /**
  * Takes objects id 3303 (temperature), 3304 (humidity) and 3323 (pressure) from
@@ -28,7 +28,7 @@ export const getEnv = ({
 	temperature: Temperature_3303 | undefined
 	humidity: Humidity_3304 | undefined
 	pressure: Pressure_3323 | undefined
-}): TransformationResult<EnvironmentData> => {
+}): ConversionResult<EnvironmentData> => {
 	if (temperature === undefined)
 		return {
 			error: new UndefinedLwM2MObjectWarning({

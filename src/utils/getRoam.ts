@@ -11,7 +11,7 @@ import {
 	type ConnectivityMonitoring_4,
 } from 'src/schemas/index.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { TransformationResult } from 'src/converter.js'
+import type { ConversionResult } from 'src/converter.js'
 
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
@@ -31,7 +31,7 @@ export const getRoam = ({
 }: {
 	connectivityMonitoring: ConnectivityMonitoring_4 | undefined
 	device: Device_3 | undefined
-}): TransformationResult<RoamingInfoData> => {
+}): ConversionResult<RoamingInfoData> => {
 	if (connectivityMonitoring === undefined)
 		return {
 			error: new UndefinedLwM2MObjectWarning({
