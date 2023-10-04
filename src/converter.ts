@@ -66,12 +66,17 @@ export type nRFAssetTrackerReportedType = Static<typeof nRFAssetTrackerReported>
  */
 export const converter = (
 	LwM2MAssetTracker: LwM2MAssetTrackerV2,
-	onWarning?: (warning: UndefinedLwM2MObjectWarning) => unknown,
-	onError?: (error: ValidationError) => unknown,
+	onError?: (error: ValidationError | UndefinedLwM2MObjectWarning) => unknown,
 ): typeof nRFAssetTrackerReported => {
 	const conversionResult = {} as typeof nRFAssetTrackerReported
 
-	const nRFAssetTrackerReportedObjects = {
+	const nRFAssetTrackerReportedObjects: Record<
+		string,
+		| {
+				error: ValidationError | UndefinedLwM2MObjectWarning
+		  }
+		| { result: Partial<typeof nRFAssetTrackerReported> }
+	> = {
 		bat: getBat(LwM2MAssetTracker[Device_3_urn]),
 		dev: getDev(LwM2MAssetTracker[Device_3_urn]),
 		env: getEnv({
@@ -92,9 +97,7 @@ export const converter = (
 			if ('result' in convertedObject)
 				conversionResult[objectId] = convertedObject.result
 			else {
-				'warning' in convertedObject
-					? onWarning?.(convertedObject.warning)
-					: onError?.(convertedObject.error)
+				onError?.(convertedObject.error)
 			}
 		},
 	)

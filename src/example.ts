@@ -87,9 +87,7 @@ const lwM2MAssetTrackerV2: LwM2MAssetTrackerV2 = {
 	},
 }
 
-const warningCallback = (warning: Error) => console.log(warning)
-const errorCallback = (error: Error) => console.log(error)
-const result = converter(lwM2MAssetTrackerV2, warningCallback, errorCallback)
+const result = converter(lwM2MAssetTrackerV2)
 console.log(result)
 
 /**

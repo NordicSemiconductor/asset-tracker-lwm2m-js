@@ -11,12 +11,11 @@ import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
  * Defines the result type of 'getGnss' method, which will be one of the following options
  * - result: contains the validated gnss object.
  * - error: contains an object indicating the object has not the expected format.
- * - warning: contains an object indicating that the LwM2M object for gnss is undefined.
+ * - error: contains an object indicating that the LwM2M object for gnss is undefined.
  */
 type GetGnssResult =
 	| { result: GNSSData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning }
+	| { error: ValidationError | UndefinedLwM2MObjectWarning }
 
 /**
  * Takes object id 6 (location) from 'LwM2M Asset Tracker v2' and convert into 'GNSS' object from 'nRF Asset Tracker Reported'.
@@ -25,7 +24,7 @@ type GetGnssResult =
 export const getGnss = (location?: Location_6): GetGnssResult => {
 	if (location === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'gnss',
 				LwM2MObjectUrn: Location_6_urn,
 			}),

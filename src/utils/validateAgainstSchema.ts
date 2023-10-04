@@ -1,6 +1,7 @@
 import type { Static, TSchema } from '@sinclair/typebox'
 import Ajv, { type ErrorObject } from 'ajv'
 import { ValidationError } from './ValidationError.js'
+import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 
 /**
  * Check if object follow the schema definition
@@ -8,7 +9,9 @@ import { ValidationError } from './ValidationError.js'
 export const validateAgainstSchema = <T extends TSchema>(
 	object: Record<string, unknown>,
 	schema: T,
-): { result: Static<typeof schema> } | { error: ValidationError } => {
+):
+	| { result: Static<typeof schema> }
+	| { error: ValidationError | UndefinedLwM2MObjectWarning } => {
 	const validatedObject = validateWithTypebox(object, schema)
 	if ('errors' in validatedObject) {
 		return {

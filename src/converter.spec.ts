@@ -10,7 +10,8 @@ import {
 	Config_50009_urn,
 } from './schemas/index.js'
 import { converter, type LwM2MAssetTrackerV2 } from './converter.js'
-import type { UndefinedLwM2MObjectWarning } from './utils/UndefinedLwM2MObjectWarning.js'
+import { UndefinedLwM2MObjectWarning } from './utils/UndefinedLwM2MObjectWarning.js'
+import { ValidationError } from './utils/ValidationError.js'
 
 void describe('converter', () => {
 	void it(`should convert 'LwM2M Asset Tracker v2' format into 'nRF Asset Tracker reported' format`, () => {
@@ -211,8 +212,8 @@ void describe('converter', () => {
 			},
 		}
 
-		const warningCallback = context.mock.fn()
-		converter(input, warningCallback)
+		const onError = context.mock.fn()
+		converter(input, onError)
 
 		/**
 		 * 4 objects (env, gnss, cfg, roam) from 'Asset Tracker reported' were not generated
@@ -221,10 +222,10 @@ void describe('converter', () => {
 		 *
 		 * @see {@link ../README.md#lwm2m-to-json-mapping}
 		 */
-		assert.strictEqual(warningCallback.mock.callCount(), 4)
+		assert.strictEqual(onError.mock.callCount(), 4)
 	})
 
-	void it(`should trigger an error if an 'Asset Tracker reported' object can not be created because convertion went wrong`, (context) => {
+	void it(`should trigger an error if an 'Asset Tracker reported' object can not be created because conversion went wrong`, (context) => {
 		const input = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
@@ -240,14 +241,19 @@ void describe('converter', () => {
 		}
 
 		const errorCallback = context.mock.fn()
-		converter(input, () => {}, errorCallback)
+		converter(input, errorCallback)
 
 		/**
 		 * Bat and Dev objects from 'Asset Tracker reported' uses resource 13 from LwM2M object id 3 as the timestamp value,
 		 * thats why it is expected the error callback to be called 2 times
 		 * @see {@link ../README.md#lwm2m-to-json-mapping}
 		 */
-		assert.strictEqual(errorCallback.mock.callCount(), 2)
+		assert.strictEqual(
+			errorCallback.mock.calls.filter(
+				(call) => call.arguments[0] instanceof ValidationError,
+			).length,
+			2,
+		)
 	})
 
 	void it(`should select first instance when LwM2M object is an array`, () => {
@@ -468,17 +474,15 @@ void describe('converter', () => {
 					...LwM2MAssetTrackerV2,
 					[LwM2MObjectId as keyof LwM2MAssetTrackerV2]: undefined,
 				}
-				converter(
-					LwM2MAssetTrackerV2Updated,
-					(warning: UndefinedLwM2MObjectWarning) => {
-						assert.equal(
-							dependentnRFAssetTrackerReportedObjects?.includes(
-								warning.notCreatednRFAssetTrackerReportedObject,
-							),
-							true,
-						)
-					},
-				)
+				converter(LwM2MAssetTrackerV2Updated, (error) => {
+					assert.equal(
+						dependentnRFAssetTrackerReportedObjects?.includes(
+							(error as UndefinedLwM2MObjectWarning)
+								.notCreatednRFAssetTrackerReportedObject,
+						),
+						true,
+					)
+				})
 			})
 		})
 	})

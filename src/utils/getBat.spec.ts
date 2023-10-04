@@ -26,15 +26,12 @@ void describe('getBat', () => {
 	})
 
 	void it(`should return a warning if the dependent LwM2M object to create the 'bat' object is not defined`, () => {
-		const result = getBat(undefined) as { warning: UndefinedLwM2MObjectWarning }
+		const result = getBat(undefined) as { error: UndefinedLwM2MObjectWarning }
 		assert.equal(
-			result.warning.message,
+			result.error.message,
 			`'bat' object can not be created because LwM2M object id '3' is undefined`,
 		)
-		assert.deepEqual(
-			result.warning.undefinedLwM2MObject,
-			parseURN(Device_3_urn),
-		)
+		assert.deepEqual(result.error.undefinedLwM2MObject, parseURN(Device_3_urn))
 	})
 
 	void it(`should return an error if the result of the conversion does not meet the schema definition`, () => {
@@ -49,7 +46,9 @@ void describe('getBat', () => {
 			'16': 'UQ',
 			'19': '3.2.1',
 		}
-		const bat = getBat(device) as { error: ValidationError }
+		const bat = getBat(device) as {
+			error: ValidationError
+		}
 		const message = bat.error.description[0]?.message
 		const checkMessage = message?.includes("must have required property 'v'")
 		const keyword = bat.error.description[0]?.keyword

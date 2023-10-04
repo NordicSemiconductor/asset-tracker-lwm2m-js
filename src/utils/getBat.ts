@@ -11,12 +11,11 @@ import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
  * Defines the result type of 'getBat' method, which will be one of the following options
  * - result: contains the validated bat object.
  * - error: contains an object indicating the object has not the expected format.
- * - warning: contains an object indicating that the LwM2M object for bat is undefined.
+ * - error: contains an object indicating that the LwM2M object for bat is undefined.
  */
 type GetBatResult =
 	| { result: BatteryData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning }
+	| { error: ValidationError | UndefinedLwM2MObjectWarning }
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'bat' object from 'nRF Asset Tracker Reported'
@@ -25,7 +24,7 @@ type GetBatResult =
 export const getBat = (device?: Device_3): GetBatResult => {
 	if (device === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'bat',
 				LwM2MObjectUrn: Device_3_urn,
 			}),

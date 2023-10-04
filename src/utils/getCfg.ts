@@ -11,12 +11,11 @@ import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
  * Defines the result type of 'getCfg' method, which will be one of the following options:
  * - result: contains the validated cfg object.
  * - error: contains an object indicating the object has not the expected format.
- * - warning: contains an object indicating that the LwM2M object for cfg is undefined.
+ * - error: contains an object indicating that the LwM2M object for cfg is undefined.
  */
 type GetCfgResult =
 	| { result: ConfigData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning }
+	| { error: ValidationError | UndefinedLwM2MObjectWarning }
 
 /**
  * Takes object id 50009 (config) from 'LwM2M Asset Tracker v2' and convert into 'cfg' object from 'nRF Asset Tracker Reported'
@@ -25,7 +24,7 @@ type GetCfgResult =
 export const getCfg = (config?: Config_50009): GetCfgResult => {
 	if (config === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'cfg',
 				LwM2MObjectUrn: Config_50009_urn,
 			}),

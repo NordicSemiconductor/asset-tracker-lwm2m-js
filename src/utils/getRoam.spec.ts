@@ -63,14 +63,14 @@ void describe('getRoam', () => {
 		const connectivityMonitoring = undefined
 		const device = undefined
 		const result = getRoam({ connectivityMonitoring, device }) as {
-			warning: UndefinedLwM2MObjectWarning
+			error: UndefinedLwM2MObjectWarning
 		}
 		assert.equal(
-			result.warning.message,
+			result.error.message,
 			`'roam' object can not be created because LwM2M object id '4' is undefined`,
 		)
 		assert.deepEqual(
-			result.warning.undefinedLwM2MObject,
+			result.error.undefinedLwM2MObject,
 			parseURN(ConnectivityMonitoring_4_urn),
 		)
 	})

@@ -33,14 +33,14 @@ void describe('getGnss', () => {
 
 	void it(`should return a warning if the dependent LwM2M object to create the 'gnss' object is not defined`, () => {
 		const result = getGnss(undefined) as {
-			warning: UndefinedLwM2MObjectWarning
+			error: UndefinedLwM2MObjectWarning
 		}
 		assert.equal(
-			result.warning.message,
+			result.error.message,
 			`'gnss' object can not be created because LwM2M object id '6' is undefined`,
 		)
 		assert.deepEqual(
-			result.warning.undefinedLwM2MObject,
+			result.error.undefinedLwM2MObject,
 			parseURN(Location_6_urn),
 		)
 	})
@@ -54,7 +54,9 @@ void describe('getGnss', () => {
 			'5': 1665149633,
 			'6': 0.579327,
 		} as unknown as Location_6
-		const result = getGnss(location) as { error: ValidationError }
+		const result = getGnss(location) as {
+			error: ValidationError
+		}
 		const instancePathError = result.error.description[0]?.instancePath
 		const message = result.error.description[0]?.message
 		const checkMessage = message?.includes("must have required property 'lat'")

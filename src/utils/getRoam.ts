@@ -17,12 +17,11 @@ import type { ValidationError } from './ValidationError.js'
  * Defines the result type of 'getRoam' method, which will be one of the following options
  * - result: contains the validated roam object.
  * - error: contains an object indicating the object has not the expected format.
- * - warning: contains an object indicating that the LwM2M object for roam is undefined.
+ * - error: contains an object indicating that the LwM2M object for roam is undefined.
  */
 type GetRoamResult =
 	| { result: RoamingInfoData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning }
+	| { error: ValidationError | UndefinedLwM2MObjectWarning }
 
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
@@ -42,7 +41,7 @@ export const getRoam = ({
 }): GetRoamResult => {
 	if (connectivityMonitoring === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'roam',
 				LwM2MObjectUrn: ConnectivityMonitoring_4_urn,
 			}),
@@ -50,7 +49,7 @@ export const getRoam = ({
 
 	if (device === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'roam',
 				LwM2MObjectUrn: Device_3_urn,
 			}),

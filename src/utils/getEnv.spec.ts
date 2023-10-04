@@ -71,14 +71,14 @@ void describe('getEnv', () => {
 			},
 		]
 		const result = getEnv({ temperature, humidity, pressure }) as {
-			warning: UndefinedLwM2MObjectWarning
+			error: UndefinedLwM2MObjectWarning
 		}
 		assert.equal(
-			result.warning.message,
+			result.error.message,
 			`'env' object can not be created because LwM2M object id '3304' is undefined`,
 		)
 		assert.deepEqual(
-			result.warning.undefinedLwM2MObject,
+			result.error.undefinedLwM2MObject,
 			parseURN(Humidity_3304_urn),
 		)
 	})

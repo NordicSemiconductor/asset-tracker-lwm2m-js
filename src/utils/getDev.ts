@@ -12,12 +12,11 @@ import type { ValidationError } from './ValidationError.js'
  * Defines the result type of 'getDev' method, which will be one of the following options:
  * - result: contains the validated dev object.
  * - error: contains an object indicating the object has not the expected format.
- * - warning: contains an object indicating that the LwM2M object for dev is undefined.
+ * - error: contains an object indicating that the LwM2M object for dev is undefined.
  */
 type GetDevResult =
-	| { error: ValidationError }
+	| { error: ValidationError | UndefinedLwM2MObjectWarning }
 	| { result: DeviceData }
-	| { warning: UndefinedLwM2MObjectWarning }
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'
@@ -26,7 +25,7 @@ type GetDevResult =
 export const getDev = (device?: Device_3): GetDevResult => {
 	if (device === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'dev',
 				LwM2MObjectUrn: Device_3_urn,
 			}),

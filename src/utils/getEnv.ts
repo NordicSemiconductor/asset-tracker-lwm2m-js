@@ -18,12 +18,11 @@ import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
  * Defines the result type of 'getEnv' method, which will be one of the following options:
  * - result: contains the validated env object.
  * - error: contains an object indicating the object has not the expected format.
- * - warning: contains an object indicating that the LwM2M object for env is undefined.
+ * - error: contains an object indicating that the LwM2M object for env is undefined.
  */
 type GetEnvResult =
 	| { result: EnvironmentData }
-	| { error: ValidationError }
-	| { warning: UndefinedLwM2MObjectWarning }
+	| { error: ValidationError | UndefinedLwM2MObjectWarning }
 
 /**
  * Takes objects id 3303 (temperature), 3304 (humidity) and 3323 (pressure) from
@@ -42,7 +41,7 @@ export const getEnv = ({
 }): GetEnvResult => {
 	if (temperature === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'env',
 				LwM2MObjectUrn: Temperature_3303_urn,
 			}),
@@ -50,7 +49,7 @@ export const getEnv = ({
 
 	if (humidity === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'env',
 				LwM2MObjectUrn: Humidity_3304_urn,
 			}),
@@ -58,7 +57,7 @@ export const getEnv = ({
 
 	if (pressure === undefined)
 		return {
-			warning: new UndefinedLwM2MObjectWarning({
+			error: new UndefinedLwM2MObjectWarning({
 				nRFAssetTrackerReportedId: 'env',
 				LwM2MObjectUrn: Pressure_3323_urn,
 			}),

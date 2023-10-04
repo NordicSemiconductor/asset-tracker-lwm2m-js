@@ -38,15 +38,12 @@ void describe('getCfg', () => {
 	})
 
 	void it(`should return a warning if the dependent LwM2M object to create the 'cfg' object is not defined`, () => {
-		const cfg = getCfg(undefined) as { warning: UndefinedLwM2MObjectWarning }
+		const cfg = getCfg(undefined) as { error: UndefinedLwM2MObjectWarning }
 		assert.equal(
-			cfg.warning.message,
+			cfg.error.message,
 			`'cfg' object can not be created because LwM2M object id '50009' is undefined`,
 		)
-		assert.deepEqual(
-			cfg.warning.undefinedLwM2MObject,
-			parseURN(Config_50009_urn),
-		)
+		assert.deepEqual(cfg.error.undefinedLwM2MObject, parseURN(Config_50009_urn))
 	})
 
 	void it('should return an error if the result of the conversion does not meet the schema definition', () => {
@@ -63,7 +60,9 @@ void describe('getCfg', () => {
 			'9': 0.5,
 		} as Config_50009
 
-		const config = getCfg(object) as { error: ValidationError }
+		const config = getCfg(object) as {
+			error: ValidationError
+		}
 		const message = config.error.description[0]?.message
 		const checkMessage = message?.includes(
 			"must have required property 'accath'",

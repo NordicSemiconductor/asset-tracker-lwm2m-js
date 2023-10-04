@@ -32,12 +32,12 @@ void describe('getDev', () => {
 	})
 
 	void it(`should return a warning if the dependent LwM2M object to create the 'dev' object is not defined`, () => {
-		const dev = getDev(undefined) as { warning: UndefinedLwM2MObjectWarning }
+		const dev = getDev(undefined) as { error: UndefinedLwM2MObjectWarning }
 		assert.equal(
-			dev.warning.message,
+			dev.error.message,
 			`'dev' object can not be created because LwM2M object id '3' is undefined`,
 		)
-		assert.deepEqual(dev.warning.undefinedLwM2MObject, parseURN(Device_3_urn))
+		assert.deepEqual(dev.error.undefinedLwM2MObject, parseURN(Device_3_urn))
 	})
 
 	void it(`should return an error if the result of the conversion does not meet the schema definition`, () => {
@@ -52,7 +52,9 @@ void describe('getDev', () => {
 			'16': 'UQ',
 			'19': '3.2.1',
 		}
-		const dev = getDev(device) as { error: ValidationError }
+		const dev = getDev(device) as {
+			error: ValidationError
+		}
 		const instancePathError = dev.error.description[0]?.instancePath
 		const message = dev.error.description[0]?.message
 		const checkMessage = message?.includes("must have required property 'imei'")
