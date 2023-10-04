@@ -27,7 +27,7 @@ Data transition from `asset_tracker_v2 LwM2M` to `nRF Asset Tracker reported`
 | [3303](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3303-1_1.xml)                                                  | 1.1               | 1.0           | Temperature             | [env](./docs/environment.md)                                                 |
 | [3304](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3304-1_1.xml)                                                  | 1.1               | 1.0           | Humidity                | [env](./docs/environment.md)                                                 |
 | [3323](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3323-1_1.xml)                                                  | 1.1               | 1.0           | Pressure                | [env](./docs/environment.md)                                                 |
-| [50009](https://github.com/NordicSemiconductor/asset-tracker-cloud-firmware-aws/blob/v31.0.0/src/cloud/lwm2m_integration/config_object_descript.xml) |                   |               | Config                  | [cfg](./docs/config.md)                                                      |
+| [50009](https://github.com/NordicSemiconductor/asset-tracker-cloud-firmware-aws/blob/v4.1.25/src/cloud/lwm2m_integration/config_object_descript.xml) |                   |               | Config                  | [cfg](./docs/config.md)                                                      |
 
 ## Installation
 
