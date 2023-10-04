@@ -161,7 +161,7 @@ void describe('converter', () => {
 		/**
 		 * Check the data transition document to see the dependency between
 		 * 'LwM2M Asset Tracker v2' and 'Asset Tracker reported' objects
-		 * @see {@link ../documents/data-transition.md}
+		 * @see {@link ../README.md#lwm2m-to-json-mapping}
 		 */
 		const input = {
 			[Device_3_urn]: {
@@ -219,7 +219,7 @@ void describe('converter', () => {
 		 * because dependent objects were not present in input, thats why it is expecting
 		 * the warning callback to be called 4 times
 		 *
-		 * @see {@link ../documents/data-transition.md}
+		 * @see {@link ../README.md#lwm2m-to-json-mapping}
 		 */
 		assert.strictEqual(warningCallback.mock.callCount(), 4)
 	})
@@ -245,7 +245,7 @@ void describe('converter', () => {
 		/**
 		 * Bat and Dev objects from 'Asset Tracker reported' uses resource 13 from LwM2M object id 3 as the timestamp value,
 		 * thats why it is expected the error callback to be called 2 times
-		 * @see {@link ../documents/data-transition.md}
+		 * @see {@link ../README.md#lwm2m-to-json-mapping}
 		 */
 		assert.strictEqual(errorCallback.mock.callCount(), 2)
 	})
@@ -446,7 +446,7 @@ void describe('converter', () => {
 			},
 		}
 		/**
-		 * @see {@link ../documents/data-transition.md}
+		 * @see {@link ../README.md#lwm2m-to-json-mapping}
 		 */
 		const objectsRelation = [
 			{ [Device_3_urn]: ['bat', 'dev', 'roam'] },

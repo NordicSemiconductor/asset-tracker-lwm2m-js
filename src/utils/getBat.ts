@@ -20,7 +20,7 @@ type GetBatResult =
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'bat' object from 'nRF Asset Tracker Reported'
- * @see {@link ../../documents/battery.md}
+ * @see {@link ../../docs/battery.md}
  */
 export const getBat = (device?: Device_3): GetBatResult => {
 	if (device === undefined)
@@ -46,7 +46,7 @@ export const getBat = (device?: Device_3): GetBatResult => {
 /**
  * The resource selected to report the timestamp value is 13.
  * Value is in seconds and it is multiplied to transform to milliseconds.
- * @see {@link ../../documents/battery.md}
+ * @see {@link ../../docs/battery.md}
  */
 export const getTime = (device: Device_3): number | undefined =>
 	device['13'] !== undefined ? device['13'] * 1000 : undefined

@@ -20,7 +20,7 @@ type GetCfgResult =
 
 /**
  * Takes object id 50009 (config) from 'LwM2M Asset Tracker v2' and convert into 'cfg' object from 'nRF Asset Tracker Reported'
- * @see {@link ../../documents/config.md}
+ * @see {@link ../../docs/config.md}
  */
 export const getCfg = (config?: Config_50009): GetCfgResult => {
 	if (config === undefined)

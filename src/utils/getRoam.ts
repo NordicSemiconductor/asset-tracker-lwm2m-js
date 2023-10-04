@@ -27,7 +27,7 @@ type GetRoamResult =
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'
  * and convert into 'roam' object from 'nRF Asset Tracker Reported'
- * @see {@link ../../documents/roam.md}
+ * @see {@link ../../docs/roam.md}
  *
  * Connectivity Monitoring (4) object does not support timestamp, for that reason timestamp value is taken from
  * Device (3) object.
@@ -82,7 +82,7 @@ export const getRoam = ({
 
 /**
  * Creates 'roam' object defined by 'nRF Asset Tracker Reported'.
- * @see {@link ../../documents/roam.md}
+ * @see {@link ../../docs/roam.md}
  *
  * 'band' and 'eest' key from the 'roam' object defined by 'nRF Asset Tracker Reported' are not provided by 'LwM2M Asset Tracker v2'.
  * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}

@@ -2,14 +2,14 @@
 
 `nRF Asset Tracker Reported` is expecting the following objects as input.
 
-| nRF Asset Tracker Reported                |
-| ----------------------------------------- |
-| [bat](.../documents/documents/battery.md) |
-| [dev](../documents/device.md)             |
-| [roam](../documents/roaming.md)           |
-| [env](../documents/environment.md)        |
-| [cfg](../documents/config.md)             |
-| [gnss](../documents/gnss.md)              |
+| nRF Asset Tracker Reported      |
+| ------------------------------- |
+| [bat](.../docs/docs/battery.md) |
+| [dev](../docs/device.md)        |
+| [roam](../docs/roaming.md)      |
+| [env](../docs/environment.md)   |
+| [cfg](../docs/config.md)        |
+| [gnss](../docs/gnss.md)         |
 
 However, the equivalent values of
 

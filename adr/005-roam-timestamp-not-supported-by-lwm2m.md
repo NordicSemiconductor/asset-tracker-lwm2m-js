@@ -2,7 +2,7 @@
 
 The roam object expecting by `nRF Asset Tracker reported` is creating using the
 object 4 from LwM2M (Connectivity Monitoring). See
-[roam - data transition](../documents/roaming.md) for more information.
+[roam - data transition](../docs/roaming.md) for more information.
 
 However, the Connectivity Monitoring (4) object has not a resource to support
 timestamp, which is something required in the roam object.
