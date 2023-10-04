@@ -3,7 +3,7 @@
  *
  * Asset Tracker v2 configuration object
  *
- * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-firmware-aws/blob/saga/src/cloud/lwm2m_integration/config_object_descript.xml
+ * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-firmware-aws/blob/v31.0.0/src/cloud/lwm2m_integration/config_object_descript.xml
  *
  * ID: 50009
  * LWM2MVersion:

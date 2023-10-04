@@ -1,6 +1,6 @@
 # Config
 
-## Link: [here](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Config.ts)
+## Link: [here](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/v31.0.0/docs/cloud-protocol/Config.ts)
 
 ## Data
 

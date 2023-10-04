@@ -19,15 +19,15 @@ data encoded as LwM2M to the JSON document required by nRF Asset Tracker.
 
 The LwM2M objects that are sent by `asset_tracker_v2` are as follows:
 
-| LwM2M ID                                                                                                                                          | LwM2M Obj Version | LwM2M version | Name                    | nRF Asset Tracker Reported                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------- | ----------------------- | ---------------------------------------------------------------------------- |
-| [3](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3-1_1.xml)                                                     | 1.2               | 1.1           | Device                  | [bat](./docs/battery.md), [dev](./docs/device.md), [roam](./docs/roaming.md) |
-| [4](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/4-1_1.xml)                                                     | 1.3               | 1.1           | Connectivity Monitoring | [roam](./docs/roaming.md)                                                    |
-| [6](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/6-1_0.xml)                                                     | 1.0               | 1.0           | Location                | [gnss](./docs/gnss.md)                                                       |
-| [3303](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3303-1_1.xml)                                               | 1.1               | 1.0           | Temperature             | [env](./docs/environment.md)                                                 |
-| [3304](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3304-1_1.xml)                                               | 1.1               | 1.0           | Humidity                | [env](./docs/environment.md)                                                 |
-| [3323](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3323-1_1.xml)                                               | 1.1               | 1.0           | Pressure                | [env](./docs/environment.md)                                                 |
-| [50009](https://github.com/NordicSemiconductor/asset-tracker-cloud-firmware-aws/blob/saga/src/cloud/lwm2m_integration/config_object_descript.xml) |                   |               | Config                  | [cfg](./docs/config.md)                                                      |
+| LwM2M ID                                                                                                                                             | LwM2M Obj Version | LwM2M version | Name                    | nRF Asset Tracker Reported                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------- | ----------------------- | ---------------------------------------------------------------------------- |
+| [3](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3-1_1.xml)                                                        | 1.2               | 1.1           | Device                  | [bat](./docs/battery.md), [dev](./docs/device.md), [roam](./docs/roaming.md) |
+| [4](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/4-1_1.xml)                                                        | 1.3               | 1.1           | Connectivity Monitoring | [roam](./docs/roaming.md)                                                    |
+| [6](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/6-1_0.xml)                                                        | 1.0               | 1.0           | Location                | [gnss](./docs/gnss.md)                                                       |
+| [3303](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3303-1_1.xml)                                                  | 1.1               | 1.0           | Temperature             | [env](./docs/environment.md)                                                 |
+| [3304](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3304-1_1.xml)                                                  | 1.1               | 1.0           | Humidity                | [env](./docs/environment.md)                                                 |
+| [3323](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3323-1_1.xml)                                                  | 1.1               | 1.0           | Pressure                | [env](./docs/environment.md)                                                 |
+| [50009](https://github.com/NordicSemiconductor/asset-tracker-cloud-firmware-aws/blob/v31.0.0/src/cloud/lwm2m_integration/config_object_descript.xml) |                   |               | Config                  | [cfg](./docs/config.md)                                                      |
 
 ## Installation
 
@@ -161,7 +161,7 @@ export const input = {
 ### Example output
 
 The output is the
-[nRF Asset Tracker Reported](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Reported.ts)
+[nRF Asset Tracker Reported](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/v31.0.0/docs/cloud-protocol/Reported.ts)
 object.
 
 ```TypeScript
