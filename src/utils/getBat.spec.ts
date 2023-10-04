@@ -25,7 +25,7 @@ void describe('getBat', () => {
 		assert.equal(bat.result.ts, 1675874731000)
 	})
 
-	void it(`should return a warning if the dependent LwM2M object for creating the 'bat' object is undefined`, () => {
+	void it(`should return a warning if the dependent LwM2M object to create the 'bat' object is not defined`, () => {
 		const result = getBat(undefined) as { warning: UndefinedLwM2MObjectWarning }
 		assert.equal(
 			result.warning.message,
@@ -37,7 +37,7 @@ void describe('getBat', () => {
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition`, () => {
 		const device = {
 			'0': 'Nordic Semiconductor ASA',
 			'1': 'Thingy:91',

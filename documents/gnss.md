@@ -4,15 +4,15 @@
 
 ## Data
 
-| nRF Asset Tracker | LwM2M                                                                              |
-| ----------------- | ---------------------------------------------------------------------------------- |
-| lng               | /6/0/1                                                                             |
-| lat               | /6/0/0                                                                             |
-| acc               | /6/0/3                                                                             |
-| alt               | /6/0/2                                                                             |
-| spd               | /6/0/6                                                                             |
-| hdg               | [value not provided](../adr/004-nrf-asset-tracker-reported-values-not-provided.md) |
-| ts                | /6/0/5                                                                             |
+| Field | LwM2M                                                                              |
+| -------------------------- | ---------------------------------------------------------------------------------- |
+| lng                        | /6/0/1                                                                             |
+| lat                        | /6/0/0                                                                             |
+| acc                        | /6/0/3                                                                             |
+| alt                        | /6/0/2                                                                             |
+| spd                        | /6/0/6                                                                             |
+| hdg                        | [value not provided](../adr/004-nrf-asset-tracker-reported-values-not-provided.md) |
+| ts                         | /6/0/5                                                                             |
 
 ## Details
 

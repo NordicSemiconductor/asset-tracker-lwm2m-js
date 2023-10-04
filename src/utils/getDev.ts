@@ -43,7 +43,7 @@ export const getDev = (device?: Device_3): GetDevResult => {
  * Creates 'dev' object defined by 'nRF Asset Tracker Reported'.
  * @see {@link ../../documents/device.md}
  *
- * 'iccid' key from the 'dev' object defined by 'nRF Asset Tracker Reported' is not provided.
+ * 'iccid' key from the 'dev' object defined by 'nRF Asset Tracker Reported' is not provided by 'LwM2M Asset Tracker v2'.
  * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
  */
 const createDevObject = ({

@@ -31,7 +31,7 @@ void describe('getDev', () => {
 		assert.deepEqual(dev.result, expected)
 	})
 
-	void it(`should return a warning if the dependent LwM2M object for creating the 'dev' object is undefined`, () => {
+	void it(`should return a warning if the dependent LwM2M object to create the 'dev' object is not defined`, () => {
 		const dev = getDev(undefined) as { warning: UndefinedLwM2MObjectWarning }
 		assert.equal(
 			dev.warning.message,
@@ -40,7 +40,7 @@ void describe('getDev', () => {
 		assert.deepEqual(dev.warning.undefinedLwM2MObject, parseURN(Device_3_urn))
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition`, () => {
 		const device = {
 			'0': 'Nordic Semiconductor ASA',
 			'1': 'Thingy:91',

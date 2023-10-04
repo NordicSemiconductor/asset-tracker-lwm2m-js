@@ -37,7 +37,7 @@ void describe('getCfg', () => {
 		assert.deepEqual(cfg.result, expected)
 	})
 
-	void it(`should return a warning if the dependent LwM2M object for creating the 'cfg' object is undefined`, () => {
+	void it(`should return a warning if the dependent LwM2M object to create the 'cfg' object is not defined`, () => {
 		const cfg = getCfg(undefined) as { warning: UndefinedLwM2MObjectWarning }
 		assert.equal(
 			cfg.warning.message,
@@ -49,7 +49,7 @@ void describe('getCfg', () => {
 		)
 	})
 
-	void it('should return an error if the result of the conversion does not meet the expected types', () => {
+	void it('should return an error if the result of the conversion does not meet the schema definition', () => {
 		const object = {
 			'0': true,
 			'1': 120,

@@ -59,7 +59,7 @@ void describe('getRoam', () => {
 		assert.deepEqual(roam.result, expected)
 	})
 
-	void it(`should return a warning if the dependent LwM2M object for creating the 'roam' object is undefined`, () => {
+	void it(`should return a warning if the dependent LwM2M object to create the 'roam' object are not defined`, () => {
 		const connectivityMonitoring = undefined
 		const device = undefined
 		const result = getRoam({ connectivityMonitoring, device }) as {
@@ -75,7 +75,7 @@ void describe('getRoam', () => {
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition`, () => {
 		const connectivityMonitoring = {
 			'0': 6,
 			'1': [6, 7],

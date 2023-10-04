@@ -4,7 +4,7 @@
 
 ## Data
 
-| Property | LwM2M      |
+| Field | LwM2M      |
 | -------- | ---------- |
 | act      | /50009/0/0 |
 | actwt    | /50009/0/2 |

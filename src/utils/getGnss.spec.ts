@@ -31,7 +31,7 @@ void describe('getGnss', () => {
 		assert.deepEqual(gnss.result, expected)
 	})
 
-	void it(`should return a warning if the dependent LwM2M object for creating the 'gnss' object is undefined`, () => {
+	void it(`should return a warning if the dependent LwM2M object to create the 'gnss' object is not defined`, () => {
 		const result = getGnss(undefined) as {
 			warning: UndefinedLwM2MObjectWarning
 		}
@@ -45,7 +45,7 @@ void describe('getGnss', () => {
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition`, () => {
 		const location = {
 			// '0': -43.5723, // required resource is missing
 			'1': 153.2176,

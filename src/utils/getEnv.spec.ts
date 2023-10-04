@@ -50,7 +50,7 @@ void describe('getEnv', () => {
 		assert.deepEqual(env.result, expected)
 	})
 
-	void it(`should return a warning if the dependent LwM2M object for creating the 'env' object is undefined`, () => {
+	void it(`should return a warning if the dependent LwM2M objects to create the 'env' object are not defined`, () => {
 		const temperature = [
 			{
 				'5601': 27.18,
@@ -83,7 +83,7 @@ void describe('getEnv', () => {
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the expected types`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition`, () => {
 		const temperature = [
 			{
 				'5601': 27.18,

@@ -49,7 +49,7 @@ const getTime = (location: Location_6): number => location['5'] * 1000
  * Creates GNSS object defined by 'nRF Asset Tracker Reported'.
  * @see {@link ../../documents/gnss.md}
  *
- * 'hdg' key from 'GNSS' object defined by 'nRF Asset Tracker Reported' is not provided.
+ * 'hdg' key from 'GNSS' object defined by 'nRF Asset Tracker Reported' is not provided by 'LwM2M Asset Tracker v2'.
  * @see {@link ../../adr/004-nrf-asset-tracker-reported-values-not-provided.md}
  */
 const createGnssObject = ({
