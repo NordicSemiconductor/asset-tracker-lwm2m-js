@@ -5,6 +5,7 @@ import { getCfg } from './getCfg.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ValidationError } from './ValidationError.js'
+import type { ConfigData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 
 void describe('getCfg', () => {
 	void it(`should create the 'cfg' object expected by 'nRF Asset Tracker Reported'`, () => {
@@ -16,7 +17,7 @@ void describe('getCfg', () => {
 			'4': 7200,
 			'5': 8.5,
 			'6': true,
-			'7': false,
+			'7': true,
 			'8': 2.5,
 			'9': 0.5,
 		}
@@ -71,5 +72,45 @@ void describe('getCfg', () => {
 
 		assert.equal(checkMessage, true)
 		assert.equal(keyword, 'required')
+	})
+
+	void describe(`create 'nod' array value`, () => {
+		const object: Config_50009 = {
+			'0': true,
+			'1': 120,
+			'2': 120,
+			'3': 600,
+			'4': 7200,
+			'5': 8.5,
+			'6': false,
+			'7': false,
+			'8': 2.5,
+			'9': 0.5,
+		}
+
+		type testTemplate = {
+			resources: { 6: boolean; 7: boolean }
+			expected: string[]
+		}[]
+
+		;(
+			[
+				{ resources: { 6: false, 7: false }, expected: [] },
+				{ resources: { 6: true, 7: false }, expected: ['gnss'] },
+				{ resources: { 6: false, 7: true }, expected: ['ncell'] },
+				{ resources: { 6: true, 7: true }, expected: ['gnss', 'ncell'] },
+			] as testTemplate
+		).forEach(({ resources, expected }) => {
+			void it(`should return '${expected}' as 'nod' value when resource id 6 is '${resources[6]}' and 7 '${resources[7]}'`, () => {
+				const cfg = getCfg({
+					...object,
+					'6': resources[6],
+					'7': resources[7],
+				}) as {
+					result: ConfigData
+				}
+				assert.deepEqual(cfg.result.nod, expected)
+			})
+		})
 	})
 })
