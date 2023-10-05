@@ -40,8 +40,26 @@ export const getCfg = (config?: Config_50009): ConversionResult<ConfigData> => {
 		accath,
 		accith,
 		accito,
-		nod: [],
+		nod: getNod(config),
 	}
 
 	return validateAgainstSchema(cfg, Config)
+}
+
+/**
+ * Nod is the list of modules which should be disabled when sampling data.
+ *
+ * Default value is an empty array.
+ *
+ * If resource 6 from Config_50009 is true, the list must have 'gnss' on it
+ * If resource 7 from Config_50009 is true, the list must have 'ncell' on it
+ */
+const getNod = (config: Config_50009): string[] => {
+	const nod = []
+
+	if (config[6] === true) nod.push('gnss')
+
+	if (config[7] === true) nod.push('ncell')
+
+	return nod
 }

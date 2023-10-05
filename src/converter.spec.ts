@@ -87,7 +87,7 @@ void describe('converter', () => {
 				'4': 7200,
 				'5': 8.5,
 				'6': false,
-				'7': true,
+				'7': false,
 				'8': 2.5,
 				'9': 0.5,
 			},

@@ -16,8 +16,8 @@ void describe('getCfg', () => {
 			'3': 600,
 			'4': 7200,
 			'5': 8.5,
-			'6': true,
-			'7': true,
+			'6': false,
+			'7': false,
 			'8': 2.5,
 			'9': 0.5,
 		}
@@ -92,7 +92,6 @@ void describe('getCfg', () => {
 			resources: { 6: boolean; 7: boolean }
 			expected: string[]
 		}[]
-
 		;(
 			[
 				{ resources: { 6: false, 7: false }, expected: [] },
@@ -101,7 +100,7 @@ void describe('getCfg', () => {
 				{ resources: { 6: true, 7: true }, expected: ['gnss', 'ncell'] },
 			] as testTemplate
 		).forEach(({ resources, expected }) => {
-			void it(`should return '${expected}' as 'nod' value when resource id 6 is '${resources[6]}' and 7 '${resources[7]}'`, () => {
+			void it(`should return '${expected}' as 'nod' value when resource 'GNSS enable' (id 6) is '${resources[6]}' and 'Neighbor cell measurements enable' (id 7) '${resources[7]}'`, () => {
 				const cfg = getCfg({
 					...object,
 					'6': resources[6],
