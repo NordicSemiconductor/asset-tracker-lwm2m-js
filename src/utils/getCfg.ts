@@ -51,8 +51,8 @@ export const getCfg = (config?: Config_50009): ConversionResult<ConfigData> => {
  *
  * Default value is an empty array.
  *
- * If resource 6 from Config_50009 is true, the list must have 'gnss' on it
- * If resource 7 from Config_50009 is true, the list must have 'ncell' on it
+ * If resource 6 from Config_50009 is true, the list must have 'gnss' in it
+ * If resource 7 from Config_50009 is true, the list must have 'ncell' in it
  */
 const getNod = (config: Config_50009): string[] => {
 	const nod = []
