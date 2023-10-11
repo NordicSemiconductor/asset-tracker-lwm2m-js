@@ -31,20 +31,6 @@
   ],
   "author": "Nordic Semiconductor ASA | nordicsemi.no",
   "license": "BSD-3-Clause",
-  "jest": {
-    "transform": {
-      "^.+\\.(t|j)sx?$": [
-        "@swc/jest"
-      ]
-    },
-    "testRegex": ".+\\.spec\\.ts$",
-    "moduleNameMapper": {
-      "^(\\.{1,2}/.*)\\.js$": "$1"
-    },
-    "extensionsToTreatAsEsm": [
-      ".ts"
-    ]
-  },
   "prettier": "@nordicsemiconductor/asset-tracker-cloud-code-style/.prettierrc",
   "lint-staged": {
     "*.{md,json,yaml,yml}": [
