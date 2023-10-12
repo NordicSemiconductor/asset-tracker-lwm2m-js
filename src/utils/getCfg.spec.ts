@@ -5,7 +5,7 @@ import { getCfg } from './getCfg.js'
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ValidationError } from './ValidationError.js'
-import type { ConfigData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
+import type { ConfigData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 
 void describe('getCfg', () => {
 	void it(`should create the 'cfg' object expected by 'nRF Asset Tracker Reported'`, () => {

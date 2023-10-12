@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getBat } from './getBat.js'
-import { type BatteryData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
+import { type BatteryData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { Device_3_urn, parseURN } from '@nordicsemiconductor/lwm2m-types'
 import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ValidationError } from './ValidationError.js'

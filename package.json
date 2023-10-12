@@ -67,20 +67,18 @@
     "access": "public"
   },
   "dependencies": {
-    "@nordicsemiconductor/asset-tracker-cloud-docs": "31.0.1",
-    "@nordicsemiconductor/lwm2m-types": "2.5.1",
-    "@sinclair/typebox": "0.31.14"
+    "@nordicsemiconductor/asset-tracker-cloud-docs": "31.2.0",
+    "@nordicsemiconductor/lwm2m-types": "2.6.1",
+    "@sinclair/typebox": "0.31.17"
   },
   "devDependencies": {
-    "@nordicsemiconductor/asset-tracker-cloud-code-style": "12.0.68",
-    "@nordicsemiconductor/eslint-config-asset-tracker-cloud-typescript": "16.0.11",
+    "@nordicsemiconductor/asset-tracker-cloud-code-style": "12.0.94",
+    "@nordicsemiconductor/eslint-config-asset-tracker-cloud-typescript": "16.0.22",
     "@swc/cli": "0.1.62",
-    "@types/node": "20.5.0",
-    "@typescript-eslint/eslint-plugin": "6.2.1",
+    "@types/node": "20.8.4",
     "husky": "8.0.3",
-    "prettier": "3.0.1",
-    "semantic-release": "21.1.1",
-    "tsx": "3.12.7",
-    "typescript": "5.1.6"
+    "prettier": "3.0.3",
+    "tsx": "3.13.0",
+    "typescript": "5.2.2"
   }
 }

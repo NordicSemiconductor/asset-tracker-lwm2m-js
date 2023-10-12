@@ -4,7 +4,7 @@ import { getDev } from './getDev.js'
 import { Device_3_urn, parseURN } from '@nordicsemiconductor/lwm2m-types'
 import type { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ValidationError } from './ValidationError.js'
-import type { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
+import type { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 
 void describe('getDev', () => {
 	void it(`should create the 'dev' object expected by 'nRF Asset Tracker Reported'`, () => {
