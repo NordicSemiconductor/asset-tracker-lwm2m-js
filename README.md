@@ -1,12 +1,6 @@
-# `asset_tracker_v2` LwM2M JSON to nRF Asset Tracker JSON
+# `asset_tracker_v2` LwM2M JSON to nRF Asset Tracker JSON [![npm version](https://img.shields.io/npm/v/@nordicsemiconductor/asset-tracker-lwm2m.svg)](https://www.npmjs.com/package/@nordicsemiconductor/asset-tracker-lwm2m)
 
-```
-TODO:
-* Update link related to test and release badge. Use NordicSemiconductor instead of MLopezJ
-* release to NPM
-```
-
-[![Test and Release](https://github.com/MLopezJ/LwM2M-Asset-Tracker-V2-to-Asset-Tracker-web-app/actions/workflows/test-and-release.yaml/badge.svg)](https://github.com/MLopezJ/LwM2M-Asset-Tracker-V2-to-Asset-Tracker-web-app/actions/workflows/test-and-release.yaml)
+[![Test and Release](https://github.com/NordicSemiconductor/asset-tracker-lwm2m-js/actions/workflows/test-and-release.yaml/badge.svg)](https://github.com/NordicSemiconductor/asset-tracker-lwm2m-js/actions/workflows/test-and-release.yaml)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier/)
@@ -159,7 +153,7 @@ export const input = {
 ### Example output
 
 The output is the
-[nRF Asset Tracker Reported](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/v31.0.0/docs/cloud-protocol/Reported.ts)
+[nRF Asset Tracker Reported](https://github.com/NordicSemiconductor/asset-tracker-lwm2m/blob/v31.0.0/docs/cloud-protocol/Reported.ts)
 object.
 
 ```TypeScript

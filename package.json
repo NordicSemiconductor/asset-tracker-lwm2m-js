@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MLopezJ/sset-tracker-lwm2m-js.git"
+    "url": "git+https://github.com/NordicSemiconductor/asset-tracker-lwm2m-js.git"
   },
   "bugs": {
-    "url": "https://github.com/MLopezJ/sset-tracker-lwm2m-js/issues"
+    "url": "https://github.com/NordicSemiconductor/asset-tracker-lwm2m-js/issues"
   },
-  "homepage": "https://github.com/MLopezJ/sset-tracker-lwm2m-js#readme",
+  "homepage": "https://github.com/NordicSemiconductor/asset-tracker-lwm2m-js#readme",
   "keywords": [
     "lwm2m",
     "asset-tracker-v2",
