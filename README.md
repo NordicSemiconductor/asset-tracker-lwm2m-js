@@ -1,208 +1,171 @@
-# `asset_tracker_v2` LwM2M JSON to nRF Asset Tracker JSON [![npm version](https://img.shields.io/npm/v/@nordicsemiconductor/asset-tracker-lwm2m.svg)](https://www.npmjs.com/package/@nordicsemiconductor/asset-tracker-lwm2m)
+# nRF Asset Tracker Web Application for AWS
 
-[![Test and Release](https://github.com/NordicSemiconductor/asset-tracker-lwm2m-js/actions/workflows/test-and-release.yaml/badge.svg)](https://github.com/NordicSemiconductor/asset-tracker-lwm2m-js/actions/workflows/test-and-release.yaml)
+[![GitHub Actions](https://github.com/NordicSemiconductor/asset-tracker-cloud-app-aws-js/workflows/Test%20and%20Release/badge.svg)](https://github.com/NordicSemiconductor/asset-tracker-cloud-app-aws-js/actions)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Mergify Status](https://img.shields.io/endpoint.svg?url=https://api.mergify.com/v1/badges/NordicSemiconductor/asset-tracker-cloud-app-aws-js)](https://mergify.io)
+[![@commitlint/config-conventional](https://img.shields.io/badge/%40commitlint-config--conventional-brightgreen)](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier/)
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
+[![React](https://github.com/aleen42/badges/raw/master/src/react.svg)](https://reactjs.org/)
+[![Bootstrap 5](https://img.shields.io/badge/Bootstrap-5-ffffff?labelColor=7952b3)](https://getbootstrap.com/docs/5.0/)
+[![CSS modules](https://img.shields.io/badge/CSS-modules-yellow)](https://github.com/css-modules/css-modules)
+[![Vite](https://github.com/aleen42/badges/raw/master/src/vitejs.svg)](https://vitejs.dev/)
 
-Converts a JSON document containing the `asset_tracker_v2` device and sensor
-data encoded as LwM2M to the JSON document required by nRF Asset Tracker.
+The nRF Asset Tracker Web Application for AWS is a reference single-page
+application (SPA) developed with [React](https://reactjs.org/) in
+[TypeScript](https://www.typescriptlang.org/).
 
-## LwM2M to JSON mapping
+The UI components are themed using
+[Bootstrap 5](https://getbootstrap.com/docs/5.0/) and
+[CSS modules](https://github.com/css-modules/css-modules). All complex UI logic
+is extracted using [React hooks](https://reactjs.org/docs/hooks-custom.html) to
+allow re-use when changing the UI framework.
 
-Data transition from `asset_tracker_v2` LwM2M to `nRF Asset Tracker reported`
+[Vite](https://vitejs.dev/) is used as the frontend toolchain.
 
-| LwM2M ID                                                                                                                                        | LwM2M Obj Version | LwM2M version | Name                    | nRF Asset Tracker Reported                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------- | ----------------------- | ---------------------------------------------------------------------------- |
-| [3](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3-1_1.xml)                                                   | 1.2               | 1.1           | Device                  | [bat](./docs/battery.md), [dev](./docs/device.md), [roam](./docs/roaming.md) |
-| [4](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/4-1_1.xml)                                                   | 1.3               | 1.1           | Connectivity Monitoring | [roam](./docs/roaming.md)                                                    |
-| [6](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/6-1_0.xml)                                                   | 1.0               | 1.0           | Location                | [gnss](./docs/gnss.md)                                                       |
-| [3303](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3303-1_1.xml)                                             | 1.1               | 1.0           | Temperature             | [env](./docs/environment.md)                                                 |
-| [3304](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3304-1_1.xml)                                             | 1.1               | 1.0           | Humidity                | [env](./docs/environment.md)                                                 |
-| [3323](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3323-1_1.xml)                                             | 1.1               | 1.0           | Pressure                | [env](./docs/environment.md)                                                 |
-| [50009](https://github.com/nrfconnect/sdk-nrf/blob/v2.4.0/applications/asset_tracker_v2/src/cloud/lwm2m_integration/config_object_descript.xml) |                   |               | Config                  | [cfg](./docs/config.md)                                                      |
+> :information_source:
+> [Read the complete nRF Asset Tracker documentation](https://nordicsemiconductor.github.io/asset-tracker-cloud-docs/).
 
-## Installation
+## Set up
 
-```
-npm i --save-exact @nordicsemiconductor/asset-tracker-lwm2m
-```
+    npm ci
 
-## Running the tests
+## Configuration
 
-After cloning the repository:
+In the
+[nRF Asset Tracker for AWS](https://github.com/NordicSemiconductor/asset-tracker-cloud-aws-js)
+folder, run `node cli web-app-config` and store the output in a local `.envrc`
+file. Then run `direnv allow` to allow it.
 
-```
-npm ci
-npm test
-```
-
-## Example usage
-
-```TypeScript
-import {
-	converter,
-	type LwM2MAssetTrackerV2,
-} from '@nordicsemiconductor/asset-tracker-lwm2m'
-
-const lwM2MAssetTrackerV2 = {} as LwM2MAssetTrackerV2 // Object with Asset Tracker v2 objects...
-const result = converter(lwM2MAssetTrackerV2)
-console.log(result)
-```
-
-See [./src/example.ts](./src/example.ts) for more details.
-
-### Example input
-
-A JSON document containing the
-[`asset_tracker_v2`](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/applications/asset_tracker_v2/README.html)
-device and sensor data encoded as LwM2M, following the schema in
-[`lwm2m-types-js`](https://github.com/NordicSemiconductor/lwm2m-types-js).
-
-```TypeScript
-import {
-  Device_3_urn,
-  ConnectivityMonitoring_4_urn,
-  Location_6_urn,
-  Temperature_3303_urn,
-  Humidity_3304_urn,
-  Pressure_3323_urn,
-  Config_50009_urn
-} from "@nordicsemiconductor/lwm2m-types";
-
-export const input = {
-	[Device_3_urn]: {
-		'0': 'Nordic Semiconductor ASA',
-		'1': 'Thingy:91',
-		'2': '351358815340515',
-		'3': '22.8.1+0',
-		'7': [2754],
-		'11': [0],
-		'13': 1675874731,
-		'16': 'UQ',
-		'19': '3.2.1',
-	},
-
-	[ConnectivityMonitoring_4_urn]: {
-		'0': 6,
-		'1': [6, 7],
-		'2': -85,
-		'3': 23,
-		'4': ['10.160.120.155'],
-		'8': 34237196,
-		'9': 20,
-		'10': 242,
-		'12': 12,
-	},
-
-	[Location_6_urn]: {
-		'0': -43.5723,
-		'1': 153.2176,
-		'2': 2,
-		'3': 24.798573,
-		'5': 1665149633,
-		'6': 0.579327,
-	},
-
-	[Temperature_3303_urn]: [
-		{
-			'5601': 27.18,
-			'5602': 27.71,
-			'5700': 27.18,
-			'5701': 'Cel',
-			'5518': 1675874731,
-		},
-	],
-
-	[Humidity_3304_urn]: [
-		{
-			'5601': 23.535,
-			'5602': 24.161,
-			'5700': 24.057,
-			'5701': '%RH',
-			'5518': 1675874731,
-		},
-	],
-
-	[Pressure_3323_urn]: [
-		{
-			'5601': 101697,
-			'5602': 101705,
-			'5700': 10,
-			'5701': 'Pa',
-			'5518': 1675874731,
-		},
-	],
-
-	[Config_50009_urn]: {
-		'0': true,
-		'1': 120,
-		'2': 120,
-		'3': 600,
-		'4': 7200,
-		'5': 8.5,
-		'6': false,
-		'7': true,
-		'8': 2.5,
-		'9': 0.5,
-	},
-}
+```bash
+# .envrc
+export PUBLIC_CELL_GEO_LOCATION_CACHE_TABLE_NAME=...
+export PUBLIC_CLOUDFRONT_DISTRIBUTION_ID=...
+export PUBLIC_FOTA_BUCKET_NAME=...
+export PUBLIC_GEOLOCATION_API_URL=...
+export PUBLIC_HISTORICALDATA_TABLE_INFO=...
+export PUBLIC_IDENTITY_POOL_ID=...
+export PUBLIC_NETWORK_SURVEY_GEOLOCATION_API_URL=...
+export PUBLIC_NETWORKSURVEY_STORAGE_TABLE_NAME=...
+export PUBLIC_USER_IOT_POLICY_NAME=...
+export PUBLIC_USER_POOL_ID=...
+export PUBLIC_USER_POOL_CLIENT_ID=...
+export PUBLIC_WEB_APP_BUCKET_NAME=...
+export PUBLIC_WEB_APP_DOMAIN_NAME=...
+export PUBLIC_SENTRY_DSN=...
+export PUBLIC_REGION=...
+export PUBLIC_MQTT_ENDPOINT=...
 ```
 
-### Example output
+## Running
 
-The output is the
-[nRF Asset Tracker Reported](https://github.com/NordicSemiconductor/asset-tracker-lwm2m/blob/v31.0.0/docs/cloud-protocol/Reported.ts)
-object.
+    npm start
 
-```TypeScript
-const result = {
-	bat: { v: 2754, ts: 1675874731000 },
-	dev: {
-		v: {
-			imei: '351358815340515',
-			modV: '22.8.1+0',
-			brdV: 'Nordic Semiconductor ASA',
-		},
-		ts: 1675874731000,
-	},
-	env: { v: { temp: 27.18, hum: 24.057, atmp: 10 }, ts: 1675874731000 },
-	gnss: {
-		v: {
-			lng: 153.2176,
-			lat: -43.5723,
-			acc: 24.798573,
-			alt: 2,
-			spd: 0.579327,
-		},
-		ts: 1665149633000,
-	},
-	roam: {
-		v: {
-			nw: '6',
-			rsrp: -85,
-			area: 12,
-			mccmnc: 24220,
-			cell: 34237196,
-			ip: '10.160.120.155',
-		},
-		ts: 1675874731000,
-	},
-	cfg: {
-		loct: 120,
-		act: true,
-		actwt: 120,
-		mvres: 600,
-		mvt: 7200,
-		accath: 8.5,
-		accith: 2.5,
-		accito: 0.5,
-		nod: [],
-	},
-}
+## End-to-end tests using Playwright
+
+The frontend provides [end-to-end tests](./e2e-tests) using
+[Playwright](https://playwright.dev/).
+
+### Configure AWS credentials
+
+The end-to-end tests run against an instance of the
+[nRF Asset Tracker for AWS](https://github.com/NordicSemiconductor/asset-tracker-cloud-aws-js).
+
+Either, use the credentials you created, when setting up the solution, or enable
+the Web App CI feature and use the dedicated credentials created for this task.
+The latter option is the recommended approach since it limits the permission
+scope to only the needed ones. They can also be used to
+[run the end-to-end tests on GitHub Actions](#running-end-to-end-tests-using-github-actions).
+
+Add these environment variables to your `.envrc`. Then run `direnv allow` to
+allow it.
+
+```bash
+# .envrc
+export AWS_REGION=...
+export AWS_ACCESS_KEY_ID=...
+export AWS_SECRET_ACCESS_KEY=...
+export WEBAPP_STACK_NAME=...
 ```
 
-## Architecture decision records (ADRs)
+### Running the tests
 
-See [./adr](./adr/).
+You can then run the tests using
+
+    npm run test:e2e
+
+### Running individual tests
+
+    npx playwright test authenticated/map/locationHistory/gnss.spec.ts
+
+### Playwright Inspector
+
+For developing tests it is helpful to run the
+[Playwright Inspector](https://playwright.dev/docs/inspector).
+
+You can enabled the inspector during the tests by running
+
+    PWDEBUG=1 npm run test:e2e
+
+### Running end-to-end tests using GitHub Actions
+
+[This workflow](./.github/workflows/test-and-release.yaml) runs the end-to-end
+tests for every commit. For this to work a running instance of
+[nRF Asset Tracker for AWS](https://github.com/NordicSemiconductor/asset-tracker-cloud-aws-js)
+is needed. The tests will be run against this instance. Typically it will be the
+production instance, to ensure that the web application works with the current
+production setup.
+
+In order for the test runner to interact with the instance for retrieving the
+app configuration and for providing test data you need to configure AWS
+credentials as
+[GitHub environment secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-an-environment).
+
+Set these secrets:
+
+- `AWS_REGION`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `WEBAPP_STACK_NAME`
+
+If you have enabled the web application CI of the nRF Asset Tracker for AWS
+(`node cli configure context stack web-app-ci 1`) you can acquire them using the
+nRF Asset Tracker for AWS CLI:
+
+```bash
+node cli web-app-ci -s
+```
+
+You can set the secrets through the GitHub UI (make sure to create the
+`production`
+[environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment)
+in your repository first).
+
+Alternatively you can use the [GitHub CLI](https://cli.github.com/) using the
+environment settings from above:
+
+```bash
+gh secret set AWS_REGION --env production --body "${AWS_REGION}"
+gh secret set AWS_ACCESS_KEY_ID --env production --body "${AWS_ACCESS_KEY_ID}"
+gh secret set AWS_SECRET_ACCESS_KEY --env production --body "${AWS_SECRET_ACCESS_KEY}"
+gh secret set WEBAPP_STACK_NAME --env production --body "${WEBAPP_STACK_NAME}"
+```
+
+## Sentry
+
+Optionally, Sentry can be enabled for the web application. Export the
+`PUBLIC_SENTRY_DSN` environment variable.
+
+To enable this in the continuous deployment pipeline of nRF Asset Tracker,
+configure the DSN using the CLI:
+
+```bash
+./cli.sh configure thirdParty sentry sentryDsn https://4f901247818d46099a3f15b6ada9390e@o4504255385174016.ingest.sentry.io/4504684789170176
+```
+
+When the next deployment is triggered, the DSN becomes available via
+
+```bash
+./cli.sh web-app-config
+```
