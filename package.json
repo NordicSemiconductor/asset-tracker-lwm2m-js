@@ -66,7 +66,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@nordicsemiconductor/asset-tracker-cloud-docs": "31.2.0",
+    "@nordicsemiconductor/asset-tracker-cloud-docs": "32.0.0",
     "@nordicsemiconductor/lwm2m-types": "2.6.1",
     "@sinclair/typebox": "0.31.18"
   },
