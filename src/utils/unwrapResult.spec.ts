@@ -8,6 +8,7 @@ void describe('unwrapResult', () => {
 		const onError = context.mock.fn()
 		const result = unwrapResult(onError)({ result: true })
 		assert.deepEqual(result, true)
+		assert.strictEqual(onError.mock.callCount(), 0)
 	})
 
 	void it(`should return undefined and call the onError callback when the input is known as invalid`, (context) => {
