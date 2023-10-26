@@ -33,6 +33,7 @@ import { getGnss } from './utils/getGnss.js'
 import { getRoam } from './utils/getRoam.js'
 import { getCfg } from './utils/getCfg.js'
 import { Type, type Static } from '@sinclair/typebox'
+import { unwrapResult } from './utils/unwrapResult.js'
 
 /**
  * Expected input type
@@ -70,40 +71,35 @@ export type ConversionResult<Result extends Record<string, unknown>> =
 export const converter = (
 	LwM2MAssetTracker: LwM2MAssetTrackerV2,
 	onError?: (error: ValidationError | UndefinedLwM2MObjectWarning) => unknown,
-): typeof nRFAssetTrackerReported => {
-	const conversionResult = {} as typeof nRFAssetTrackerReported
+): Static<typeof nRFAssetTrackerReported> => {
+	const unwrap = unwrapResult(onError)
 
-	const nRFAssetTrackerReportedObjects: Record<
-		string,
-		| {
-				error: ValidationError | UndefinedLwM2MObjectWarning
-		  }
-		| { result: Partial<typeof nRFAssetTrackerReported> }
-	> = {
-		bat: getBat(LwM2MAssetTracker[Device_3_urn]),
-		dev: getDev(LwM2MAssetTracker[Device_3_urn]),
-		env: getEnv({
+	const convertedBat = unwrap(getBat(LwM2MAssetTracker[Device_3_urn]))
+	const convertedDev = unwrap(getDev(LwM2MAssetTracker[Device_3_urn]))
+	const convertedEnv = unwrap(
+		getEnv({
 			temperature: LwM2MAssetTracker[Temperature_3303_urn],
 			humidity: LwM2MAssetTracker[Humidity_3304_urn],
 			pressure: LwM2MAssetTracker[Pressure_3323_urn],
 		}),
-		gnss: getGnss(LwM2MAssetTracker[Location_6_urn]),
-		roam: getRoam({
+	)
+	const convertedGnss = unwrap(getGnss(LwM2MAssetTracker[Location_6_urn]))
+	const convertedRoam = unwrap(
+		getRoam({
 			connectivityMonitoring: LwM2MAssetTracker[ConnectivityMonitoring_4_urn],
 			device: LwM2MAssetTracker[Device_3_urn],
 		}),
-		cfg: getCfg(LwM2MAssetTracker[Config_50009_urn]),
-	}
-
-	Object.entries(nRFAssetTrackerReportedObjects).forEach(
-		([objectId, convertedObject]) => {
-			if ('result' in convertedObject)
-				conversionResult[objectId] = convertedObject.result
-			else {
-				onError?.(convertedObject.error)
-			}
-		},
 	)
+	const convertedCfg = unwrap(getCfg(LwM2MAssetTracker[Config_50009_urn]))
 
-	return conversionResult
+	const output: Static<typeof nRFAssetTrackerReported> = {}
+
+	if (convertedBat !== undefined) output['bat'] = convertedBat
+	if (convertedDev !== undefined) output['dev'] = convertedDev
+	if (convertedEnv !== undefined) output['env'] = convertedEnv
+	if (convertedGnss !== undefined) output['gnss'] = convertedGnss
+	if (convertedRoam !== undefined) output['roam'] = convertedRoam
+	if (convertedCfg !== undefined) output['cfg'] = convertedCfg
+
+	return output
 }
