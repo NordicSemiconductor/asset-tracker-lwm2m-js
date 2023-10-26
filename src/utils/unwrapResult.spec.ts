@@ -29,7 +29,6 @@ void describe('unwrapResult', () => {
 		assert.strictEqual(onError.mock.callCount(), 1)
 
 		assert.strictEqual(onError.mock.calls.length, 1)
-		if (onError.mock.calls[0] !== undefined)
-			assert.deepEqual(onError.mock.calls[0].arguments[0], reportedError)
+		assert.deepEqual(onError.mock.calls[0]?.arguments?.[0], reportedError)
 	})
 })
