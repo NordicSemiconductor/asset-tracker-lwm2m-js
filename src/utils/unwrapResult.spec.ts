@@ -13,10 +13,23 @@ void describe('unwrapResult', () => {
 
 	void it(`should return undefined and call the onError callback when the input is known as invalid`, (context) => {
 		const onError = context.mock.fn()
+		const reportedError = new ValidationError([
+			{
+				instancePath: '/v',
+				schemaPath: '#/properties/v/required',
+				keyword: 'required',
+				params: { missingProperty: 'ip' },
+				message: "must have required property 'ip'",
+			},
+		])
 		const result = unwrapResult(onError)({
-			error: new ValidationError('' as any),
+			error: reportedError,
 		})
 		assert.deepEqual(result, undefined)
 		assert.strictEqual(onError.mock.callCount(), 1)
+
+		assert.strictEqual(onError.mock.calls.length, 1)
+		if (onError.mock.calls[0] !== undefined)
+			assert.deepEqual(onError.mock.calls[0].arguments[0], reportedError)
 	})
 })
