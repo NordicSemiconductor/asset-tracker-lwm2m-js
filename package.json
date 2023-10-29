@@ -68,7 +68,7 @@
   "dependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-docs": "33.0.1",
     "@nordicsemiconductor/lwm2m-types": "2.6.1",
-    "@sinclair/typebox": "0.31.20"
+    "@sinclair/typebox": "0.31.21"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "18.1.0",
