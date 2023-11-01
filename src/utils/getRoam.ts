@@ -9,7 +9,7 @@ import {
 	ConnectivityMonitoring_4_urn,
 	type Device_3,
 	type ConnectivityMonitoring_4,
-} from 'src/schemas/index.js'
+} from '../schemas/index.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
 import type { ConversionResult } from 'src/converter.js'
 
