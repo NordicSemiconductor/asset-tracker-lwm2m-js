@@ -9,9 +9,9 @@ import {
 	ConnectivityMonitoring_4_urn,
 	type Device_3,
 	type ConnectivityMonitoring_4,
-} from 'src/schemas/index.js'
+} from '../schemas/index.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { ConversionResult } from 'src/converter.js'
+import type { ConversionResult } from '../converter.js'
 
 /**
  * Takes objects id 4 (connectivity monitoring) and 3 (device) from 'LwM2M Asset Tracker v2'

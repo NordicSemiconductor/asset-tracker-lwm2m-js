@@ -5,7 +5,7 @@ import {
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { ConversionResult } from 'src/converter.js'
+import type { ConversionResult } from '../converter.js'
 
 /**
  * Takes object id 50009 (config) from 'LwM2M Asset Tracker v2' and convert into 'cfg' object from 'nRF Asset Tracker Reported'

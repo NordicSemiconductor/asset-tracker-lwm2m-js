@@ -5,7 +5,7 @@ import {
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { Location_6_urn, type Location_6 } from '../schemas/index.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { ConversionResult } from 'src/converter.js'
+import type { ConversionResult } from '../converter.js'
 
 /**
  * Takes object id 6 (location) from 'LwM2M Asset Tracker v2' and convert into 'GNSS' object from 'nRF Asset Tracker Reported'.
