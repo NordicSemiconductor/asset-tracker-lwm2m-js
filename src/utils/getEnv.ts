@@ -12,7 +12,7 @@ import {
 } from '../schemas/index.js'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { ConversionResult } from 'src/converter.js'
+import type { ConversionResult } from '../converter.js'
 
 /**
  * Takes objects id 3303 (temperature), 3304 (humidity) and 3323 (pressure) from

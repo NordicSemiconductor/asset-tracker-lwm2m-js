@@ -6,7 +6,7 @@ import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { validateAgainstSchema } from './validateAgainstSchema.js'
 import { getTimeInMS } from './getBat.js'
 import { UndefinedLwM2MObjectWarning } from './UndefinedLwM2MObjectWarning.js'
-import type { ConversionResult } from 'src/converter.js'
+import type { ConversionResult } from '../converter.js'
 
 /**
  * Takes object id 3 (device) from 'LwM2M Asset Tracker v2' and convert into 'dev' object from 'nRF Asset Tracker Reported'

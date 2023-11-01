@@ -2,7 +2,7 @@ import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 import type {
 	LwM2MAssetTrackerV2,
 	nRFAssetTrackerReportedType,
-} from 'src/converter.js'
+} from '../converter.js'
 
 /**
  * This error is returned when an object is missing in the input document
