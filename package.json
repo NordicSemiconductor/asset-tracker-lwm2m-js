@@ -5,7 +5,7 @@
   "scripts": {
     "test": "find ./ -type f -name '*.spec.ts' -not -path './node_modules/*' -print | xargs npx tsx --no-warnings --test",
     "prepare": "husky install",
-    "prepublish": "npx swc -d dist ./src"
+    "prepublishOnly": "npx swc -d dist ./src"
   },
   "type": "module",
   "types": "./index.d.ts",
@@ -65,6 +65,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "export.js",
+    "index.d.ts",
+    "dist",
+    "src",
+    "package-lock.json",
+    "LICENSE",
+    "README.md"
+  ],
   "dependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-docs": "33.0.2",
     "@nordicsemiconductor/lwm2m-types": "2.7.0",
