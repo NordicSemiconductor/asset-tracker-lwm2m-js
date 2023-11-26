@@ -75,7 +75,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@nordicsemiconductor/asset-tracker-cloud-docs": "33.0.5",
+    "@nordicsemiconductor/asset-tracker-cloud-docs": "33.0.8",
     "@nordicsemiconductor/lwm2m-types": "2.7.0",
     "@sinclair/typebox": "0.31.23"
   },
